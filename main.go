@@ -18,7 +18,7 @@ func createNewWin(height int, width int, starty int, startx int) *gc.Window {
 		os.Exit(1)
 	}
 
-	localWindow.Box(0, 0)
+	localWindow.Border(0x01AB, 0x01AB, ' ', ' ', ' ', ' ', ' ', ' ')
 
 	localWindow.Refresh()
 
@@ -50,6 +50,7 @@ func main() {
 	go func() {
 		<-closeSignal
 		cleanup()
+		fmt.Println("Interrupt")
 		os.Exit(1)
 	}()
 
@@ -73,7 +74,7 @@ func main() {
 	starty = (LINES - height) / 2
 	startx = (COLS - width) / 2
 
-	stdscr.Print("Press F1 to exit" + string('ƫ'))
+	stdscr.Print("Press F1 to exit")
 	stdscr.Refresh()
 
 	window = createNewWin(height, width, starty, startx)
@@ -93,4 +94,5 @@ func main() {
 		window = createNewWin(height, width, starty, startx)
 	}
 
+	cleanup()
 }
