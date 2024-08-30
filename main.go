@@ -1,19 +1,33 @@
 package main
 
 import (
-	"fmt"
-	"os"
-	"os/signal"
+	"errors"
+	"log"
+
+	"github.com/awesome-gocui/gocui"
 )
 
 func main() {
+	g, err := gocui.NewGui(gocui.OutputNormal, true)
+	if err != nil {
+		log.Panicln(err)
+	}
+	defer g.Close()
 
-	closeSignal := make(chan os.Signal, 1)
-	signal.Notify(closeSignal, os.Interrupt)
-	go func() {
-		<-closeSignal
-		fmt.Println("Interrupt")
-		os.Exit(1)
-	}()
+	if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone, quit); err != nil {
+		log.Panicln(err)
+	}
 
+	if err := g.MainLoop(); err != nil && !errors.Is(err, gocui.ErrQuit) {
+		log.Panicln(err)
+	}
+}
+
+func layout(g *gocui.Gui) error {
+
+	return nil
+}
+
+func quit(g *gocui.Gui, v *gocui.View) error {
+	return gocui.ErrQuit
 }
