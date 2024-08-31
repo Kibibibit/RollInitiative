@@ -30,7 +30,7 @@ type Creature struct {
 }
 
 type IniativeEntry struct {
-	creature     Creature
+	creature     *Creature
 	iniativeRoll int
 	currentHp    int
 	tag          string
