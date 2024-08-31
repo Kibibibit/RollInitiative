@@ -60,14 +60,15 @@ func (w *MainTableWidget) Layout(g *gocui.Gui) error {
 }
 
 type AddCreatureWidget struct {
-	name       string
-	w, h       int
-	beastiary  *Beastiary
-	searchTerm string
+	name              string
+	w, h              int
+	beastiary         *Beastiary
+	searchTerm        string
+	filteredCreatures []Creature
 }
 
 func NewAddCreatureWidget(name string, w, h int) *AddCreatureWidget {
-	return &AddCreatureWidget{name: name, w: w, h: h, beastiary: beastiary, searchTerm: ""}
+	return &AddCreatureWidget{name: name, w: w, h: h, beastiary: beastiary, searchTerm: "", filteredCreatures: []Creature{}}
 }
 
 type AddCreatureEditor struct {
@@ -76,13 +77,20 @@ type AddCreatureEditor struct {
 
 func (e *AddCreatureEditor) Edit(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modifier) {
 	if ch != 0 && mod == 0 {
-		e.widget.searchTerm += string(ch)
+		if ch < '0' || ch > '9' {
+			e.widget.searchTerm += string(ch)
+		}
+
+	} else if key == gocui.KeySpace {
+		e.widget.searchTerm += " "
 	} else if key == gocui.KeyBackspace || key == gocui.KeyBackspace2 {
-		e.widget.searchTerm = e.widget.searchTerm[:len(e.widget.searchTerm)-1]
+		if len(e.widget.searchTerm) > 0 {
+			e.widget.searchTerm = e.widget.searchTerm[:len(e.widget.searchTerm)-1]
+		}
 	}
-	v.SetWritePos(0, 25)
-	v.SetLine(25, "")
-	v.WriteString(e.widget.searchTerm)
+
+	e.widget.Search(v)
+
 }
 
 func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
@@ -93,6 +101,8 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 
 	width := int(w.w / 2)
 	height := int(float32(lines)*0.8) / 2
+
+	w.h = height
 
 	x0 := int(x - width)
 	x1 := int(x + width)
@@ -105,14 +115,26 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
-
+		view.Editable = true
+		view.Editor = &AddCreatureEditor{widget: w}
 		w.searchTerm = ""
+		w.filteredCreatures = []Creature{}
+		view.Title = "Add Creature"
 	}
 
-	var filteredCreatures []Creature
-	var index int = 1
+	w.Search(view)
 
-	view.Title = "Add Creature"
+	return nil
+
+}
+
+func (w *AddCreatureWidget) Search(v *gocui.View) {
+	w.filteredCreatures = []Creature{}
+	var index int = 0
+
+	v.Clear()
+
+	lowercaseSearchTerm := strings.ToLower(w.searchTerm)
 
 	for _, creature := range w.beastiary.Creatures {
 
@@ -120,22 +142,27 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 
 		if w.searchTerm == "" {
 			contains = true
-		} else if strings.Contains(w.searchTerm, strings.ToLower(creature.Name)) {
+		} else if strings.Contains(strings.ToLower(creature.Name), lowercaseSearchTerm) {
 			contains = true
 		}
 
 		if contains {
-			filteredCreatures = append(filteredCreatures, creature)
-			view.SetWritePos(1, index)
-			fmt.Fprintf(view, "\x1b[37;2m%d\x1b[0m %s", index, creature.Name)
+			w.filteredCreatures = append(w.filteredCreatures, creature)
+			v.SetWritePos(1, index+3)
+			fmt.Fprintf(v, "\x1b[37;2m%d\x1b[0m %s", index+1, creature.Name)
 			index += 1
+			if index >= w.h-5 {
+				break
+			}
 		}
 	}
-	view.Editable = true
-	view.Editor = &AddCreatureEditor{widget: w}
+	v.SetWritePos(0, 0)
+	v.SetLine(0, "")
 
-	return nil
-
+	fmt.Fprintf(v, "🔎︎%s", w.searchTerm)
+	v.SetLine(1, "")
+	v.SetWritePos(0, 1)
+	fmt.Fprintf(v, "\x1b[37;2mFound %d results\x1b[0m", len(w.filteredCreatures))
 }
 
 func main() {
@@ -153,8 +180,6 @@ func main() {
 	}
 	defer g.Close()
 
-	g.Cursor = true
-
 	table := NewMainTableWidget(TABLE_NAME, 0, 0)
 
 	addCreature := NewAddCreatureWidget(ADD_CREATURE_NAME, 50, 0)
@@ -168,6 +193,17 @@ func main() {
 	if err := g.SetKeybinding(TABLE_NAME, 'a', gocui.ModNone,
 		func(g *gocui.Gui, v *gocui.View) error {
 			return newAddCreatureWindow(g, v, addCreature)
+		}); err != nil {
+		log.Panicln(err)
+	}
+
+	if err := g.SetKeybinding(ADD_CREATURE_NAME, gocui.KeyEsc, gocui.ModNone,
+		func(g *gocui.Gui, v *gocui.View) error {
+			if err := g.DeleteView(v.Name()); err != nil {
+				return err
+			}
+			g.SetCurrentView(TABLE_NAME)
+			return nil
 		}); err != nil {
 		log.Panicln(err)
 	}
