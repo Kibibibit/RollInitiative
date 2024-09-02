@@ -100,9 +100,7 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 	y := int(lines / 2)
 
 	width := int(w.w / 2)
-	height := int(float32(lines)*0.8) / 2
-
-	w.h = height
+	height := int(w.h / 2)
 
 	x0 := int(x - width)
 	x1 := int(x + width)
@@ -120,6 +118,7 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 		w.searchTerm = ""
 		w.filteredCreatures = []Creature{}
 		view.Title = "Add Creature"
+
 	}
 
 	w.Search(view)
@@ -136,6 +135,11 @@ func (w *AddCreatureWidget) Search(v *gocui.View) {
 
 	lowercaseSearchTerm := strings.ToLower(w.searchTerm)
 
+	v.SetWritePos(3, 3)
+	fmt.Fprint(v, "\x1b[37;2mName\x1b[0m")
+	v.SetWritePos(w.w-4, 3)
+	fmt.Fprint(v, "\x1b[37;2mCR\x1b[0m")
+
 	for _, creature := range w.beastiary.Creatures {
 
 		var contains bool = false
@@ -148,10 +152,16 @@ func (w *AddCreatureWidget) Search(v *gocui.View) {
 
 		if contains {
 			w.filteredCreatures = append(w.filteredCreatures, creature)
-			v.SetWritePos(1, index+3)
-			fmt.Fprintf(v, "\x1b[37;2m%d\x1b[0m %s", index+1, creature.Name)
+			v.SetWritePos(1, index+4)
+			drawIndex := index + 1
+			if index+1 == 10 {
+				drawIndex = 0
+			}
+			fmt.Fprintf(v, "\x1b[37;2m%d\x1b[0m %s", drawIndex, creature.Name)
+			v.SetWritePos(w.w-4, index+4)
+			fmt.Fprint(v, creature.CR)
 			index += 1
-			if index >= w.h-5 {
+			if index >= 10 {
 				break
 			}
 		}
@@ -167,7 +177,9 @@ func (w *AddCreatureWidget) Search(v *gocui.View) {
 
 func main() {
 
-	b, err := LoadBeastiary("./data/creatures.xml")
+	ImportMonsters()
+
+	b, err := LoadBeastiary("./data/srd_creatures.xml")
 	beastiary = b
 
 	if err != nil {
@@ -182,7 +194,7 @@ func main() {
 
 	table := NewMainTableWidget(TABLE_NAME, 0, 0)
 
-	addCreature := NewAddCreatureWidget(ADD_CREATURE_NAME, 50, 0)
+	addCreature := NewAddCreatureWidget(ADD_CREATURE_NAME, 50, 16)
 
 	g.SetManager(table)
 

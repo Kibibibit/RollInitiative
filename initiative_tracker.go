@@ -21,14 +21,40 @@ type Beastiary struct {
 }
 
 type Creature struct {
-	Name        string    `xml:"name"`
-	StatBlock   StatBlock `xml:"statBlock"`
-	MaxHP       int       `xml:"hp"`
-	AC          int       `xml:"ac"`
-	HitDice     int       `xml:"hitDice"`
-	HitDiceType int       `xml:"hitDiceType"`
+	Name                  string          `xml:"name"`
+	StatBlock             StatBlock       `xml:"statBlock"`
+	AvgHP                 int             `xml:"avgHp"`
+	AC                    int             `xml:"ac"`
+	HitDice               int             `xml:"hitDice"`
+	HitDiceType           int             `xml:"hitDiceType"`
+	Speed                 string          `xml:"speed"`
+	Type                  string          `xml:"type"`
+	Size                  string          `xml:"size"`
+	Alignment             string          `xml:"alignment"`
+	Senses                string          `xml:"senses"`
+	Languages             string          `xml:"languages"`
+	CR                    string          `xml:"cr"`
+	Source                string          `xml:"source"`
+	Saves                 []string        `xml:"save"`
+	Skills                []string        `xml:"skill"`
+	DamageVulnerabilities string          `xml:"damageVulnerabilities"`
+	DamageResistances     string          `xml:"damageResistances"`
+	DamageImmunities      string          `xml:"damageImmunities"`
+	ConditionImmunities   string          `xml:"conditionImmunities"`
+	Actions               []CreatureTrait `xml:"action"`
+	BonusActions          []CreatureTrait `xml:"bonusAction"`
+	Reactions             []CreatureTrait `xml:"reaction"`
+	LairActions           []CreatureTrait `xml:"lairAction"`
+	LegendaryDescription  string          `xml:"legendaryDescription"`
+	LegendaryActions      []CreatureTrait `xml:"legendaryAction"`
+	SpellNotes            string          `xml:"spellNotes"`
+	//Do spells with a list of each spell level maybe?
 }
 
+type CreatureTrait struct {
+	Name        string `xml:"name"`
+	Description string `xml:"desc"`
+}
 type IniativeEntry struct {
 	creature     *Creature
 	iniativeRoll int
