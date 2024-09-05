@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"encoding/xml"
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -11,8 +12,153 @@ import (
 	"strings"
 )
 
-func ImportMonsters() error {
-	jsonFile, err := os.Open("./data/data.json")
+func ImportSpells(path string) ([]Spell, error) {
+	xmlFile, err := os.Open(path)
+
+	log.Printf("Trying to open file %s\n", path)
+
+	if err != nil {
+		log.Println("Failed to open file!")
+		log.Fatalln(err)
+		return nil, err
+	}
+
+	defer xmlFile.Close()
+
+	log.Printf("Trying to read data from file %s\n", path)
+
+	data, err := io.ReadAll(xmlFile)
+
+	if err != nil {
+		log.Println("Failed to read data!")
+		log.Fatalln(err)
+		return nil, err
+	}
+
+	var spellImportList SpellListImport
+
+	log.Printf("Attempting to unmarshal spell data from %s\n", path)
+
+	err = xml.Unmarshal(data, &spellImportList)
+	if err != nil {
+		log.Println("Failed to unmarshal data!")
+		log.Fatalln(err)
+		return nil, err
+	}
+
+	return spellImportList.Spells, nil
+
+}
+
+func ImportMonsters(path string, spellList *SpellList) ([]Creature, error) {
+	xmlFile, err := os.Open(path)
+
+	log.Printf("Trying to open file %s\n", path)
+
+	if err != nil {
+		log.Println("Failed to open file!")
+		log.Fatalln(err)
+		return nil, err
+	}
+
+	defer xmlFile.Close()
+
+	log.Printf("Trying to read data from file %s\n", path)
+
+	data, err := io.ReadAll(xmlFile)
+
+	if err != nil {
+		log.Println("Failed to read data!")
+		log.Fatalln(err)
+		return nil, err
+	}
+
+	var creatureImportList BeastiaryImport
+
+	log.Printf("Attempting to unmarshal creature data from %s\n", path)
+
+	err = xml.Unmarshal(data, &creatureImportList)
+	if err != nil {
+		log.Println("Failed to unmarshal data!")
+		log.Fatalln(err)
+		return nil, err
+	}
+
+	return creatureImportList.Creatures, nil
+
+}
+
+func ConvertSpellsToXML() error {
+	jsonFile, err := os.Open("./data/spells.json")
+	if err != nil {
+		log.Fatal(err)
+		log.Fatal("Failed to read spell json!")
+
+		return err
+	}
+	defer jsonFile.Close()
+
+	data, err := io.ReadAll(jsonFile)
+	if err != nil {
+		log.Fatal("Failed to parse json for spell!")
+		return err
+	}
+
+	err = os.Remove("./data/srd_spells.xml")
+	if err != nil {
+
+		if !errors.Is(err, os.ErrNotExist) {
+			log.Fatal(err)
+			return err
+		}
+	}
+	xmlFile, err := os.Create("./data/srd_spells.xml")
+
+	if err != nil {
+		log.Fatal(err)
+		log.Fatal("Failed to load spell xml!")
+
+		return err
+	}
+
+	defer xmlFile.Close()
+
+	var spellImportList []SpellImport
+
+	json.Unmarshal(data, &spellImportList)
+
+	var spellList SpellListImport
+
+	spellList.Spells = []Spell{}
+
+	for _, imp := range spellImportList {
+
+		spell := SpellImportToSpell(&imp)
+
+		spellList.Spells = append(spellList.Spells, *spell)
+
+	}
+
+	s, err := xml.MarshalIndent(spellList, "", "	")
+
+	dataString := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + string(s)
+	dataString = strings.ReplaceAll(dataString, "SpellList", "spells")
+
+	if err != nil {
+		log.Fatal("Failed to convert spell")
+		return err
+	}
+	_, err = xmlFile.WriteString(dataString)
+	if err != nil {
+		log.Fatalln(err)
+		return err
+	}
+
+	return nil
+}
+
+func ConvertCreaturesToXML(spellList SpellList) error {
+	jsonFile, err := os.Open("./data/new_data.json")
 	if err != nil {
 		log.Fatal(err)
 		log.Fatal("Failed to read creature!")
@@ -23,7 +169,7 @@ func ImportMonsters() error {
 
 	data, err := io.ReadAll(jsonFile)
 	if err != nil {
-		log.Fatal("Failed to parse xml for creature!")
+		log.Fatal("Failed to parse json for creature!")
 		return err
 	}
 
@@ -46,12 +192,12 @@ func ImportMonsters() error {
 	var creatures []MonsterImport
 	json.Unmarshal(data, &creatures)
 
-	var beastiary Beastiary
+	var beastiary BeastiaryImport
 	beastiary.Creatures = []Creature{}
 
 	for _, imp := range creatures {
 
-		creature := MonsterImportToCreature(&imp)
+		creature := MonsterImportToCreature(&imp, spellList)
 
 		beastiary.Creatures = append(beastiary.Creatures, *creature)
 
@@ -61,7 +207,6 @@ func ImportMonsters() error {
 
 	dataString := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + string(b)
 	dataString = strings.ReplaceAll(dataString, "Beastiary", "creatures")
-	dataString = strings.ReplaceAll(dataString, "&#39;", "'")
 
 	if err != nil {
 		log.Fatal("Failed to convert creature")
@@ -76,9 +221,59 @@ func ImportMonsters() error {
 	return nil
 }
 
-func MonsterImportToCreature(in *MonsterImport) *Creature {
+func MakeId(prefix string, data string) string {
+	out := strings.ToUpper(fmt.Sprintf("%s:%s", prefix, data))
+	out = strings.ReplaceAll(out, " ", "_")
+	out = strings.ReplaceAll(out, "(", "")
+	out = strings.ReplaceAll(out, ")", "")
+	out = strings.ReplaceAll(out, "-", "_")
+	out = strings.ReplaceAll(out, "/", "_")
+	out = strings.ReplaceAll(out, "'", "")
+	out = strings.ReplaceAll(out, "’", "")
+	out = strings.ReplaceAll(out, "*", "")
+	return out
+}
+
+func SpellImportToSpell(in *SpellImport) *Spell {
+	var out Spell = Spell{}
+
+	out.Id = MakeId("SPELL", in.Name)
+	out.Name = in.Name
+	out.Name = strings.ReplaceAll(out.Name, "’", "'")
+
+	out.Level = 0
+	if in.Level != "cantrip" {
+		level, err := strconv.ParseInt(in.Level, 10, 64)
+		if err != nil {
+			log.Println(in)
+			log.Panic(err)
+			os.Exit(1)
+		}
+		out.Level = int(level)
+	}
+
+	out.School = in.School
+	out.Range = in.Range
+	out.Description = in.Description
+	out.CastingTime = in.CastingTime
+	out.Duration = in.Duration
+	out.Ritual = in.Ritual
+	out.HigherLevels = in.HigherLevels
+
+	out.Components = SpellComponents{}
+	out.Components.HasMaterial = in.Components.HasMaterial
+	out.Components.HasSomatic = in.Components.HasSomatic
+	out.Components.HasVerbal = in.Components.HasVerbal
+	out.Components.Materials = strings.Join(in.Components.Materials, ", ")
+	out.Classes = in.Classes
+
+	return &out
+}
+
+func MonsterImportToCreature(in *MonsterImport, spells SpellList) *Creature {
 	var out Creature = Creature{}
 
+	out.Id = MakeId("CREATURE", in.Name)
 	out.Name = in.Name
 	out.AvgHP = in.HP
 	out.AC = in.AC
@@ -135,7 +330,39 @@ func MonsterImportToCreature(in *MonsterImport) *Creature {
 	out.LegendaryActions = convertTraits(in.LegendaryActions)
 	out.LegendaryDescription = in.LegendaryDescription
 
-	out.SpellNotes = in.SpellNotes
+	out.SpellBook = SpellBook{}
+	out.SpellBook.SpellNotes = in.SpellNotes
+
+	for level, spell := range in.Spells {
+		spellNames := strings.Split(spell, ",")
+		for _, name := range spellNames {
+			name = strings.Trim(name, " ")
+			spellId := MakeId("SPELL", name)
+
+			if _, ok := spells[spellId]; ok {
+				switch level {
+				case "0":
+					out.SpellBook.Cantrips = append(out.SpellBook.Cantrips, spellId)
+					break
+				case "1":
+					out.SpellBook.Level1 = append(out.SpellBook.Level1, spellId)
+					break
+				}
+			} else {
+				log.Fatalf("Couldnt find spell with id %s for creature with id %s", spellId, out.Id)
+			}
+
+		}
+	}
+
+	for _, spell := range in.PreCombatSpells {
+		spellId := MakeId("SPELL", spell)
+		if _, ok := spells[spellId]; ok {
+			out.SpellBook.PreCombatSpells = append(out.SpellBook.PreCombatSpells, spellId)
+		} else {
+			log.Fatalf("Couldnt find pre-combat spell with id %s for creature with id %s", spellId, out.Id)
+		}
+	}
 
 	return &out
 }
@@ -180,7 +407,7 @@ type MonsterImportTrait struct {
 	Description string `json:"desc"`
 }
 
-type MonsterImportSpell = []map[string]string
+type MonsterImportSpell = map[string]string
 
 type MonsterImport struct {
 	Name                  string               `json:"name"`
@@ -210,6 +437,28 @@ type MonsterImport struct {
 	LairActions           []MonsterImportTrait `json:"lair_actions"`
 	LegendaryActions      []MonsterImportTrait `json:"legendary_actions"`
 	LegendaryDescription  string               `json:"legendary_description"`
-	SpellNotes            string               `json:"spellsNotes"`
+	SpellNotes            string               `json:"spellNotes"`
 	Spells                MonsterImportSpell   `json:"spells"`
+	PreCombatSpells       []string             `json:"precombatSpells"`
+}
+
+type SpellImport struct {
+	CastingTime  string                `json:"casting_time"`
+	Name         string                `json:"name"`
+	Level        string                `json:"level"`
+	Range        string                `json:"range"`
+	School       string                `json:"school"`
+	Duration     string                `json:"duration"`
+	Description  string                `json:"description"`
+	Ritual       bool                  `json:"ritual"`
+	HigherLevels string                `json:"higher_levels"`
+	Components   SpellComponentsImport `json:"components"`
+	Classes      []string              `json:"classes"`
+}
+
+type SpellComponentsImport struct {
+	HasVerbal   bool     `json:"verbal"`
+	HasSomatic  bool     `json:"somatic"`
+	HasMaterial bool     `json:"material"`
+	Materials   []string `json:"materials_needed"`
 }

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"os"
 	"strings"
 
 	"github.com/awesome-gocui/gocui"
@@ -14,7 +15,7 @@ const ADD_CREATURE_NAME = "add_creature"
 
 var (
 	views     = []string{}
-	beastiary *Beastiary
+	beastiary *BeastiaryImport
 )
 
 type MainTableWidget struct {
@@ -62,7 +63,7 @@ func (w *MainTableWidget) Layout(g *gocui.Gui) error {
 type AddCreatureWidget struct {
 	name              string
 	w, h              int
-	beastiary         *Beastiary
+	beastiary         *BeastiaryImport
 	searchTerm        string
 	filteredCreatures []Creature
 }
@@ -176,8 +177,29 @@ func (w *AddCreatureWidget) Search(v *gocui.View) {
 }
 
 func main() {
+	ConvertSpellsToXML()
 
-	ImportMonsters()
+	spellArray, err := ImportSpells("./data/srd_spells.xml")
+	if err != nil {
+		log.Fatalln(err)
+		os.Exit(1)
+	}
+
+	var spellList = make(SpellList)
+	for _, item := range spellArray {
+		spellList[item.Id] = item
+	}
+
+	ConvertCreaturesToXML(spellList)
+
+	_, err = ImportMonsters("./data/srd_creatures.xml", &spellList)
+
+	if err != nil {
+		log.Fatalln(err)
+		os.Exit(1)
+	}
+
+	//var monsterList = make(Beastiary)
 
 	b, err := LoadBeastiary("./data/srd_creatures.xml")
 	beastiary = b
