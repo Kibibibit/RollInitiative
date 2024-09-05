@@ -142,7 +142,7 @@ func ConvertSpellsToXML() error {
 	s, err := xml.MarshalIndent(spellList, "", "	")
 
 	dataString := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + string(s)
-	dataString = strings.ReplaceAll(dataString, "SpellList", "spells")
+	dataString = strings.ReplaceAll(dataString, "SpellListImport", "spells")
 
 	if err != nil {
 		log.Fatal("Failed to convert spell")
@@ -206,7 +206,7 @@ func ConvertCreaturesToXML(spellList SpellList) error {
 	b, err := xml.MarshalIndent(beastiary, "", "	")
 
 	dataString := "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + string(b)
-	dataString = strings.ReplaceAll(dataString, "Beastiary", "creatures")
+	dataString = strings.ReplaceAll(dataString, "BeastiaryImport", "creatures")
 
 	if err != nil {
 		log.Fatal("Failed to convert creature")

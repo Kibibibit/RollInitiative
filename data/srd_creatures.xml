@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<creaturesImport>
+<creatures>
 	<creature>
 		<id>CREATURE:ABOLETH</id>
 		<name>Aboleth</name>
@@ -14966,4 +14966,4 @@
 			<spellNotes></spellNotes>
 		</spellBook>
 	</creature>
-</creaturesImport>
+</creatures>

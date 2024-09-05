@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<spellsImport>
+<spells>
 	<spell>
 		<id>SPELL:ACID_SPLASH</id>
 		<name>Acid Splash</name>
@@ -8081,4 +8081,4 @@
 		</components>
 		<class>wizard</class>
 	</spell>
-</spellsImport>
+</spells>
