@@ -2,211 +2,56 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"log"
 	"os"
-	"strings"
+	"slices"
 
 	"github.com/awesome-gocui/gocui"
 )
 
-const TABLE_NAME = "table"
 const ADD_CREATURE_NAME = "add_creature"
 
 var (
-	views     = []string{}
-	beastiary *BeastiaryImport
+	views        = []string{}
+	spellDict    SpellDict
+	creatureDict CreatureDict
+	spellIds     []string
+	creatureIds  []string
 )
 
-type MainTableWidget struct {
-	name string
-	x, y int
-	data *IniativeTracker
-}
-
-func NewMainTableWidget(name string, x, y int) *MainTableWidget {
-
-	return &MainTableWidget{
-		name: name,
-		x:    x,
-		y:    y,
-		data: &IniativeTracker{},
-	}
-}
-
-func (w *MainTableWidget) Layout(g *gocui.Gui) error {
-
-	width, height := g.Size()
-
-	view, err := g.SetView(w.name, w.x, w.y, w.x+width-1, w.y+height-1, 0)
-
-	if err != nil {
-		if err != gocui.ErrUnknownView {
-			return err
-		}
-
-		g.SetCurrentView(w.name)
-
-		for index, combatant := range w.data.combatants {
-			view.SetWritePos(1, index)
-			str := fmt.Sprintf("\x1b[37;2m%d\x1b[0m %s (%s)", index+1, combatant.creature.Name, combatant.tag)
-			fmt.Fprintf(view, str)
-		}
-
-	}
-
-	view.Title = "Roll Initiative"
-
-	return nil
-}
-
-type AddCreatureWidget struct {
-	name              string
-	w, h              int
-	beastiary         *BeastiaryImport
-	searchTerm        string
-	filteredCreatures []Creature
-}
-
-func NewAddCreatureWidget(name string, w, h int) *AddCreatureWidget {
-	return &AddCreatureWidget{name: name, w: w, h: h, beastiary: beastiary, searchTerm: "", filteredCreatures: []Creature{}}
-}
-
-type AddCreatureEditor struct {
-	widget *AddCreatureWidget
-}
-
-func (e *AddCreatureEditor) Edit(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modifier) {
-	if ch != 0 && mod == 0 {
-		if ch < '0' || ch > '9' {
-			e.widget.searchTerm += string(ch)
-		}
-
-	} else if key == gocui.KeySpace {
-		e.widget.searchTerm += " "
-	} else if key == gocui.KeyBackspace || key == gocui.KeyBackspace2 {
-		if len(e.widget.searchTerm) > 0 {
-			e.widget.searchTerm = e.widget.searchTerm[:len(e.widget.searchTerm)-1]
-		}
-	}
-
-	e.widget.Search(v)
-
-}
-
-func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
-	cols, lines := g.Size()
-
-	x := int(cols / 2)
-	y := int(lines / 2)
-
-	width := int(w.w / 2)
-	height := int(w.h / 2)
-
-	x0 := int(x - width)
-	x1 := int(x + width)
-	y0 := int(y - height)
-	y1 := int(y + height)
-
-	view, err := g.SetView(w.name, x0, y0, x1, y1, 0)
-
-	if err != nil {
-		if err != gocui.ErrUnknownView {
-			return err
-		}
-		view.Editable = true
-		view.Editor = &AddCreatureEditor{widget: w}
-		w.searchTerm = ""
-		w.filteredCreatures = []Creature{}
-		view.Title = "Add Creature"
-
-	}
-
-	w.Search(view)
-
-	return nil
-
-}
-
-func (w *AddCreatureWidget) Search(v *gocui.View) {
-	w.filteredCreatures = []Creature{}
-	var index int = 0
-
-	v.Clear()
-
-	lowercaseSearchTerm := strings.ToLower(w.searchTerm)
-
-	v.SetWritePos(3, 3)
-	fmt.Fprint(v, "\x1b[37;2mName\x1b[0m")
-	v.SetWritePos(w.w-4, 3)
-	fmt.Fprint(v, "\x1b[37;2mCR\x1b[0m")
-
-	for _, creature := range w.beastiary.Creatures {
-
-		var contains bool = false
-
-		if w.searchTerm == "" {
-			contains = true
-		} else if strings.Contains(strings.ToLower(creature.Name), lowercaseSearchTerm) {
-			contains = true
-		}
-
-		if contains {
-			w.filteredCreatures = append(w.filteredCreatures, creature)
-			v.SetWritePos(1, index+4)
-			drawIndex := index + 1
-			if index+1 == 10 {
-				drawIndex = 0
-			}
-			fmt.Fprintf(v, "\x1b[37;2m%d\x1b[0m %s", drawIndex, creature.Name)
-			v.SetWritePos(w.w-4, index+4)
-			fmt.Fprint(v, creature.CR)
-			index += 1
-			if index >= 10 {
-				break
-			}
-		}
-	}
-	v.SetWritePos(0, 0)
-	v.SetLine(0, "")
-
-	fmt.Fprintf(v, "🔎︎%s", w.searchTerm)
-	v.SetLine(1, "")
-	v.SetWritePos(0, 1)
-	fmt.Fprintf(v, "\x1b[37;2mFound %d results\x1b[0m", len(w.filteredCreatures))
-}
-
 func main() {
-	ConvertSpellsToXML()
 
-	spellArray, err := ImportSpells("./data/srd_spells.xml")
+	spellDict = make(SpellDict)
+	creatureDict = make(CreatureDict)
+
+	spellDict, err := ImportSpells("./data/spells", spellDict)
 	if err != nil {
 		log.Fatalln(err)
 		os.Exit(1)
 	}
 
-	var spellList = make(SpellList)
-	for _, item := range spellArray {
-		spellList[item.Id] = item
-	}
-
-	ConvertCreaturesToXML(spellList)
-
-	_, err = ImportMonsters("./data/srd_creatures.xml", &spellList)
-
+	creatureDict, err = ImportCreatures("./data/creatures", creatureDict)
 	if err != nil {
 		log.Fatalln(err)
 		os.Exit(1)
 	}
 
-	//var monsterList = make(Beastiary)
+	spellIds = make([]string, len(spellDict))
+	creatureIds = make([]string, len(creatureDict))
 
-	b, err := LoadBeastiary("./data/srd_creatures.xml")
-	beastiary = b
-
-	if err != nil {
-		log.Panicln(err)
+	var i int = 0
+	for k := range spellDict {
+		spellIds[i] = k
+		i++
 	}
+	i = 0
+	for k := range creatureDict {
+		creatureIds[i] = k
+		i++
+	}
+
+	slices.Sort(spellIds)
+	slices.Sort(creatureIds)
 
 	g, err := gocui.NewGui(gocui.OutputNormal, true)
 	if err != nil {
@@ -214,7 +59,7 @@ func main() {
 	}
 	defer g.Close()
 
-	table := NewMainTableWidget(TABLE_NAME, 0, 0)
+	table := NewMainTableWidget(MAIN_TABLE_NAME, 0, 0)
 
 	addCreature := NewAddCreatureWidget(ADD_CREATURE_NAME, 50, 16)
 
@@ -224,45 +69,13 @@ func main() {
 		log.Panicln(err)
 	}
 
-	if err := g.SetKeybinding(TABLE_NAME, 'a', gocui.ModNone,
-		func(g *gocui.Gui, v *gocui.View) error {
-			return newAddCreatureWindow(g, v, addCreature)
-		}); err != nil {
-		log.Panicln(err)
-	}
+	AddMainTableWidgetKeybinds(g, addCreature)
+	AddAddCreatureWidgetKeybinds(g)
 
-	if err := g.SetKeybinding(ADD_CREATURE_NAME, gocui.KeyEsc, gocui.ModNone,
-		func(g *gocui.Gui, v *gocui.View) error {
-			if err := g.DeleteView(v.Name()); err != nil {
-				return err
-			}
-			g.SetCurrentView(TABLE_NAME)
-			return nil
-		}); err != nil {
-		log.Panicln(err)
-	}
+	spellDict["1"] = Spell{}
 
 	if err := g.MainLoop(); err != nil && !errors.Is(err, gocui.ErrQuit) {
 		log.Panicln(err)
 	}
 
-}
-
-func newAddCreatureWindow(g *gocui.Gui, v *gocui.View, widget *AddCreatureWidget) error {
-
-	widget.Layout(g)
-
-	_, err := g.SetCurrentView(ADD_CREATURE_NAME)
-
-	if err != nil {
-		if err != gocui.ErrUnknownView {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func quit(g *gocui.Gui, v *gocui.View) error {
-	return gocui.ErrQuit
 }

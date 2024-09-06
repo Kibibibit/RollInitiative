@@ -12,7 +12,7 @@ import (
 	"strings"
 )
 
-func ImportSpells(path string) ([]Spell, error) {
+func ImportMonsters(path string, spellList *SpellDict) ([]Creature, error) {
 	xmlFile, err := os.Open(path)
 
 	log.Printf("Trying to open file %s\n", path)
@@ -35,45 +35,7 @@ func ImportSpells(path string) ([]Spell, error) {
 		return nil, err
 	}
 
-	var spellImportList SpellListImport
-
-	log.Printf("Attempting to unmarshal spell data from %s\n", path)
-
-	err = xml.Unmarshal(data, &spellImportList)
-	if err != nil {
-		log.Println("Failed to unmarshal data!")
-		log.Fatalln(err)
-		return nil, err
-	}
-
-	return spellImportList.Spells, nil
-
-}
-
-func ImportMonsters(path string, spellList *SpellList) ([]Creature, error) {
-	xmlFile, err := os.Open(path)
-
-	log.Printf("Trying to open file %s\n", path)
-
-	if err != nil {
-		log.Println("Failed to open file!")
-		log.Fatalln(err)
-		return nil, err
-	}
-
-	defer xmlFile.Close()
-
-	log.Printf("Trying to read data from file %s\n", path)
-
-	data, err := io.ReadAll(xmlFile)
-
-	if err != nil {
-		log.Println("Failed to read data!")
-		log.Fatalln(err)
-		return nil, err
-	}
-
-	var creatureImportList BeastiaryImport
+	var creatureImportList XMLCreatureImportList
 
 	log.Printf("Attempting to unmarshal creature data from %s\n", path)
 
@@ -84,7 +46,7 @@ func ImportMonsters(path string, spellList *SpellList) ([]Creature, error) {
 		return nil, err
 	}
 
-	return creatureImportList.Creatures, nil
+	return creatureImportList.Items, nil
 
 }
 
@@ -127,15 +89,15 @@ func ConvertSpellsToXML() error {
 
 	json.Unmarshal(data, &spellImportList)
 
-	var spellList SpellListImport
+	var spellList XMLSpellImportList
 
-	spellList.Spells = []Spell{}
+	spellList.Items = []Spell{}
 
 	for _, imp := range spellImportList {
 
 		spell := SpellImportToSpell(&imp)
 
-		spellList.Spells = append(spellList.Spells, *spell)
+		spellList.Items = append(spellList.Items, *spell)
 
 	}
 
@@ -157,7 +119,7 @@ func ConvertSpellsToXML() error {
 	return nil
 }
 
-func ConvertCreaturesToXML(spellList SpellList) error {
+func ConvertCreaturesToXML(spellList SpellDict) error {
 	jsonFile, err := os.Open("./data/new_data.json")
 	if err != nil {
 		log.Fatal(err)
@@ -192,14 +154,14 @@ func ConvertCreaturesToXML(spellList SpellList) error {
 	var creatures []MonsterImport
 	json.Unmarshal(data, &creatures)
 
-	var beastiary BeastiaryImport
-	beastiary.Creatures = []Creature{}
+	var beastiary XMLCreatureImportList
+	beastiary.Items = []Creature{}
 
 	for _, imp := range creatures {
 
 		creature := MonsterImportToCreature(&imp, spellList)
 
-		beastiary.Creatures = append(beastiary.Creatures, *creature)
+		beastiary.Items = append(beastiary.Items, *creature)
 
 	}
 
@@ -219,19 +181,6 @@ func ConvertCreaturesToXML(spellList SpellList) error {
 	}
 
 	return nil
-}
-
-func MakeId(prefix string, data string) string {
-	out := strings.ToUpper(fmt.Sprintf("%s:%s", prefix, data))
-	out = strings.ReplaceAll(out, " ", "_")
-	out = strings.ReplaceAll(out, "(", "")
-	out = strings.ReplaceAll(out, ")", "")
-	out = strings.ReplaceAll(out, "-", "_")
-	out = strings.ReplaceAll(out, "/", "_")
-	out = strings.ReplaceAll(out, "'", "")
-	out = strings.ReplaceAll(out, "’", "")
-	out = strings.ReplaceAll(out, "*", "")
-	return out
 }
 
 func SpellImportToSpell(in *SpellImport) *Spell {
@@ -270,13 +219,13 @@ func SpellImportToSpell(in *SpellImport) *Spell {
 	return &out
 }
 
-func MonsterImportToCreature(in *MonsterImport, spells SpellList) *Creature {
+func MonsterImportToCreature(in *MonsterImport, spells SpellDict) *Creature {
 	var out Creature = Creature{}
 
 	out.Id = MakeId("CREATURE", in.Name)
 	out.Name = in.Name
 	out.AvgHP = in.HP
-	out.AC = in.AC
+	out.AC = fmt.Sprintf("%d", in.AC)
 	out.Speed = in.Speed
 	out.Alignment = in.Alignment
 	out.Size = in.Size
@@ -363,7 +312,7 @@ func MonsterImportToCreature(in *MonsterImport, spells SpellList) *Creature {
 			log.Fatalf("Couldnt find pre-combat spell with id %s for creature with id %s", spellId, out.Id)
 		}
 	}
-
+	out.Traits = convertTraits(in.Traits)
 	return &out
 }
 
