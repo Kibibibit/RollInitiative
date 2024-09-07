@@ -26,10 +26,10 @@ func NewMainTableWidget(name string, x, y int) *MainTableWidget {
 	}
 }
 
-func AddMainTableWidgetKeybinds(g *gocui.Gui, addCreature *AddCreatureWidget) {
+func AddMainTableWidgetKeybinds(g *gocui.Gui) {
 	if err := g.SetKeybinding(MAIN_TABLE_NAME, 'a', gocui.ModNone,
 		func(g *gocui.Gui, v *gocui.View) error {
-			return newAddCreatureWindow(g, v, addCreature)
+			return switchToAddCreatureWindow(g, v, NewAddCreatureWidget(ADD_CREATURE_NAME, 50, 16))
 		}); err != nil {
 		log.Panicln(err)
 		os.Exit(1)

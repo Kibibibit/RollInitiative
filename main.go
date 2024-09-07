@@ -62,18 +62,14 @@ func main() {
 
 	table := NewMainTableWidget(MAIN_TABLE_NAME, 0, 0)
 
-	addCreature := NewAddCreatureWidget(ADD_CREATURE_NAME, 50, 16)
-
 	g.SetManager(table)
 
 	if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone, quit); err != nil {
 		log.Panicln(err)
 	}
 
-	AddMainTableWidgetKeybinds(g, addCreature)
+	AddMainTableWidgetKeybinds(g)
 	AddAddCreatureWidgetKeybinds(g)
-
-	spellDict["1"] = Spell{}
 
 	if err := g.MainLoop(); err != nil && !errors.Is(err, gocui.ErrQuit) {
 		log.Panicln(err)
