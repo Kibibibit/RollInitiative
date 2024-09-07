@@ -1,0 +1,12 @@
+SPELL:SANGUINE_BLAST:
+    name: Sanguine Blast
+    level: 0
+    castingTime: 1 action
+    range: 120 feet
+    school: evocation
+    duration: Instantaneous
+    description: A bolt of blood streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, the target must make a DC 13 Constitution saving throw. On a failed save, they take 1d10 necrotic damage and Rauds restores half of the damage dealt as hitpoints. On a successful save, Rauds does not restore any hitpoints and the target takes half damage.
+    components: VS
+    class:
+        - warlock
+    source: The Araluen Campaign

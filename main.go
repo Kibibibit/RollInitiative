@@ -1,12 +1,9 @@
 package main
 
 import (
-	"errors"
 	"log"
 	"os"
 	"slices"
-
-	"github.com/awesome-gocui/gocui"
 )
 
 const ADD_CREATURE_NAME = "add_creature"
@@ -29,6 +26,14 @@ func main() {
 		log.Fatalln(err)
 		os.Exit(1)
 	}
+	spellIds = make([]string, len(spellDict))
+	var i int = 0
+	for k := range spellDict {
+		spellIds[i] = k
+		i++
+	}
+
+	ReadJSON()
 
 	creatureDict, err = ImportCreatures("./data/creatures", creatureDict)
 	if err != nil {
@@ -36,14 +41,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	spellIds = make([]string, len(spellDict))
 	creatureIds = make([]string, len(creatureDict))
 
-	var i int = 0
-	for k := range spellDict {
-		spellIds[i] = k
-		i++
-	}
 	i = 0
 	for k := range creatureDict {
 		creatureIds[i] = k
@@ -53,29 +52,29 @@ func main() {
 	slices.Sort(spellIds)
 	slices.Sort(creatureIds)
 
-	g, err := gocui.NewGui(gocui.OutputNormal, true)
-	if err != nil {
-		log.Panicln(err)
-	}
-	defer g.Close()
+	// g, err := gocui.NewGui(gocui.OutputNormal, true)
+	// if err != nil {
+	// 	log.Panicln(err)
+	// }
+	// defer g.Close()
 
-	table := NewMainTableWidget(MAIN_TABLE_NAME, 0, 0)
+	// table := NewMainTableWidget(MAIN_TABLE_NAME, 0, 0)
 
-	addCreature := NewAddCreatureWidget(ADD_CREATURE_NAME, 50, 16)
+	// addCreature := NewAddCreatureWidget(ADD_CREATURE_NAME, 50, 16)
 
-	g.SetManager(table)
+	// g.SetManager(table)
 
-	if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone, quit); err != nil {
-		log.Panicln(err)
-	}
+	// if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone, quit); err != nil {
+	// 	log.Panicln(err)
+	// }
 
-	AddMainTableWidgetKeybinds(g, addCreature)
-	AddAddCreatureWidgetKeybinds(g)
+	// AddMainTableWidgetKeybinds(g, addCreature)
+	// AddAddCreatureWidgetKeybinds(g)
 
-	spellDict["1"] = Spell{}
+	// spellDict["1"] = Spell{}
 
-	if err := g.MainLoop(); err != nil && !errors.Is(err, gocui.ErrQuit) {
-		log.Panicln(err)
-	}
+	// if err := g.MainLoop(); err != nil && !errors.Is(err, gocui.ErrQuit) {
+	// 	log.Panicln(err)
+	// }
 
 }
