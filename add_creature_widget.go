@@ -9,6 +9,8 @@ import (
 	"github.com/awesome-gocui/gocui"
 )
 
+const ADD_CREATURE_NAME = "add_creature"
+
 type AddCreatureWidget struct {
 	name              string
 	w, h              int
