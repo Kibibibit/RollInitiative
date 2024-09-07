@@ -1,0 +1,387 @@
+CREATURE:CLOUD_GIANT:
+    name: Cloud Giant
+    stats:
+        - 27
+        - 10
+        - 22
+        - 12
+        - 16
+        - 16
+    ac: 14 (Natural Armor)
+    hitDice: 16
+    hitDiceType: 12
+    speed: 40 ft.
+    type: giant
+    size: Huge
+    alignment: neutral good (50%) or neutral evil (50%)
+    senses: passive Perception 17
+    languages: Common, Giant
+    cr: "9"
+    source: 5e SRD
+    saves:
+        charisma: 7
+        constitution: 10
+        wisdom: 7
+    skills:
+        insight: 7
+        perception: 7
+    actions:
+        - name: Multiattack
+          desc: The giant makes two morningstar attacks.
+        - name: Morningstar
+          desc: 'Melee Weapon Attack: +12 to hit, reach 10 ft., one target. Hit: 21 (3d8 + 8) piercing damage.'
+        - name: Rock
+          desc: 'Ranged Weapon Attack: +12 to hit, range 60/240 ft., one target. Hit: 30 (4d10 + 8) bludgeoning damage.'
+    traits:
+        - name: Keen Smell
+          desc: The giant has advantage on Wisdom (Perception) checks that rely on smell.
+        - name: Innate Spellcasting
+          desc: |-
+            The giant's innate spellcasting ability is Charisma. It can innately cast the following spells, requiring no material components:
+
+            At will: detect magic, fog cloud, light
+            3/day each: feather fall, fly, misty step, telekinesis
+            1/day each: control weather, gaseous form
+CREATURE:ETTIN:
+    name: Ettin
+    stats:
+        - 21
+        - 8
+        - 17
+        - 6
+        - 10
+        - 8
+    ac: 12 (Natural Armor)
+    hitDice: 10
+    hitDiceType: 10
+    speed: 40 ft.
+    type: giant
+    size: Large
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 14
+    languages: Giant, Orc
+    cr: "4"
+    source: 5e SRD
+    skills:
+        perception: 4
+    actions:
+        - name: Multiattack
+          desc: 'The ettin makes two attacks: one with its battleaxe and one with its morningstar.'
+        - name: Battleaxe
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) slashing damage.'
+        - name: Morningstar
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) piercing damage.'
+    traits:
+        - name: Two Heads
+          desc: The ettin has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.
+        - name: Wakeful
+          desc: When one of the ettin's heads is asleep, its other head is awake.
+CREATURE:FIRE_GIANT:
+    name: Fire Giant
+    stats:
+        - 25
+        - 9
+        - 23
+        - 10
+        - 14
+        - 13
+    ac: 18 (Plate)
+    hitDice: 13
+    hitDiceType: 12
+    speed: 30 ft.
+    type: giant
+    size: Huge
+    alignment: lawful evil
+    senses: passive Perception 16
+    languages: Giant
+    cr: "9"
+    source: 5e SRD
+    saves:
+        charisma: 5
+        constitution: 10
+        dexterity: 3
+    skills:
+        athletics: 11
+        perception: 6
+    damageImmunities: fire
+    actions:
+        - name: Multiattack
+          desc: The giant makes two greatsword attacks.
+        - name: Greatsword
+          desc: 'Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 28 (6d6 + 7) slashing damage.'
+        - name: Rock
+          desc: 'Ranged Weapon Attack: +11 to hit, range 60/240 ft., one target. Hit: 29 (4d10 + 7) bludgeoning damage.'
+CREATURE:FROST_GIANT:
+    name: Frost Giant
+    stats:
+        - 23
+        - 9
+        - 21
+        - 9
+        - 10
+        - 12
+    ac: 15 (Patchwork Armor)
+    hitDice: 12
+    hitDiceType: 12
+    speed: 40 ft.
+    type: giant
+    size: Huge
+    alignment: neutral evil
+    senses: passive Perception 13
+    languages: Giant
+    cr: "8"
+    source: 5e SRD
+    saves:
+        charisma: 4
+        constitution: 8
+        wisdom: 3
+    skills:
+        athletics: 9
+        perception: 3
+    damageImmunities: cold
+    actions:
+        - name: Multiattack
+          desc: The giant makes two greataxe attacks.
+        - name: Greataxe
+          desc: 'Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 25 (3d12 + 6) slashing damage.'
+        - name: Rock
+          desc: 'Ranged Weapon Attack: +9 to hit, range 60/240 ft., one target. Hit: 28 (4d10 + 6) bludgeoning damage.'
+CREATURE:HILL_GIANT:
+    name: Hill Giant
+    stats:
+        - 21
+        - 8
+        - 19
+        - 5
+        - 9
+        - 6
+    ac: 13 (Natural Armor)
+    hitDice: 10
+    hitDiceType: 12
+    speed: 40 ft.
+    type: giant
+    size: Huge
+    alignment: chaotic evil
+    senses: passive Perception 12
+    languages: Giant
+    cr: "5"
+    source: 5e SRD
+    skills:
+        perception: 2
+    actions:
+        - name: Multiattack
+          desc: The giant makes two greatclub attacks.
+        - name: Greatclub
+          desc: 'Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 18 (3d8 + 5) bludgeoning damage.'
+        - name: Rock
+          desc: 'Ranged Weapon Attack: +8 to hit, range 60/240 ft., one target. Hit: 21 (3d10 + 5) bludgeoning damage.'
+CREATURE:OGRE:
+    name: Ogre
+    stats:
+        - 19
+        - 8
+        - 16
+        - 5
+        - 7
+        - 7
+    ac: 11 (Hide Armor)
+    hitDice: 7
+    hitDiceType: 10
+    speed: 40 ft.
+    type: giant
+    size: Large
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 8
+    languages: Common, Giant
+    cr: "2"
+    source: 5e SRD
+    actions:
+        - name: Greatclub
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage.'
+        - name: Javelin
+          desc: 'Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 11 (2d6 + 4) piercing damage.'
+CREATURE:ONI:
+    name: Oni
+    stats:
+        - 19
+        - 11
+        - 16
+        - 14
+        - 12
+        - 15
+    ac: 16 (Chain Mail)
+    hitDice: 13
+    hitDiceType: 10
+    speed: 30 ft., fly 30 ft.
+    type: giant
+    size: Large
+    alignment: lawful evil
+    senses: darkvision 60 ft., passive Perception 14
+    languages: Common, Giant
+    cr: "7"
+    source: 5e SRD
+    saves:
+        charisma: 5
+        constitution: 6
+        dexterity: 3
+        wisdom: 4
+    skills:
+        arcana: 5
+        deception: 8
+        perception: 4
+    actions:
+        - name: Multiattack
+          desc: The oni makes two attacks, either with its claws or its glaive.
+        - name: Claw (Oni Form Only)
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage.'
+        - name: Glaive
+          desc: 'Melee Weapon Attack: +7 to hit, reach 10 ft., one target. Hit: 15 (2d10 + 4) slashing damage, or 9 (1d10 + 4) slashing damage in Small or Medium form.'
+        - name: Change Shape
+          desc: The oni magically polymorphs into a Small or Medium humanoid, into a Large giant, or back into its true form. Other than its size, its statistics are the same in each form. The only equipment that is transformed is its glaive, which shrinks so that it can be wielded in humanoid form. If the oni dies, it reverts to its true form, and its glaive reverts to its normal size.
+    traits:
+        - name: Innate Spellcasting
+          desc: |-
+            The oni's innate spellcasting ability is Charisma (spell save DC 13). The oni can innately cast the following spells, requiring no material components:
+
+            At will: darkness, invisibility
+            1/day each: charm person, cone of cold, gaseous form, sleep
+        - name: Magic Weapons
+          desc: The oni's weapon attacks are magical.
+        - name: Regeneration
+          desc: The oni regains 10 hit points at the start of its turn if it has at least 1 hit point.
+CREATURE:STONE_GIANT:
+    name: Stone Giant
+    stats:
+        - 23
+        - 15
+        - 20
+        - 10
+        - 12
+        - 9
+    ac: 17 (Natural Armor)
+    hitDice: 11
+    hitDiceType: 12
+    speed: 40 ft.
+    type: giant
+    size: Huge
+    alignment: neutral
+    senses: darkvision 60 ft., passive Perception 14
+    languages: Giant
+    cr: "7"
+    source: 5e SRD
+    saves:
+        constitution: 8
+        dexterity: 5
+        wisdom: 4
+    skills:
+        athletics: 12
+        perception: 4
+    actions:
+        - name: Multiattack
+          desc: The giant makes two greatclub attacks.
+        - name: Greatclub
+          desc: 'Melee Weapon Attack: +9 to hit, reach 15 ft., one target. Hit: 19 (3d8 + 6) bludgeoning damage.'
+        - name: Rock
+          desc: 'Ranged Weapon Attack: +9 to hit, range 60/240 ft., one target. Hit: 28 (4d10 + 6) bludgeoning damage. If the target is a creature, it must succeed on a DC 17 Strength saving throw or be knocked prone.'
+    reactions:
+        - name: Rock Catching
+          desc: If a rock or similar object is hurled at the giant, the giant can, with a successful DC 10 Dexterity saving throw, catch the missile and take no bludgeoning damage from it.
+    traits:
+        - name: Stone Camouflage
+          desc: The giant has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.
+CREATURE:STORM_GIANT:
+    name: Storm Giant
+    stats:
+        - 29
+        - 14
+        - 20
+        - 16
+        - 18
+        - 18
+    ac: 16 (Scale Mail)
+    hitDice: 20
+    hitDiceType: 12
+    speed: 50 ft., swim 50 ft.
+    type: giant
+    size: Huge
+    alignment: chaotic good
+    senses: passive Perception 19
+    languages: Common, Giant
+    cr: "13"
+    source: 5e SRD
+    saves:
+        charisma: 9
+        constitution: 10
+        strength: 14
+        wisdom: 9
+    skills:
+        arcana: 8
+        athletics: 14
+        history: 8
+        perception: 9
+    damageResistances: cold
+    damageImmunities: lightning, thunder
+    actions:
+        - name: Multiattack
+          desc: The giant makes two greatsword attacks.
+        - name: Greatsword
+          desc: 'Melee Weapon Attack: +14 to hit, reach 10 ft., one target. Hit: 30 (6d6 + 9) slashing damage.'
+        - name: Rock
+          desc: 'Ranged Weapon Attack: +14 to hit, range 60/240 ft., one target. Hit: 35 (4d12 + 9) bludgeoning damage.'
+        - name: Lightning Strike (Recharge 5-6)
+          desc: The giant hurls a magical lightning bolt at a point it can see within 500 feet of it. Each creature within 10 feet of that point must make a DC 17 Dexterity saving throw, taking 54 (12d8) lightning damage on a failed save, or half as much damage on a successful one.
+    traits:
+        - name: Amphibious
+          desc: The giant can breathe air and water.
+        - name: Innate Spellcasting
+          desc: |-
+            The giant's innate spellcasting ability is Charisma (spell save DC 17). It can innately cast the following spells, requiring no material components:
+
+            At will: detect magic, feather fall, levitate, light
+            3/day each: control weather, water breathing
+CREATURE:TROLL:
+    name: Troll
+    stats:
+        - 18
+        - 13
+        - 20
+        - 7
+        - 9
+        - 7
+    ac: 15 (Natural Armor)
+    hitDice: 8
+    hitDiceType: 10
+    speed: 30 ft.
+    type: giant
+    size: Large
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 12
+    languages: Giant
+    cr: "5"
+    source: 5e SRD
+    skills:
+        perception: 2
+    actions:
+        - name: Multiattack
+          desc: 'The troll makes three attacks: one with its bite and two with its claws.'
+        - name: Bite
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 7 (1d6 + 4) piercing damage.'
+        - name: Claw
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.'
+    traits:
+        - name: Keen Smell
+          desc: The troll has advantage on Wisdom (Perception) checks that rely on smell.
+        - name: Regeneration
+          desc: The troll regains 10 hit points at the start of its turn. If the troll takes acid or fire damage, this trait doesn't function at the start of the troll's next turn. The troll dies only if it starts its turn with 0 hit points and doesn't regenerate.
+        - name: 'Variant: Loathsome Limbs'
+          desc: |-
+            Whenever the troll takes at least 15 slashing damage at one time, roll a d20 to determine what else happens to it:
+            1-10: Nothing else happens.
+            11-14: One leg is severed from the troll if it has any legs left.
+            15- 18: One arm is severed from the troll if it has any arms left.
+            19-20: The troll is decapitated, but the troll dies only if it can't regenerate. If it dies, so does the severed head.
+            If the troll finishes a short or long rest without reattaching a severed limb or head, the part regrows. At that point, the severed part dies. Until then, a severed part acts on the troll's initiative and has its own action and movement. A severed part has AC 13, 10 hit points, and the troll's Regeneration trait.
+            A severed leg is unable to attack and has a speed of 5 feet.
+            A severed arm has a speed of 5 feet and can make one claw attack on its turn, with disadvantage on the attack roll unless the troll can see the arm and its target. Each time the troll loses an arm, it loses a claw attack.
+            If its head is severed, the troll loses its bite attack and its body is blinded unless the head can see it. The severed head has a speed of 0 feet and the troll's Keen Smell trait. It can make a bite attack but only against a target in its space.
+            The troll's speed is halved if it's missing a leg. If it loses both legs, it falls prone. If it has both arms, it can crawl. With only one arm, it can still crawl, but its speed is halved. With no arms or legs, its speed is 0, and it can't benefit from bonuses to speed.

@@ -12,7 +12,7 @@ type Spell struct {
 	Ritual       bool     `yaml:"ritual"`
 	HigherLevels string   `yaml:"higherLevels,omitempty"`
 	Components   string   `yaml:"components"`
-	Materials    string   `yaml:"materials"`
+	Materials    string   `yaml:"materials,omitempty"`
 	Classes      []string `yaml:"class,omitempty"`
 	Source       string   `yaml:"source"`
 }

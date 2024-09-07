@@ -1,0 +1,1477 @@
+CREATURE:ACOLYTE:
+    name: Acolyte
+    stats:
+        - 10
+        - 10
+        - 10
+        - 10
+        - 14
+        - 11
+    ac: "10"
+    hitDice: 2
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 12
+    languages: any one language (usually Common)
+    cr: 1/4
+    source: 5e SRD
+    skills:
+        medicine: 4
+        religion: 2
+    actions:
+        - name: Club
+          desc: 'Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage.'
+    spellNotes: 'The acolyte is a 1st-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following cleric spells prepared:'
+    spells:
+        0:
+            spells:
+                - SPELL:LIGHT
+                - SPELL:SACRED_FLAME
+                - SPELL:THAUMATURGY
+        1:
+            slots: 3
+            spells:
+                - SPELL:BLESS
+                - SPELL:CURE_WOUNDS
+                - SPELL:SANCTUARY
+CREATURE:ARCHMAGE:
+    name: Archmage
+    stats:
+        - 10
+        - 14
+        - 12
+        - 20
+        - 15
+        - 16
+    ac: 12 (15 With Mage Armor)
+    hitDice: 18
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 12
+    languages: any six languages
+    cr: "12"
+    source: 5e SRD
+    saves:
+        intelligence: 9
+        wisdom: 6
+    skills:
+        arcana: 13
+        history: 13
+    damageResistances: damage from spells; non magical bludgeoning, piercing, and slashing (from stoneskin)
+    actions:
+        - name: Dagger
+          desc: 'Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d4 + 2) piercing damage.'
+    traits:
+        - name: Magic Resistance
+          desc: The archmage has advantage on saving throws against spells and other magical effects.
+    spellNotes: 'The archmage is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 17, +9 to hit with spell attacks). The archmage can cast disguise self and invisibility at will and has the following wizard spells prepared:'
+    spells:
+        0:
+            spells:
+                - SPELL:FIRE_BOLT
+                - SPELL:LIGHT
+                - SPELL:MAGE_HAND
+                - SPELL:PRESTIDIGITATION
+                - SPELL:SHOCKING_GRASP
+        1:
+            slots: 4
+            spells:
+                - SPELL:DETECT_MAGIC
+                - SPELL:IDENTIFY
+                - SPELL:MAGE_ARMOR
+                - SPELL:MAGIC_MISSILE
+        2:
+            slots: 3
+            spells:
+                - SPELL:DETECT_THOUGHTS
+                - SPELL:MIRROR_IMAGE
+                - SPELL:MISTY_STEP
+        3:
+            slots: 3
+            spells:
+                - SPELL:COUNTERSPELL
+                - SPELL:FLY
+                - SPELL:LIGHTNING_BOLT
+        4:
+            slots: 3
+            spells:
+                - SPELL:BANISHMENT
+                - SPELL:FIRE_SHIELD
+                - SPELL:STONESKIN
+        5:
+            slots: 3
+            spells:
+                - SPELL:CONE_OF_COLD
+                - SPELL:SCRYING
+                - SPELL:WALL_OF_FORCE
+        6:
+            slots: 1
+            spells:
+                - SPELL:GLOBE_OF_INVULNERABILITY
+        7:
+            slots: 1
+            spells:
+                - SPELL:TELEPORT
+        8:
+            slots: 1
+            spells:
+                - SPELL:MIND_BLANK
+        9:
+            slots: 1
+            spells:
+                - SPELL:TIME_STOP
+    precombatSpells:
+        - SPELL:MAGE_ARMOR
+        - SPELL:STONESKIN
+        - SPELL:MIND_BLANK
+CREATURE:ASSASSIN:
+    name: Assassin
+    stats:
+        - 11
+        - 16
+        - 14
+        - 13
+        - 11
+        - 10
+    ac: 15 (Studded Leather)
+    hitDice: 12
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any non-good alignment
+    senses: passive Perception 13
+    languages: Thieves' cant plus any two languages
+    cr: "8"
+    source: 5e SRD
+    saves:
+        dexterity: 6
+        intelligence: 4
+    skills:
+        acrobatics: 6
+        deception: 3
+        perception: 3
+        stealth: 9
+    damageResistances: poison
+    actions:
+        - name: Multiattack
+          desc: The assassin makes two shortsword attacks.
+        - name: Shortsword
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage, and the target must make a DC 15 Constitution saving throw, taking 24 (7d6) poison damage on a failed save, or half as much damage on a successful one.'
+        - name: Light Crossbow
+          desc: 'Ranged Weapon Attack: +6 to hit, range 80/320 ft., one target. Hit: 7 (1d8 + 3) piercing damage, and the target must make a DC 15 Constitution saving throw, taking 24 (7d6) poison damage on a failed save, or half as much damage on a successful one.'
+    traits:
+        - name: Assassinate
+          desc: During its first turn, the assassin has advantage on attack rolls against any creature that hasn't taken a turn. Any hit the assassin scores against a surprised creature is a critical hit.
+        - name: Evasion
+          desc: If the assassin is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, the assassin instead takes no damage if it succeeds on the saving throw, and only half damage if it fails.
+        - name: Sneak Attack (1/Turn)
+          desc: The assassin deals an extra 13 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll.
+CREATURE:BANDIT:
+    name: Bandit
+    stats:
+        - 11
+        - 12
+        - 12
+        - 10
+        - 10
+        - 10
+    ac: 12 (Leather Armor)
+    hitDice: 2
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any non-lawful alignment
+    senses: passive Perception 10
+    languages: any one language (usually Common)
+    cr: 1/8
+    source: 5e SRD
+    actions:
+        - name: Scimitar
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) slashing damage.'
+        - name: Light Crossbow
+          desc: 'Ranged Weapon Attack: +3 to hit, range 80 ft./320 ft., one target. Hit: 5 (1d8 + 1) piercing damage.'
+CREATURE:BANDIT_CAPTAIN:
+    name: Bandit Captain
+    stats:
+        - 15
+        - 16
+        - 14
+        - 14
+        - 11
+        - 14
+    ac: 15 (Studded Leather)
+    hitDice: 10
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any non-lawful alignment
+    senses: passive Perception 10
+    languages: any two languages
+    cr: "2"
+    source: 5e SRD
+    saves:
+        dexterity: 5
+        strength: 4
+        wisdom: 2
+    skills:
+        athletics: 4
+        deception: 4
+    actions:
+        - name: Multiattack
+          desc: 'The captain makes three melee attacks: two with its scimitar and one with its dagger. Or the captain makes two ranged attacks with its daggers.'
+        - name: Scimitar
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage.'
+        - name: Dagger
+          desc: 'Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d4 + 3) piercing damage.'
+    reactions:
+        - name: Parry
+          desc: The captain adds 2 to its AC against one melee attack that would hit it. To do so, the captain must see the attacker and be wielding a melee weapon.
+CREATURE:BERSERKER:
+    name: Berserker
+    stats:
+        - 16
+        - 12
+        - 17
+        - 9
+        - 11
+        - 9
+    ac: 13 (Hide Armor)
+    hitDice: 9
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any chaotic alignment
+    senses: passive Perception 10
+    languages: any one language (usually Common)
+    cr: "2"
+    source: 5e SRD
+    actions:
+        - name: Greataxe
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 9 (1d12 + 3) slashing damage.'
+    traits:
+        - name: Reckless
+          desc: At the start of its turn, the berserker can gain advantage on all melee weapon attack rolls during that turn, but attack rolls against it have advantage until the start of its next turn.
+CREATURE:BUGBEAR:
+    name: Bugbear
+    stats:
+        - 15
+        - 14
+        - 13
+        - 8
+        - 11
+        - 9
+    ac: 16 (Hide Armor, Shield)
+    hitDice: 5
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (goblinoid)
+    size: Medium
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 10
+    languages: Common, Goblin
+    cr: "1"
+    source: 5e SRD
+    skills:
+        stealth: 6
+        survival: 2
+    actions:
+        - name: Morningstar
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 11 (2d8 + 2) piercing damage.'
+        - name: Javelin
+          desc: 'Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 9 (2d6 + 2) piercing damage in melee or 5 (1d6 + 2) piercing damage at range.'
+    traits:
+        - name: Brute
+          desc: A melee weapon deals one extra die of its damage when the bugbear hits with it (included in the attack).
+        - name: Surprise Attack
+          desc: If the bugbear surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 7 (2d6) damage from the attack.
+CREATURE:COMMONER:
+    name: Commoner
+    stats:
+        - 10
+        - 10
+        - 10
+        - 10
+        - 10
+        - 10
+    ac: "10"
+    hitDice: 1
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 10
+    languages: any one language (usually Common)
+    cr: "0"
+    source: 5e SRD
+    actions:
+        - name: Club
+          desc: 'Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 2 (1d4) bludgeoning damage.'
+CREATURE:CULT_FANATIC:
+    name: Cult Fanatic
+    stats:
+        - 11
+        - 14
+        - 12
+        - 10
+        - 13
+        - 14
+    ac: 13 (Leather Armor)
+    hitDice: 6
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any non-good alignment
+    senses: passive Perception 11
+    languages: any one language (usually Common)
+    cr: "2"
+    source: 5e SRD
+    skills:
+        deception: 4
+        persuasion: 4
+        religion: 2
+    actions:
+        - name: Multiattack
+          desc: The fanatic makes two melee attacks.
+        - name: Dagger
+          desc: 'Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one creature. Hit: 4 (1d4 + 2) piercing damage.'
+    traits:
+        - name: Dark Devotion
+          desc: The fanatic has advantage on saving throws against being charmed or frightened.
+    spellNotes: 'The fanatic is a 4th-level spellcaster. Its spell casting ability is Wisdom (spell save DC 11, +3 to hit with spell attacks). The fanatic has the following cleric spells prepared:'
+    spells:
+        1:
+            slots: 4
+            spells:
+                - SPELL:COMMAND
+                - SPELL:INFLICT_WOUNDS
+                - SPELL:SHIELD_OF_FAITH
+        2:
+            slots: 3
+            spells:
+                - SPELL:HOLD_PERSON
+                - SPELL:SPIRITUAL_WEAPON
+CREATURE:CULTIST:
+    name: Cultist
+    stats:
+        - 11
+        - 12
+        - 10
+        - 10
+        - 11
+        - 10
+    ac: 12 (Leather Armor)
+    hitDice: 2
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any non-good alignment
+    senses: passive Perception 10
+    languages: any one language (usually Common)
+    cr: 1/8
+    source: 5e SRD
+    skills:
+        deception: 2
+        religion: 2
+    actions:
+        - name: Scimitar
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 4 (1d6 + 1) slashing damage.'
+    traits:
+        - name: Dark Devotion
+          desc: The cultist has advantage on saving throws against being charmed or frightened.
+CREATURE:DEEP_GNOME_SVIRFNEBLIN:
+    name: Deep Gnome (Svirfneblin)
+    stats:
+        - 15
+        - 14
+        - 14
+        - 12
+        - 10
+        - 9
+    ac: 15 (Chain Shirt)
+    hitDice: 3
+    hitDiceType: 6
+    speed: 20 ft.
+    type: humanoid (gnome)
+    size: Small
+    alignment: neutral good
+    senses: darkvision 120 ft., passive Perception 12
+    languages: Gnomish, Terran, Undercommon
+    cr: 1/2
+    source: 5e SRD
+    skills:
+        investigation: 3
+        perception: 2
+        stealth: 4
+    actions:
+        - name: War Pick
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage.'
+        - name: Poisoned Dart
+          desc: 'Ranged Weapon Attack: +4 to hit, range 30/120 ft., one creature. Hit: 4 (1d4 + 2) piercing damage, and the target must succeed on a DC 12 Constitution saving throw or be poisoned for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success'
+    traits:
+        - name: Stone Camouflage
+          desc: The gnome has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.
+        - name: Gnome Cunning
+          desc: The gnome has advantage on Intelligence, Wisdom, and Charisma saving throws against magic.
+        - name: Innate Spellcasting
+          desc: |-
+            The gnome's innate spellcasting ability is Intelligence (spell save DC 11). It can innately cast the following spells, requiring no material components:
+            At will: nondetection (self only)
+            1/day each: blindness/deafness, blur, disguise self
+CREATURE:DROW:
+    name: Drow
+    stats:
+        - 10
+        - 14
+        - 10
+        - 11
+        - 11
+        - 12
+    ac: 15 (Chain Shirt)
+    hitDice: 3
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (elf)
+    size: Medium
+    alignment: neutral evil
+    senses: darkvision 120 ft., passive Perception 12
+    languages: Elvish, Undercommon
+    cr: 1/4
+    source: 5e SRD
+    skills:
+        perception: 2
+        stealth: 4
+    actions:
+        - name: Shortsword
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+        - name: Hand Crossbow
+          desc: 'Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage, and the target must succeed on a DC 13 Constitution saving throw or be poisoned for 1 hour. If the saving throw fails by 5 or more, the target is also unconscious while poisoned in this way. The target wakes up if it takes damage or if another creature takes an action to shake it awake.'
+    traits:
+        - name: Fey Ancestry
+          desc: The drow has advantage on saving throws against being charmed, and magic can't put the drow to sleep.
+        - name: Innate Spellcasting
+          desc: |-
+            The drow's spellcasting ability is Charisma (spell save DC 11). It can innately cast the following spells, requiring no material components:
+            At will: dancing lights
+            1/day each: darkness, faerie fire
+        - name: Sunlight Sensitivity
+          desc: While in sunlight, the drow has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.
+CREATURE:DRUID:
+    name: Druid
+    stats:
+        - 10
+        - 12
+        - 13
+        - 12
+        - 15
+        - 11
+    ac: 11 (16 With Barkskin)
+    hitDice: 5
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 14
+    languages: Druidic plus any two languages
+    cr: "2"
+    source: 5e SRD
+    skills:
+        medicine: 4
+        nature: 3
+        perception: 4
+    actions:
+        - name: Quarterstaff
+          desc: 'Melee Weapon Attack: +2 to hit (+4 to hit with shillelagh), reach 5 ft., one target. Hit: 3 (1d6) bludgeoning damage, or 6 (1d8 + 2) bludgeoning damage with shillelagh or if wielded with two hands.'
+    spellNotes: 'The druid is a 4th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 12, +4 to hit with spell attacks). It has the following druid spells prepared:'
+    spells:
+        0:
+            spells:
+                - SPELL:DRUIDCRAFT
+                - SPELL:PRODUCE_FLAME
+                - SPELL:SHILLELAGH
+        1:
+            slots: 4
+            spells:
+                - SPELL:ENTANGLE
+                - SPELL:LONGSTRIDER
+                - SPELL:SPEAK_WITH_ANIMALS
+                - SPELL:THUNDERWAVE
+        2:
+            slots: 3
+            spells:
+                - SPELL:ANIMAL_MESSENGER
+                - SPELL:BARKSKIN
+CREATURE:DUERGAR:
+    name: Duergar
+    stats:
+        - 14
+        - 11
+        - 14
+        - 11
+        - 10
+        - 9
+    ac: 16 (Scale Mail, Shield)
+    hitDice: 4
+    hitDiceType: 8
+    speed: 25 ft.
+    type: humanoid (dwarf)
+    size: Medium
+    alignment: lawful evil
+    senses: darkvision 120 ft., passive Perception 10
+    languages: Dwarvish, Undercommon
+    cr: "1"
+    source: 5e SRD
+    damageResistances: poison
+    actions:
+        - name: Enlarge (Recharges after a Short or Long Rest)
+          desc: For 1 minute, the duergar magically increases in size, along with anything it is wearing or carrying. While enlarged, the duergar is Large, doubles its damage dice on Strength-based weapon attacks (included in the attacks), and makes Strength checks and Strength saving throws with advantage. If the duergar lacks the room to become Large, it attains the maximum size possible in the space available.
+        - name: War Pick
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage, or 11 (2d8 + 2) piercing damage while enlarged.'
+        - name: Javelin
+          desc: 'Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 9 (2d6 + 2) piercing damage while enlarged.'
+        - name: Invisibility (Recharges after a Short or Long Rest)
+          desc: The duergar magically turns invisible until it attacks, casts a spell, or uses its Enlarge, or until its concentration is broken, up to 1 hour (as if concentrating on a spell). Any equipment the duergar wears or carries is invisible with it .
+    traits:
+        - name: Duergar Resilience
+          desc: The duergar has advantage on saving throws against poison, spells, and illusions, as well as to resist being charmed or paralyzed.
+        - name: Sunlight Sensitivity
+          desc: While in sunlight, the duergar has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.
+CREATURE:GLADIATOR:
+    name: Gladiator
+    stats:
+        - 18
+        - 15
+        - 16
+        - 10
+        - 12
+        - 15
+    ac: 16 (Studded Leather, Shield)
+    hitDice: 15
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 11
+    languages: any one language (usually Common)
+    cr: "5"
+    source: 5e SRD
+    saves:
+        constitution: 6
+        dexterity: 5
+        strength: 7
+    skills:
+        athletics: 10
+        intimidation: 5
+    actions:
+        - name: Multiattack
+          desc: The gladiator makes three melee attacks or two ranged attacks.
+        - name: Spear
+          desc: 'Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. and range 20/60 ft., one target. Hit: 11 (2d6 + 4) piercing damage, or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.'
+        - name: Shield Bash
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 Strength saving throw or be knocked prone.'
+    reactions:
+        - name: Parry
+          desc: The gladiator adds 3 to its AC against one melee attack that would hit it. To do so, the gladiator must see the attacker and be wielding a melee weapon.
+    traits:
+        - name: Brave
+          desc: The gladiator has advantage on saving throws against being frightened.
+        - name: Brute
+          desc: A melee weapon deals one extra die of its damage when the gladiator hits with it (included in the attack).
+CREATURE:GNOLL:
+    name: Gnoll
+    stats:
+        - 14
+        - 12
+        - 11
+        - 6
+        - 10
+        - 7
+    ac: 15 (Hide Armor, Shield)
+    hitDice: 5
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (gnoll)
+    size: Medium
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 10
+    languages: Gnoll
+    cr: 1/2
+    source: 5e SRD
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 4 (1d4 + 2) piercing damage.'
+        - name: Spear
+          desc: 'Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.'
+        - name: Longbow
+          desc: 'Ranged Weapon Attack: +3 to hit, range 150/600 ft., one target. Hit: 5 (1d8 + 1) piercing damage.'
+    traits:
+        - name: Rampage
+          desc: When the gnoll reduces a creature to 0 hit points with a melee attack on its turn, the gnoll can take a bonus action to move up to half its speed and make a bite attack.
+CREATURE:GOBLIN:
+    name: Goblin
+    stats:
+        - 8
+        - 14
+        - 10
+        - 10
+        - 8
+        - 8
+    ac: 15 (Leather Armor, Shield)
+    hitDice: 2
+    hitDiceType: 6
+    speed: 30 ft.
+    type: humanoid (goblinoid)
+    size: Small
+    alignment: neutral evil
+    senses: darkvision 60 ft., passive Perception 9
+    languages: Common, Goblin
+    cr: 1/4
+    source: 5e SRD
+    skills:
+        stealth: 6
+    actions:
+        - name: Scimitar
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) slashing damage.'
+        - name: Shortbow
+          desc: 'Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+    traits:
+        - name: Nimble Escape
+          desc: The goblin can take the Disengage or Hide action as a bonus action on each of its turns.
+CREATURE:GRIMLOCK:
+    name: Grimlock
+    stats:
+        - 16
+        - 12
+        - 12
+        - 9
+        - 8
+        - 6
+    ac: "11"
+    hitDice: 2
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (grimlock)
+    size: Medium
+    alignment: neutral evil
+    senses: blindsight 30 ft. or 10 ft. while deafened (blind beyond this radius), passive Perception 13
+    languages: Undercommon
+    cr: 1/4
+    source: 5e SRD
+    skills:
+        athletics: 5
+        perception: 3
+        stealth: 3
+    damageImmunities: blinded
+    actions:
+        - name: Spiked Bone Club
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d4 + 3) bludgeoning damage plus 2 (1d4) piercing damage.'
+    traits:
+        - name: Blind Senses
+          desc: The grimlock can't use its blindsight while deafened and unable to smell.
+        - name: Keen Hearing and Smell
+          desc: The grimlock has advantage on Wisdom (Perception) checks that rely on hearing or smell.
+        - name: Stone Camouflage
+          desc: The grimlock has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.
+CREATURE:GUARD:
+    name: Guard
+    stats:
+        - 13
+        - 12
+        - 12
+        - 10
+        - 11
+        - 10
+    ac: 16 (Chain Shirt, Shield)
+    hitDice: 2
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 12
+    languages: any one language (usually Common)
+    cr: 1/8
+    source: 5e SRD
+    skills:
+        perception: 2
+    actions:
+        - name: Spear
+          desc: 'Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.'
+CREATURE:HALF_RED_DRAGON_VETERAN:
+    name: Half-Red Dragon Veteran
+    stats:
+        - 16
+        - 13
+        - 14
+        - 10
+        - 11
+        - 10
+    ac: 18 (Plate)
+    hitDice: 10
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (human)
+    size: Medium
+    alignment: any alignment
+    senses: blindsight 10 ft., darkvision 60 ft., passive Perception 12
+    languages: Common, Draconic
+    cr: "5"
+    source: 5e SRD
+    damageResistances: fire
+    actions:
+        - name: Multiattack
+          desc: The veteran makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack.
+        - name: Longsword
+          desc: 'Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.'
+        - name: Shortsword
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage.'
+        - name: Heavy Crossbow
+          desc: 'Ranged Weapon Attack: +3 to hit, range 100/400 ft., one target. Hit: 6 (1d10 + 1) piercing damage.'
+        - name: Fire Breath (Recharge 5-6)
+          desc: The veteran exhales fire in a 15-foot cone. Each creature in that area must make a DC 15 Dexterity saving throw, taking 24 (7d6) fire damage on a failed save, or half as much damage on a successful one.
+CREATURE:HOBGOBLIN:
+    name: Hobgoblin
+    stats:
+        - 13
+        - 12
+        - 12
+        - 10
+        - 10
+        - 9
+    ac: 18 (Chain Mail, Shield)
+    hitDice: 2
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (goblinoid)
+    size: Medium
+    alignment: lawful evil
+    senses: darkvision 60 ft., passive Perception 10
+    languages: Common, Goblin
+    cr: 1/2
+    source: 5e SRD
+    actions:
+        - name: Longsword
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) slashing damage, or 6 (1d10 + 1) slashing damage if used with two hands.'
+        - name: Longbow
+          desc: 'Ranged Weapon Attack: +3 to hit, range 150/600 ft., one target. Hit: 5 (1d8 + 1) piercing damage.'
+    traits:
+        - name: Martial Advantage
+          desc: Once per turn, the hobgoblin can deal an extra 7 (2d6) damage to a creature it hits with a weapon attack if that creature is within 5 ft. of an ally of the hobgoblin that isn't incapacitated.
+CREATURE:KNIGHT:
+    name: Knight
+    stats:
+        - 16
+        - 11
+        - 14
+        - 11
+        - 11
+        - 15
+    ac: 18 (Plate)
+    hitDice: 8
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 10
+    languages: any one language (usually Common)
+    cr: "3"
+    source: 5e SRD
+    saves:
+        constitution: 4
+        wisdom: 2
+    actions:
+        - name: Multiattack
+          desc: The knight makes two melee attacks.
+        - name: Greatsword
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage.'
+        - name: Heavy Crossbow
+          desc: 'Ranged Weapon Attack: +2 to hit, range 100/400 ft., one target. Hit: 5 (1d10) piercing damage.'
+        - name: Leadership (Recharges after a Short or Long Rest)
+          desc: For 1 minute, the knight can utter a special command or warning whenever a nonhostile creature that it can see within 30 ft. of it makes an attack roll or a saving throw. The creature can add a d4 to its roll provided it can hear and understand the knight. A creature can benefit from only one Leadership die at a time. This effect ends if the knight is incapacitated.
+    reactions:
+        - name: Parry
+          desc: The knight adds 2 to its AC against one melee attack that would hit it. To do so, the knight must see the attacker and be wielding a melee weapon.
+    traits:
+        - name: Brave
+          desc: The knight has advantage on saving throws against being frightened.
+CREATURE:KOBOLD:
+    name: Kobold
+    stats:
+        - 7
+        - 15
+        - 9
+        - 8
+        - 7
+        - 8
+    ac: "12"
+    hitDice: 2
+    hitDiceType: 6
+    speed: 30 ft.
+    type: humanoid (kobold)
+    size: Small
+    alignment: lawful evil
+    senses: darkvision 60 ft., passive Perception 8
+    languages: Common, Draconic
+    cr: 1/8
+    source: 5e SRD
+    actions:
+        - name: Dagger
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage.'
+        - name: Sling
+          desc: 'Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 4 (1d4 + 2) bludgeoning damage.'
+    traits:
+        - name: Sunlight Sensitivity
+          desc: While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.
+        - name: Pack Tactics
+          desc: The kobold has advantage on an attack roll against a creature if at least one of the kobold's allies is within 5 ft. of the creature and the ally isn't incapacitated.
+CREATURE:LIZARDFOLK:
+    name: Lizardfolk
+    stats:
+        - 15
+        - 10
+        - 13
+        - 7
+        - 12
+        - 7
+    ac: 15 (Natural Armor, Shield)
+    hitDice: 4
+    hitDiceType: 8
+    speed: 30 ft., swim 30 ft.
+    type: humanoid (lizardfolk)
+    size: Medium
+    alignment: neutral
+    senses: passive Perception 13
+    languages: Draconic
+    cr: 1/2
+    source: 5e SRD
+    skills:
+        perception: 3
+        stealth: 4
+        survival: 5
+    actions:
+        - name: Multiattack
+          desc: The lizardfolk makes two melee attacks, each one with a different weapon.
+        - name: Bite
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+        - name: Heavy Club
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage.'
+        - name: Javelin
+          desc: 'Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+        - name: Spiked Shield
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+    traits:
+        - name: Hold Breath
+          desc: The lizardfolk can hold its breath for 15 minutes.
+CREATURE:MAGE:
+    name: Mage
+    stats:
+        - 9
+        - 14
+        - 11
+        - 17
+        - 12
+        - 11
+    ac: 12 (15 With Mage Armor)
+    hitDice: 9
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 11
+    languages: any four languages
+    cr: "6"
+    source: 5e SRD
+    saves:
+        intelligence: 6
+        wisdom: 4
+    skills:
+        arcana: 6
+        history: 6
+    actions:
+        - name: Dagger
+          desc: 'Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d4 + 2) piercing damage.'
+    spellNotes: 'The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:'
+    spells:
+        0:
+            spells:
+                - SPELL:FIRE_BOLT
+                - SPELL:LIGHT
+                - SPELL:MAGE_HAND
+                - SPELL:PRESTIDIGITATION
+        1:
+            slots: 4
+            spells:
+                - SPELL:DETECT_MAGIC
+                - SPELL:MAGE_ARMOR
+                - SPELL:MAGIC_MISSILE
+                - SPELL:SHIELD
+        2:
+            slots: 3
+            spells:
+                - SPELL:MISTY_STEP
+                - SPELL:SUGGESTION
+        3:
+            slots: 3
+            spells:
+                - SPELL:COUNTERSPELL
+                - SPELL:FIREBALL
+                - SPELL:FLY
+        4:
+            slots: 3
+            spells:
+                - SPELL:GREATER_INVISIBILITY
+                - SPELL:ICE_STORM
+        5:
+            slots: 1
+            spells:
+                - SPELL:CONE_OF_COLD
+CREATURE:MERFOLK:
+    name: Merfolk
+    stats:
+        - 10
+        - 13
+        - 12
+        - 11
+        - 11
+        - 12
+    ac: "11"
+    hitDice: 2
+    hitDiceType: 8
+    speed: 10 ft., swim 40 ft.
+    type: humanoid (merfolk)
+    size: Medium
+    alignment: neutral
+    senses: passive Perception 12
+    languages: Aquan, Common
+    cr: 1/8
+    source: 5e SRD
+    skills:
+        perception: 2
+    actions:
+        - name: Spear
+          desc: 'Melee or Ranged Weapon Attack: +2 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 3 (1d6) piercing damage, or 4 (1d8) piercing damage if used with two hands to make a melee attack.'
+    traits:
+        - name: Amphibious
+          desc: The merfolk can breathe air and water.
+CREATURE:NOBLE:
+    name: Noble
+    stats:
+        - 11
+        - 12
+        - 11
+        - 12
+        - 14
+        - 16
+    ac: 15 (Breastplate)
+    hitDice: 2
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 12
+    languages: any two languages
+    cr: 1/8
+    source: 5e SRD
+    skills:
+        deception: 5
+        insight: 4
+        persuasion: 5
+    actions:
+        - name: Rapier
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) piercing damage.'
+    reactions:
+        - name: Parry
+          desc: The noble adds 2 to its AC against one melee attack that would hit it. To do so, the noble must see the attacker and be wielding a melee weapon.
+CREATURE:ORC:
+    name: Orc
+    stats:
+        - 16
+        - 12
+        - 16
+        - 7
+        - 11
+        - 10
+    ac: 13 (Hide Armor)
+    hitDice: 2
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (orc)
+    size: Medium
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 10
+    languages: Common, Orc
+    cr: 1/2
+    source: 5e SRD
+    skills:
+        intimidation: 2
+    actions:
+        - name: Greataxe
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 9 (1d12 + 3) slashing damage.'
+        - name: Javelin
+          desc: 'Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 6 (1d6 + 3) piercing damage.'
+    traits:
+        - name: Aggressive
+          desc: As a bonus action, the orc can move up to its speed toward a hostile creature that it can see.
+CREATURE:PRIEST:
+    name: Priest
+    stats:
+        - 10
+        - 10
+        - 12
+        - 13
+        - 16
+        - 13
+    ac: 13 (Chain Shirt)
+    hitDice: 5
+    hitDiceType: 8
+    speed: 25 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 13
+    languages: any two languages
+    cr: "2"
+    source: 5e SRD
+    skills:
+        medicine: 7
+        persuasion: 3
+        religion: 4
+    actions:
+        - name: Mace
+          desc: 'Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 3 (1d6) bludgeoning damage.'
+    traits:
+        - name: Divine Eminence
+          desc: As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra 10 (3d6) radiant damage to a target on a hit. This benefit lasts until the end of the turn. If the priest expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st.
+    spellNotes: 'The priest is a 5th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 13, +5 to hit with spell attacks). The priest has the following cleric spells prepared:'
+    spells:
+        0:
+            spells:
+                - SPELL:LIGHT
+                - SPELL:SACRED_FLAME
+                - SPELL:THAUMATURGY
+        1:
+            slots: 4
+            spells:
+                - SPELL:CURE_WOUNDS
+                - SPELL:GUIDING_BOLT
+                - SPELL:SANCTUARY
+        2:
+            slots: 3
+            spells:
+                - SPELL:LESSER_RESTORATION
+                - SPELL:SPIRITUAL_WEAPON
+        3:
+            slots: 2
+            spells:
+                - SPELL:DISPEL_MAGIC
+                - SPELL:SPIRIT_GUARDIANS
+CREATURE:SAHUAGIN:
+    name: Sahuagin
+    stats:
+        - 13
+        - 11
+        - 12
+        - 12
+        - 13
+        - 9
+    ac: 12 (Natural Armor)
+    hitDice: 4
+    hitDiceType: 8
+    speed: 30 ft., swim 40 ft.
+    type: humanoid (sahuagin)
+    size: Medium
+    alignment: lawful evil
+    senses: darkvision 120 ft., passive Perception 15
+    languages: Sahuagin
+    cr: 1/2
+    source: 5e SRD
+    skills:
+        perception: 5
+    actions:
+        - name: Multiattack
+          desc: 'The sahuagin makes two melee attacks: one with its bite and one with its claws or spear.'
+        - name: Bite
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 1) piercing damage.'
+        - name: Claws
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 1) slashing damage.'
+        - name: Spear
+          desc: 'Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.'
+    traits:
+        - name: Blood Frenzy
+          desc: The sahuagin has advantage on melee attack rolls against any creature that doesn't have all its hit points.
+        - name: Limited Amphibiousness
+          desc: The sahuagin can breathe air and water, but it needs to be submerged at least once every 4 hours to avoid suffocating.
+        - name: Shark Telepathy
+          desc: The sahuagin can magically command any shark within 120 feet of it, using a limited telepathy.
+CREATURE:SCOUT:
+    name: Scout
+    stats:
+        - 11
+        - 14
+        - 12
+        - 11
+        - 13
+        - 11
+    ac: 13 (Leather Armor)
+    hitDice: 3
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 15
+    languages: any one language (usually Common)
+    cr: 1/2
+    source: 5e SRD
+    skills:
+        nature: 4
+        perception: 5
+        stealth: 6
+        survival: 5
+    actions:
+        - name: Multiattack
+          desc: The scout makes two melee attacks or two ranged attacks.
+        - name: Shortsword
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+        - name: Longbow
+          desc: 'Ranged Weapon Attack: +4 to hit, ranged 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage.'
+    traits:
+        - name: Keen Hearing and Sight
+          desc: The scout has advantage on Wisdom (Perception) checks that rely on hearing or sight.
+CREATURE:SPY:
+    name: Spy
+    stats:
+        - 10
+        - 15
+        - 10
+        - 12
+        - 14
+        - 16
+    ac: "12"
+    hitDice: 6
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 16
+    languages: any two languages
+    cr: "1"
+    source: 5e SRD
+    skills:
+        deception: 5
+        insight: 4
+        investigation: 5
+        perception: 6
+        persuasion: 5
+        stealth: 4
+    actions:
+        - name: Multiattack
+          desc: The spy makes two melee attacks.
+        - name: Shortsword
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+        - name: Hand Crossbow
+          desc: 'Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+    traits:
+        - name: Cunning Action
+          desc: On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action.
+        - name: Sneak Attack (1/Turn)
+          desc: The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll.
+CREATURE:THUG:
+    name: Thug
+    stats:
+        - 15
+        - 11
+        - 14
+        - 10
+        - 10
+        - 11
+    ac: 11 (Leather Armor)
+    hitDice: 5
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any non-good alignment
+    senses: passive Perception 10
+    languages: any one language (usually Common)
+    cr: 1/2
+    source: 5e SRD
+    skills:
+        intimidation: 2
+    actions:
+        - name: Multiattack
+          desc: The thug makes two melee attacks.
+        - name: Mace
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 5 (1d6 + 2) bludgeoning damage.'
+        - name: Heavy Crossbow
+          desc: 'Ranged Weapon Attack: +2 to hit, range 100/400 ft., one target. Hit: 5 (1d10) piercing damage.'
+    traits:
+        - name: Pack Tactics
+          desc: The thug has advantage on an attack roll against a creature if at least one of the thug's allies is within 5 ft. of the creature and the ally isn't incapacitated.
+CREATURE:TRIBAL_WARRIOR:
+    name: Tribal Warrior
+    stats:
+        - 13
+        - 11
+        - 12
+        - 8
+        - 11
+        - 8
+    ac: 12 (Hide Armor)
+    hitDice: 2
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 10
+    languages: any one language
+    cr: 1/8
+    source: 5e SRD
+    actions:
+        - name: Spear
+          desc: 'Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 4 (1d6 + 1) piercing damage, or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.'
+    traits:
+        - name: Pack Tactics
+          desc: The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 ft. of the creature and the ally isn't incapacitated.
+CREATURE:VETERAN:
+    name: Veteran
+    stats:
+        - 16
+        - 13
+        - 14
+        - 10
+        - 11
+        - 10
+    ac: 17 (Splint)
+    hitDice: 9
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (any race)
+    size: Medium
+    alignment: any alignment
+    senses: passive Perception 12
+    languages: any one language (usually Common)
+    cr: "3"
+    source: 5e SRD
+    skills:
+        athletics: 5
+        perception: 2
+    actions:
+        - name: Multiattack
+          desc: The veteran makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack.
+        - name: Longsword
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.'
+        - name: Shortsword
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) piercing damage.'
+        - name: Heavy Crossbow
+          desc: 'Ranged Weapon Attack: +3 to hit, range 100/400 ft., one target. Hit: 6 (1d10 + 1) piercing damage.'
+CREATURE:WEREBEAR:
+    name: Werebear
+    stats:
+        - 19
+        - 10
+        - 17
+        - 11
+        - 12
+        - 12
+    ac: 10 In Humanoid Form, 11 In Bear And Hybrid Form
+    hitDice: 18
+    hitDiceType: 8
+    speed: 30 ft. (40 ft., climb 30 ft. in bear or hybrid form)
+    type: humanoid (human)
+    size: Medium
+    alignment: neutral good
+    senses: passive Perception 17
+    languages: Common (can't speak in bear form)
+    cr: "5"
+    source: 5e SRD
+    skills:
+        perception: 7
+    damageImmunities: bludgeoning, piercing, and slashing damage from nonmagical weapons that aren't silvered
+    actions:
+        - name: Multiattack
+          desc: In bear form, the werebear makes two claw attacks. In humanoid form, it makes two greataxe attacks. In hybrid form, it can attack like a bear or a humanoid.
+        - name: Bite (Bear or Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 15 (2d10 + 4) piercing damage. If the target is a humanoid, it must succeed on a DC 14 Constitution saving throw or be cursed with were bear lycanthropy.'
+        - name: Claw (Bear or Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage.'
+        - name: Greataxe (Humanoid or Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 10 (1d12 + 4) slashing damage.'
+    traits:
+        - name: Shapechanger
+          desc: The werebear can use its action to polymorph into a Large bear-humanoid hybrid or into a Large bear, or back into its true form, which is humanoid. Its statistics, other than its size and AC, are the same in each form. Any equipment it. is wearing or carrying isn't transformed. It reverts to its true form if it dies.
+        - name: Keen Smell
+          desc: The werebear has advantage on WisGlom (Perception) checks that rely on smell.
+CREATURE:WEREBOAR:
+    name: Wereboar
+    stats:
+        - 17
+        - 10
+        - 15
+        - 10
+        - 11
+        - 8
+    ac: 10 In Humanoid Form, 11 In Boar Or Hybrid Form
+    hitDice: 12
+    hitDiceType: 8
+    speed: 30 ft. (40 ft. in boar form)
+    type: humanoid (human)
+    size: Medium
+    alignment: neutral evil
+    senses: passive Perception 12
+    languages: Common (can't speak in boar form)
+    cr: "4"
+    source: 5e SRD
+    skills:
+        perception: 2
+    damageImmunities: bludgeoning, piercing, and slashing damage from nonmagical weapons that aren't silvered
+    actions:
+        - name: Multiattack (Humanoid or Hybrid Form Only)
+          desc: The wereboar makes two attacks, only one of which can be with its tusks.
+        - name: Maul (Humanoid or Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) bludgeoning damage.'
+        - name: Tusks (Boar or Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage. If the target is a humanoid, it must succeed on a DC 12 Constitution saving throw or be cursed with wereboar lycanthropy.'
+    traits:
+        - name: Shapechanger
+          desc: The wereboar can use its action to polymorph into a boar-humanoid hybrid or into a boar, or back into its true form, which is humanoid. Its statistics, other than its AC, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.
+        - name: Charge (Boar or Hybrid Form Only)
+          desc: If the wereboar moves at least 15 feet straight toward a target and then hits it with its tusks on the same turn, the target takes an extra 7 (2d6) slashing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone.
+        - name: Relentless (Recharges after a Short or Long Rest)
+          desc: If the wereboar takes 14 damage or less that would reduce it to 0 hit points, it is reduced to 1 hit point instead.
+CREATURE:WERERAT:
+    name: Wererat
+    stats:
+        - 10
+        - 15
+        - 12
+        - 11
+        - 10
+        - 8
+    ac: "12"
+    hitDice: 6
+    hitDiceType: 8
+    speed: 30 ft.
+    type: humanoid (human)
+    size: Medium
+    alignment: lawful evil
+    senses: darkvision 60 ft. (rat form only), passive Perception 12
+    languages: Common (can't speak in rat form)
+    cr: "2"
+    source: 5e SRD
+    skills:
+        perception: 2
+        stealth: 4
+    damageImmunities: bludgeoning, piercing, and slashing damage from nonmagical weapons that aren't silvered
+    actions:
+        - name: Multiattack (Humanoid or Hybrid Form Only)
+          desc: The wererat makes two attacks, only one of which can be a bite.
+        - name: Bite (Rat or Hybrid Form Only).
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4 + 2) piercing damage. If the target is a humanoid, it must succeed on a DC 11 Constitution saving throw or be cursed with wererat lycanthropy.'
+        - name: Shortsword (Humanoid or Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+        - name: Hand Crossbow (Humanoid or Hybrid Form Only)
+          desc: 'Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+    traits:
+        - name: Shapechanger
+          desc: The wererat can use its action to polymorph into a rat-humanoid hybrid or into a giant rat, or back into its true form, which is humanoid. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.
+        - name: Keen Smell
+          desc: The wererat has advantage on Wisdom (Perception) checks that rely on smell.
+CREATURE:WERETIGER:
+    name: Weretiger
+    stats:
+        - 17
+        - 15
+        - 16
+        - 10
+        - 13
+        - 11
+    ac: "12"
+    hitDice: 16
+    hitDiceType: 8
+    speed: 30 ft. (40 ft. in tiger form)
+    type: humanoid (human)
+    size: Medium
+    alignment: neutral
+    senses: darkvision 60 ft., passive Perception 15
+    languages: Common (can't speak in tiger form)
+    cr: "4"
+    source: 5e SRD
+    skills:
+        perception: 5
+        stealth: 4
+    damageImmunities: bludgeoning, piercing, and slashing damage from nonmagical weapons that aren't silvered
+    actions:
+        - name: Multiattack (Humanoid or Hybrid Form Only)
+          desc: In humanoid form, the weretiger makes two scimitar attacks or two longbow attacks. In hybrid form, it can attack like a humanoid or make two claw attacks.
+        - name: Bite (Tiger or Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage. If the target is a humanoid, it must succeed on a DC 13 Constitution saving throw or be cursed with weretiger lycanthropy.'
+        - name: Claw (Tiger or Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage.'
+        - name: Scimitar (Humanoid or Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage.'
+        - name: Longbow (Humanoid or Hybrid Form Only)
+          desc: 'Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage.'
+    traits:
+        - name: Shapechanger
+          desc: The weretiger can use its action to polymorph into a tiger-humanoid hybrid or into a tiger, or back into its true form, which is humanoid. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.
+        - name: Keen Hearing and Smell
+          desc: The weretiger has advantage on Wisdom (Perception) checks that rely on hearing or smell.
+        - name: Pounce (Tiger or Hybrid Form Only)
+          desc: If the weretiger moves at least 15 feet straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a DC 14 Strength saving throw or be knocked prone. If the target is prone, the weretiger can make one bite attack against it as a bonus action.
+CREATURE:WEREWOLF:
+    name: Werewolf
+    stats:
+        - 15
+        - 13
+        - 14
+        - 10
+        - 11
+        - 10
+    ac: 11 In Humanoid Form, 12 In Wolf Or Hybrid Form
+    hitDice: 9
+    hitDiceType: 8
+    speed: 30 ft. (40 ft. in wolf form)
+    type: humanoid (human)
+    size: Medium
+    alignment: chaotic evil
+    senses: passive Perception 14
+    languages: Common (can't speak in wolf form)
+    cr: "3"
+    source: 5e SRD
+    skills:
+        perception: 4
+    damageImmunities: bludgeoning, piercing, and slashing damage from nonmagical weapons that aren't silvered
+    actions:
+        - name: Multiattack (Humanoid or Hybrid Form Only)
+          desc: 'The werewolf makes two attacks: one with its bite and one with its claws or spear.'
+        - name: Bite (Wolf or Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 6 (1d8 + 2) piercing damage. If the target is a humanoid, it must succeed on a DC 12 Constitution saving throw or be cursed with werewolf lycanthropy.'
+        - name: Claws (Hybrid Form Only)
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (2d4 + 2) slashing damage.'
+        - name: Spear (Humanoid Form Only)
+          desc: 'Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range 20/60 ft., one creature. Hit: 5 (1d6 + 2) piercing damage, or 6 (1d8 + 2) piercing damage if used with two hands to make a melee attack.'
+    traits:
+        - name: Shapechanger
+          desc: The werewolf can use its action to polymorph into a wolf-humanoid hybrid or into a wolf, or back into its true form, which is humanoid. Its statistics, other than its AC, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.
+        - name: Keen Hearing and Smell
+          desc: The werewolf has advantage on Wisdom (Perception) checks that rely on hearing or smell.

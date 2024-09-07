@@ -1,0 +1,1552 @@
+CREATURE:ANDROSPHINX:
+    name: Androsphinx
+    stats:
+        - 22
+        - 10
+        - 20
+        - 16
+        - 18
+        - 23
+    ac: 17 (Natural Armor)
+    hitDice: 19
+    hitDiceType: 10
+    speed: 40 ft., fly 60 ft.
+    type: monstrosity
+    size: Large
+    alignment: lawful neutral
+    senses: truesight 120 ft., passive Perception 20
+    languages: Common, Sphinx
+    cr: "17"
+    source: 5e SRD
+    saves:
+        constitution: 11
+        dexterity: 6
+        intelligence: 9
+        wisdom: 10
+    skills:
+        arcana: 9
+        perception: 10
+        religion: 15
+    damageImmunities: psychic; bludgeoning, piercing, and slashing from nonmagical weapons
+    conditionImmunities: charmed, frightened
+    actions:
+        - name: Multiattack
+          desc: The sphinx makes two claw attacks.
+        - name: Claw
+          desc: 'Melee Weapon Attack: +12 to hit, reach 5 ft., one target. Hit: 17 (2d10 + 6) slashing damage.'
+        - name: Roar (3/Day)
+          desc: |-
+            The sphinx emits a magical roar. Each time it roars before finishing a long rest, the roar is louder and the effect is different, as detailed below. Each creature within 500 feet of the sphinx and able to hear the roar must make a saving throw.
+
+            First Roar. Each creature that fails a DC 18 Wisdom saving throw is frightened for 1 minute. A frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.
+
+            Second Roar. Each creature that fails a DC 18 Wisdom saving throw is deafened and frightened for 1 minute. A frightened creature is paralyzed and can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.
+
+            Third Roar. Each creature makes a DC 18 Constitution saving throw. On a failed save, a creature takes 44 (8d10) thunder damage and is knocked prone. On a successful save, the creature takes half as much damage and isn't knocked prone.
+    traits:
+        - name: Inscrutable
+          desc: The sphinx is immune to any effect that would sense its emotions or read its thoughts, as well as any divination spell that it refuses. Wisdom (Insight) checks made to ascertain the sphinx's intentions or sincerity have disadvantage.
+        - name: Magic Weapons
+          desc: The sphinx's weapon attacks are magical.
+    legendaryActions:
+        - name: Claw Attack
+          desc: The sphinx makes one claw attack.
+        - name: Teleport (Costs 2 Actions)
+          desc: The sphinx magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see.
+        - name: Cast a Spell (Costs 3 Actions)
+          desc: The sphinx casts a spell from its list of prepared spells, using a spell slot as normal.
+    spellNotes: 'The sphinx is a 12th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 18, +10 to hit with spell attacks). It requires no material components to cast its spells. The sphinx has the following cleric spells prepared:'
+    spells:
+        0:
+            spells:
+                - SPELL:SACRED_FLAME
+                - SPELL:SPARE_THE_DYING
+                - SPELL:THAUMATURGY
+        1:
+            slots: 4
+            spells:
+                - SPELL:COMMAND
+                - SPELL:DETECT_EVIL_AND_GOOD
+                - SPELL:DETECT_MAGIC
+        2:
+            slots: 3
+            spells:
+                - SPELL:LESSER_RESTORATION
+                - SPELL:ZONE_OF_TRUTH
+        3:
+            slots: 3
+            spells:
+                - SPELL:DISPEL_MAGIC
+                - SPELL:TONGUES
+        4:
+            slots: 3
+            spells:
+                - SPELL:BANISHMENT
+                - SPELL:FREEDOM_OF_MOVEMENT
+        5:
+            slots: 2
+            spells:
+                - SPELL:FLAME_STRIKE
+                - SPELL:GREATER_RESTORATION
+        6:
+            slots: 1
+            spells:
+                - SPELL:HEROES_FEAST
+CREATURE:ANKHEG:
+    name: Ankheg
+    stats:
+        - 17
+        - 11
+        - 13
+        - 1
+        - 13
+        - 6
+    ac: 14 (Natural Armor), 11 While Prone
+    hitDice: 6
+    hitDiceType: 10
+    speed: 30 ft., burrow 10 ft.
+    type: monstrosity
+    size: Large
+    alignment: unaligned
+    senses: darkvision 60 ft., tremorsense 60 ft., passive Perception 11
+    cr: "2"
+    source: 5e SRD
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage plus 3 (1d6) acid damage. If the target is a Large or smaller creature, it is grappled (escape DC 13). Until this grapple ends, the ankheg can bite only the grappled creature and has advantage on attack rolls to do so.'
+        - name: Acid Spray (Recharge 6)
+          desc: The ankheg spits acid in a line that is 30 ft. long and 5 ft. wide, provided that it has no creature grappled. Each creature in that line must make a DC 13 Dexterity saving throw, taking 10 (3d6) acid damage on a failed save, or half as much damage on a successful one.
+CREATURE:BASILISK:
+    name: Basilisk
+    stats:
+        - 16
+        - 8
+        - 15
+        - 2
+        - 8
+        - 7
+    ac: 15 (Natural Armor)
+    hitDice: 8
+    hitDiceType: 8
+    speed: 20 ft.
+    type: monstrosity
+    size: Medium
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 9
+    cr: "3"
+    source: 5e SRD
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage plus 7 (2d6) poison damage.'
+    traits:
+        - name: Petrifying Gaze
+          desc: |-
+            If a creature starts its turn within 30 ft. of the basilisk and the two of them can see each other, the basilisk can force the creature to make a DC 12 Constitution saving throw if the basilisk isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified until freed by the greater restoration spell or other magic.
+            A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the basilisk until the start of its next turn, when it can avert its eyes again. If it looks at the basilisk in the meantime, it must immediately make the save.
+            If the basilisk sees its reflection within 30 ft. of it in bright light, it mistakes itself for a rival and targets itself with its gaze.
+CREATURE:BEHIR:
+    name: Behir
+    stats:
+        - 23
+        - 16
+        - 18
+        - 7
+        - 14
+        - 12
+    ac: 17 (Natural Armor)
+    hitDice: 16
+    hitDiceType: 12
+    speed: 50 ft., climb 40 ft.
+    type: monstrosity
+    size: Huge
+    alignment: neutral evil
+    senses: darkvision 90 ft., passive Perception 16
+    languages: Draconic
+    cr: "11"
+    source: 5e SRD
+    skills:
+        perception: 6
+        stealth: 7
+    damageImmunities: lightning
+    actions:
+        - name: Multiattack
+          desc: 'The behir makes two attacks: one with its bite and one to constrict.'
+        - name: Bite
+          desc: 'Melee Weapon Attack: +10 to hit, reach 10 ft., one target. Hit: 22 (3d10 + 6) piercing damage.'
+        - name: Constrict
+          desc: 'Melee Weapon Attack: +10 to hit, reach 5 ft., one Large or smaller creature. Hit: 17 (2d10 + 6) bludgeoning damage plus 17 (2d10 + 6) slashing damage. The target is grappled (escape DC 16) if the behir isn''t already constricting a creature, and the target is restrained until this grapple ends.'
+        - name: Lightning Breath (Recharge 5-6)
+          desc: The behir exhales a line of lightning that is 20 ft. long and 5 ft. wide. Each creature in that line must make a DC 16 Dexterity saving throw, taking 66 (12d10) lightning damage on a failed save, or half as much damage on a successful one.
+        - name: Swallow
+          desc: |-
+            The behir makes one bite attack against a Medium or smaller target it is grappling. If the attack hits, the target is also swallowed, and the grapple ends. While swallowed, the target is blinded and restrained, it has total cover against attacks and other effects outside the behir, and it takes 21 (6d6) acid damage at the start of each of the behir's turns. A behir can have only one creature swallowed at a time.
+            If the behir takes 30 damage or more on a single turn from the swallowed creature, the behir must succeed on a DC 14 Constitution saving throw at the end of that turn or regurgitate the creature, which falls prone in a space within 10 ft. of the behir. If the behir dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 15 ft. of movement, exiting prone.
+CREATURE:BULETTE:
+    name: Bulette
+    stats:
+        - 19
+        - 11
+        - 21
+        - 2
+        - 10
+        - 5
+    ac: 17 (Natural Armor)
+    hitDice: 9
+    hitDiceType: 10
+    speed: 40 ft., burrow 40 ft.
+    type: monstrosity
+    size: Large
+    alignment: unaligned
+    senses: darkvision 60 ft., tremorsense 60 ft., passive Perception 16
+    cr: "5"
+    source: 5e SRD
+    skills:
+        perception: 6
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 30 (4d12 + 4) piercing damage.'
+        - name: Deadly Leap
+          desc: If the bulette jumps at least 15 ft. as part of its movement, it can then use this action to land on its ft. in a space that contains one or more other creatures. Each of those creatures must succeed on a DC 16 Strength or Dexterity saving throw (target's choice) or be knocked prone and take 14 (3d6 + 4) bludgeoning damage plus 14 (3d6 + 4) slashing damage. On a successful save, the creature takes only half the damage, isn't knocked prone, and is pushed 5 ft. out of the bulette's space into an unoccupied space of the creature's choice. If no unoccupied space is within range, the creature instead falls prone in the bulette's space.
+    traits:
+        - name: Standing Leap
+          desc: The bulette's long jump is up to 30 ft. and its high jump is up to 15 ft., with or without a running start.
+CREATURE:CARRION_CRAWLER:
+    name: Carrion Crawler
+    stats:
+        - 14
+        - 13
+        - 16
+        - 1
+        - 12
+        - 5
+    ac: ""
+    hitDice: 6
+    hitDiceType: 10
+    speed: 30 ft., climb 30 ft.
+    type: monstrosity
+    size: Large
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 13
+    cr: "2"
+    source: 5e SRD
+    skills:
+        perception: 3
+    actions:
+        - name: Multiattack
+          desc: 'The carrion crawler makes two attacks: one with its tentacles and one with its bite.'
+        - name: Tentacles
+          desc: 'Melee Weapon Attack: +8 to hit, reach 10 ft., one creature. Hit: 4 (1d4 + 2) poison damage, and the target must succeed on a DC 13 Constitution saving throw or be poisoned for 1 minute. Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the poison on itself on a success.'
+        - name: Bite
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) piercing damage.'
+    traits:
+        - name: Keen Smell
+          desc: The carrion crawler has advantage on Wisdom (Perception) checks that rely on smell.
+        - name: Spider Climb
+          desc: The carrion crawler can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.
+CREATURE:CENTAUR:
+    name: Centaur
+    stats:
+        - 18
+        - 14
+        - 14
+        - 9
+        - 13
+        - 11
+    ac: "12"
+    hitDice: 6
+    hitDiceType: 10
+    speed: 50 ft.
+    type: monstrosity
+    size: Large
+    alignment: neutral good
+    senses: passive Perception 13
+    languages: Elvish, Sylvan
+    cr: "2"
+    source: 5e SRD
+    skills:
+        athletics: 6
+        perception: 3
+        survival: 3
+    actions:
+        - name: Multiattack
+          desc: 'The centaur makes two attacks: one with its pike and one with its hooves or two with its longbow.'
+        - name: Pike
+          desc: 'Melee Weapon Attack: +6 to hit, reach 10 ft., one target. Hit: 9 (1d10 + 4) piercing damage.'
+        - name: Hooves
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage.'
+        - name: Longbow
+          desc: 'Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage.'
+    traits:
+        - name: Charge
+          desc: If the centaur moves at least 30 ft. straight toward a target and then hits it with a pike attack on the same turn, the target takes an extra 10 (3d6) piercing damage.
+CREATURE:CHIMERA:
+    name: Chimera
+    stats:
+        - 19
+        - 11
+        - 19
+        - 3
+        - 14
+        - 10
+    ac: 14 (Natural Armor)
+    hitDice: 12
+    hitDiceType: 10
+    speed: 30 ft., fly 60 ft.
+    type: monstrosity
+    size: Large
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 18
+    languages: understands Draconic but can't speak
+    cr: "6"
+    source: 5e SRD
+    skills:
+        perception: 8
+    actions:
+        - name: Multiattack
+          desc: 'The chimera makes three attacks: one with its bite, one with its horns, and one with its claws. When its fire breath is available, it can use the breath in place of its bite or horns.'
+        - name: Bite
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) piercing damage.'
+        - name: Horns
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 10 (1d12 + 4) bludgeoning damage.'
+        - name: Claws
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.'
+        - name: Fire Breath (Recharge 5-6)
+          desc: The dragon head exhales fire in a 15-foot cone. Each creature in that area must make a DC 15 Dexterity saving throw, taking 31 (7d8) fire damage on a failed save, or half as much damage on a successful one.
+CREATURE:COCKATRICE:
+    name: Cockatrice
+    stats:
+        - 6
+        - 12
+        - 12
+        - 2
+        - 13
+        - 5
+    ac: "11"
+    hitDice: 6
+    hitDiceType: 6
+    speed: 20 ft., fly 40 ft.
+    type: monstrosity
+    size: Small
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 11
+    cr: 1/2
+    source: 5e SRD
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one creature. Hit: 3 (1d4 + 1) piercing damage, and the target must succeed on a DC 11 Constitution saving throw against being magically petrified. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified for 24 hours.'
+CREATURE:DARKMANTLE:
+    name: Darkmantle
+    stats:
+        - 16
+        - 12
+        - 13
+        - 2
+        - 10
+        - 5
+    ac: "11"
+    hitDice: 5
+    hitDiceType: 6
+    speed: 10 ft., fly 30 ft.
+    type: monstrosity
+    size: Small
+    alignment: unaligned
+    senses: blindsight 60 ft., passive Perception 10
+    cr: 1/2
+    source: 5e SRD
+    skills:
+        stealth: 3
+    actions:
+        - name: Crush
+          desc: |-
+            Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 6 (1d6 + 3) bludgeoning damage, and the darkmantle attaches to the target. If the target is Medium or smaller and the darkmantle has advantage on the attack roll, it attaches by engulfing the target's head, and the target is also blinded and unable to breathe while the darkmantle is attached in this way.
+            While attached to the target, the darkmantle can attack no other creature except the target but has advantage on its attack rolls. The darkmantle's speed also becomes 0, it can't benefit from any bonus to its speed, and it moves with the target.
+            A creature can detach the darkmantle by making a successful DC 13 Strength check as an action. On its turn, the darkmantle can detach itself from the target by using 5 feet of movement.
+        - name: Darkness Aura (1/day)
+          desc: A 15-foot radius of magical darkness extends out from the darkmantle, moves with it, and spreads around corners. The darkness lasts as long as the darkmantle maintains concentration, up to 10 minutes (as if concentrating on a spell). Darkvision can't penetrate this darkness, and no natural light can illuminate it. If any of the darkness overlaps with an area of light created by a spell of 2nd level or lower, the spell creating the light is dispelled.
+    traits:
+        - name: Echolocation
+          desc: The darkmantle can't use its blindsight while deafened.
+        - name: False Appearance
+          desc: While the darkmantle remains motionless, it is indistinguishable from a cave formation such as a stalactite or stalagmite.
+CREATURE:DEATH_DOG:
+    name: Death Dog
+    stats:
+        - 15
+        - 14
+        - 14
+        - 3
+        - 13
+        - 6
+    ac: "12"
+    hitDice: 6
+    hitDiceType: 8
+    speed: 40 ft.
+    type: monstrosity
+    size: Medium
+    alignment: neutral evil
+    senses: darkvision 120 ft., passive Perception 15
+    cr: "1"
+    source: 5e SRD
+    skills:
+        perception: 5
+        stealth: 4
+    actions:
+        - name: Multiattack
+          desc: The dog makes two bite attacks.
+        - name: Bite
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage. If the target is a creature, it must succeed on a DC 12 Constitution saving throw against disease or become poisoned until the disease is cured. Every 24 hours that elapse, the creature must repeat the saving throw, reducing its hit point maximum by 5 (1d10) on a failure. This reduction lasts until the disease is cured. The creature dies if the disease reduces its hit point maximum to 0.'
+    traits:
+        - name: Two-Headed
+          desc: The dog has advantage on Wisdom (Perception) checks and on saving throws against being blinded, charmed, deafened, frightened, stunned, or knocked unconscious.
+CREATURE:DOPPELGANGER:
+    name: Doppelganger
+    stats:
+        - 11
+        - 18
+        - 14
+        - 11
+        - 12
+        - 14
+    ac: "14"
+    hitDice: 8
+    hitDiceType: 8
+    speed: 30 ft.
+    type: monstrosity (shapechanger)
+    size: Medium
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 11
+    languages: Common
+    cr: "3"
+    source: 5e SRD
+    skills:
+        deception: 6
+        insight: 3
+    damageImmunities: charmed
+    actions:
+        - name: Multiattack
+          desc: The doppelganger makes two melee attacks.
+        - name: Slam
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d6 + 4) bludgeoning damage.'
+        - name: Read Thoughts
+          desc: The doppelganger magically reads the surface thoughts of one creature within 60 ft. of it. The effect can penetrate barriers, but 3 ft. of wood or dirt, 2 ft. of stone, 2 inches of metal, or a thin sheet of lead blocks it. While the target is in range, the doppelganger can continue reading its thoughts, as long as the doppelganger's concentration isn't broken (as if concentrating on a spell). While reading the target's mind, the doppelganger has advantage on Wisdom (Insight) and Charisma (Deception, Intimidation, and Persuasion) checks against the target.
+    traits:
+        - name: Shapechanger
+          desc: The doppelganger can use its action to polymorph into a Small or Medium humanoid it has seen, or back into its true form. Its statistics, other than its size, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.
+        - name: Ambusher
+          desc: The doppelganger has advantage on attack rolls against any creature it has surprised.
+        - name: Surprise Attack
+          desc: If the doppelganger surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 10 (3d6) damage from the attack.
+CREATURE:DRIDER:
+    name: Drider
+    stats:
+        - 16
+        - 16
+        - 18
+        - 13
+        - 14
+        - 12
+    ac: 19 (Natural Armor)
+    hitDice: 13
+    hitDiceType: 10
+    speed: 30 ft., climb 30 ft.
+    type: monstrosity
+    size: Large
+    alignment: chaotic evil
+    senses: darkvision 120 ft., passive Perception 15
+    languages: Elvish, Undercommon
+    cr: "6"
+    source: 5e SRD
+    skills:
+        perception: 5
+        stealth: 9
+    actions:
+        - name: Multiattack
+          desc: The drider makes three attacks, either with its longsword or its longbow. It can replace one of those attacks with a bite attack.
+        - name: Bite
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one creature. Hit: 2 (1d4) piercing damage plus 9 (2d8) poison damage.'
+        - name: Longsword
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands.'
+        - name: Longbow
+          desc: 'Ranged Weapon Attack: +6 to hit, range 150/600 ft., one target. Hit: 7 (1d8 + 3) piercing damage plus 4 (1d8) poison damage.'
+    traits:
+        - name: Fey Ancestry
+          desc: The drider has advantage on saving throws against being charmed, and magic can't put the drider to sleep.
+        - name: Innate Spellcasting
+          desc: |-
+            The drider's innate spellcasting ability is Wisdom (spell save DC 13). The drider can innately cast the following spells, requiring no material components:
+            At will: dancing lights
+            1/day each: darkness, faerie fire
+        - name: Spider Climb
+          desc: The drider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.
+        - name: Sunlight Sensitivity
+          desc: While in sunlight, the drider has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.
+        - name: Web Walker
+          desc: The drider ignores movement restrictions caused by webbing.
+CREATURE:ETTERCAP:
+    name: Ettercap
+    stats:
+        - 14
+        - 15
+        - 13
+        - 7
+        - 12
+        - 8
+    ac: 13 (Natural Armor)
+    hitDice: 8
+    hitDiceType: 8
+    speed: 30 ft., climb 30 ft.
+    type: monstrosity
+    size: Medium
+    alignment: neutral evil
+    senses: darkvision 60 ft., passive Perception 13
+    cr: "2"
+    source: 5e SRD
+    skills:
+        perception: 3
+        stealth: 4
+        survival: 3
+    actions:
+        - name: Multiattack
+          desc: 'The ettercap makes two attacks: one with its bite and one with its claws.'
+        - name: Bite
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 6 (1d8 + 2) piercing damage plus 4 (1d8) poison damage. The target must succeed on a DC 11 Constitution saving throw or be poisoned for 1 minute. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.'
+        - name: Claws
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) slashing damage.'
+        - name: Web (Recharge 5-6)
+          desc: 'Ranged Weapon Attack: +4 to hit, range 30/60 ft., one Large or smaller creature. Hit: The creature is restrained by webbing. As an action, the restrained creature can make a DC 11 Strength check, escaping from the webbing on a success. The effect ends if the webbing is destroyed. The webbing has AC 10, 5 hit points, is vulnerable to fire damage and immune to bludgeoning damage.'
+        - name: 'Variant: Web Garrote'
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one Medium or Small creature against which the ettercap has advantage on the attack roll. Hit: 4 (1d4 + 2) bludgeoning damage, and the target is grappled (escape DC 12). Until this grapple ends, the target can''t breathe, and the ettercap has advantage on attack rolls against it.'
+    traits:
+        - name: Spider Climb
+          desc: The ettercap can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.
+        - name: Web Sense
+          desc: While in contact with a web, the ettercap knows the exact location of any other creature in contact with the same web.
+        - name: Web Walker
+          desc: The ettercap ignores movement restrictions caused by webbing.
+CREATURE:GORGON:
+    name: Gorgon
+    stats:
+        - 20
+        - 11
+        - 18
+        - 2
+        - 12
+        - 7
+    ac: 19 (Natural Armor)
+    hitDice: 12
+    hitDiceType: 10
+    speed: 40 ft.
+    type: monstrosity
+    size: Large
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 14
+    cr: "5"
+    source: 5e SRD
+    skills:
+        perception: 4
+    damageImmunities: petrified
+    actions:
+        - name: Gore
+          desc: 'Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 18 (2d12 + 5) piercing damage.'
+        - name: Hooves
+          desc: 'Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 16 (2d10 + 5) bludgeoning damage.'
+        - name: Petrifying Breath (Recharge 5-6)
+          desc: The gorgon exhales petrifying gas in a 30-foot cone. Each creature in that area must succeed on a DC 13 Constitution saving throw. On a failed save, a target begins to turn to stone and is restrained. The restrained target must repeat the saving throw at the end of its next turn. On a success, the effect ends on the target. On a failure, the target is petrified until freed by the greater restoration spell or other magic.
+    traits:
+        - name: Trampling Charge
+          desc: If the gorgon moves at least 20 feet straight toward a creature and then hits it with a gore attack on the same turn, that target must succeed on a DC 16 Strength saving throw or be knocked prone. If the target is prone, the gorgon can make one attack with its hooves against it as a bonus action.
+CREATURE:GRICK:
+    name: Grick
+    stats:
+        - 14
+        - 14
+        - 11
+        - 3
+        - 14
+        - 5
+    ac: 14 (Natural Armor)
+    hitDice: 6
+    hitDiceType: 8
+    speed: 30 ft., climb 30 ft.
+    type: monstrosity
+    size: Medium
+    alignment: neutral
+    senses: darkvision 60 ft., passive Perception 12
+    cr: "2"
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, and slashing damage from nonmagical weapons
+    actions:
+        - name: Multiattack
+          desc: The grick makes one attack with its tentacles. If that attack hits, the grick can make one beak attack against the same target.
+        - name: Tentacles
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 9 (2d6 + 2) slashing damage.'
+        - name: Beak
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+    traits:
+        - name: Stone Camouflage
+          desc: The grick has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.
+CREATURE:GRIFFON:
+    name: Griffon
+    stats:
+        - 18
+        - 15
+        - 16
+        - 2
+        - 13
+        - 8
+    ac: "12"
+    hitDice: 7
+    hitDiceType: 10
+    speed: 30 ft., fly 80 ft.
+    type: monstrosity
+    size: Large
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 15
+    cr: "2"
+    source: 5e SRD
+    skills:
+        perception: 5
+    actions:
+        - name: Multiattack
+          desc: 'The griffon makes two attacks: one with its beak and one with its claws.'
+        - name: Beak
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage.'
+        - name: Claws
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage.'
+    traits:
+        - name: Keen Sight
+          desc: The griffon has advantage on Wisdom (Perception) checks that rely on sight.
+CREATURE:GUARDIAN_NAGA:
+    name: Guardian Naga
+    stats:
+        - 19
+        - 18
+        - 16
+        - 16
+        - 19
+        - 18
+    ac: 18 (Natural Armor)
+    hitDice: 15
+    hitDiceType: 10
+    speed: 40 ft.
+    type: monstrosity
+    size: Large
+    alignment: lawful good
+    senses: darkvision 60 ft., passive Perception 14
+    languages: Celestial, Common
+    cr: "10"
+    source: 5e SRD
+    saves:
+        charisma: 8
+        constitution: 7
+        dexterity: 8
+        intelligence: 7
+        wisdom: 8
+    damageImmunities: poison
+    conditionImmunities: charmed, poisoned
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +8 to hit, reach 10 ft., one creature. Hit: 8 (1d8 + 4) piercing damage, and the target must make a DC 15 Constitution saving throw, taking 45 (10d8) poison damage on a failed save, or half as much damage on a successful one.'
+        - name: Spit Poison
+          desc: 'Ranged Weapon Attack: +8 to hit, range 15/30 ft., one creature. Hit: The target must make a DC 15 Constitution saving throw, taking 45 (10d8) poison damage on a failed save, or half as much damage on a successful one.'
+    traits:
+        - name: Rejuvenation
+          desc: If it dies, the naga returns to life in 1d6 days and regains all its hit points. Only a wish spell can prevent this trait from functioning.
+    spellNotes: 'The naga is an 11th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 16, +8 to hit with spell attacks), and it needs only verbal components to cast its spells. It has the following cleric spells prepared:'
+    spells:
+        0:
+            spells:
+                - SPELL:MENDING
+                - SPELL:SACRED_FLAME
+                - SPELL:THAUMATURGY
+        1:
+            slots: 4
+            spells:
+                - SPELL:COMMAND
+                - SPELL:CURE_WOUNDS
+                - SPELL:SHIELD_OF_FAITH
+        2:
+            slots: 3
+            spells:
+                - SPELL:CALM_EMOTIONS
+                - SPELL:HOLD_PERSON
+        3:
+            slots: 3
+            spells:
+                - SPELL:BESTOW_CURSE
+                - SPELL:CLAIRVOYANCE
+        4:
+            slots: 3
+            spells:
+                - SPELL:BANISHMENT
+                - SPELL:FREEDOM_OF_MOVEMENT
+        5:
+            slots: 2
+            spells:
+                - SPELL:FLAME_STRIKE
+                - SPELL:GEAS
+        6:
+            slots: 1
+            spells:
+                - SPELL:TRUE_SEEING
+CREATURE:GYNOSPHINX:
+    name: Gynosphinx
+    stats:
+        - 18
+        - 15
+        - 16
+        - 18
+        - 18
+        - 18
+    ac: 17 (Natural Armor)
+    hitDice: 16
+    hitDiceType: 10
+    speed: 40 ft., fly 60 ft.
+    type: monstrosity
+    size: Large
+    alignment: lawful neutral
+    senses: truesight 120 ft., passive Perception 18
+    languages: Common, Sphinx
+    cr: "11"
+    source: 5e SRD
+    skills:
+        arcana: 12
+        history: 12
+        perception: 8
+        religion: 8
+    damageResistances: bludgeoning, piercing, and slashing from nonmagical weapons
+    damageImmunities: psychic
+    conditionImmunities: charmed, frightened
+    actions:
+        - name: Multiattack
+          desc: The sphinx makes two claw attacks.
+        - name: Claw
+          desc: 'Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage.'
+    traits:
+        - name: Inscrutable
+          desc: The sphinx is immune to any effect that would sense its emotions or read its thoughts, as well as any divination spell that it refuses. Wisdom (Insight) checks made to ascertain the sphinx's intentions or sincerity have disadvantage.
+        - name: Magic Weapons
+          desc: The sphinx's weapon attacks are magical.
+    legendaryActions:
+        - name: Claw Attack
+          desc: The sphinx makes one claw attack.
+        - name: Teleport (Costs 2 Actions)
+          desc: The sphinx magically teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space it can see.
+        - name: Cast a Spell (Costs 3 Actions)
+          desc: The sphinx casts a spell from its list of prepared spells, using a spell slot as normal.
+    spellNotes: 'The sphinx is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 16, +8 to hit with spell attacks). It requires no material components to cast its spells. The sphinx has the following wizard spells prepared:'
+    spells:
+        0:
+            spells:
+                - SPELL:MAGE_HAND
+                - SPELL:MINOR_ILLUSION
+                - SPELL:PRESTIDIGITATION
+        1:
+            slots: 4
+            spells:
+                - SPELL:DETECT_MAGIC
+                - SPELL:IDENTIFY
+                - SPELL:SHIELD
+        2:
+            slots: 3
+            spells:
+                - SPELL:DARKNESS
+                - SPELL:LOCATE_OBJECT
+                - SPELL:SUGGESTION
+        3:
+            slots: 3
+            spells:
+                - SPELL:DISPEL_MAGIC
+                - SPELL:REMOVE_CURSE
+                - SPELL:TONGUES
+        4:
+            slots: 3
+            spells:
+                - SPELL:BANISHMENT
+                - SPELL:GREATER_INVISIBILITY
+        5:
+            slots: 1
+            spells:
+                - SPELL:LEGEND_LORE
+CREATURE:HARPY:
+    name: Harpy
+    stats:
+        - 12
+        - 13
+        - 12
+        - 7
+        - 10
+        - 13
+    ac: "11"
+    hitDice: 7
+    hitDiceType: 8
+    speed: 20 ft., fly 40 ft.
+    type: monstrosity
+    size: Medium
+    alignment: chaotic evil
+    senses: passive Perception 10
+    languages: Common
+    cr: "1"
+    source: 5e SRD
+    actions:
+        - name: Multiattack
+          desc: 'The harpy makes two attacks: one with its claws and one with its club.'
+        - name: Claws
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (2d4 + 1) slashing damage.'
+        - name: Club
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4 + 1) bludgeoning damage.'
+        - name: Luring Song
+          desc: |-
+            The harpy sings a magical melody. Every humanoid and giant within 300 ft. of the harpy that can hear the song must succeed on a DC 11 Wisdom saving throw or be charmed until the song ends. The harpy must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the harpy is incapacitated.
+            While charmed by the harpy, a target is incapacitated and ignores the songs of other harpies. If the charmed target is more than 5 ft. away from the harpy, the must move on its turn toward the harpy by the most direct route. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the harpy, a target can repeat the saving throw. A creature can also repeat the saving throw at the end of each of its turns. If a creature's saving throw is successful, the effect ends on it.
+            A target that successfully saves is immune to this harpy's song for the next 24 hours.
+CREATURE:HIPPOGRIFF:
+    name: Hippogriff
+    stats:
+        - 17
+        - 13
+        - 13
+        - 2
+        - 12
+        - 8
+    ac: "11"
+    hitDice: 3
+    hitDiceType: 10
+    speed: 40 ft, fly 60 ft.
+    type: monstrosity
+    size: Large
+    alignment: unaligned
+    senses: passive Perception 15
+    cr: "1"
+    source: 5e SRD
+    skills:
+        perception: 5
+    actions:
+        - name: Multiattack
+          desc: 'The hippogriff makes two attacks: one with its beak and one with its claws.'
+        - name: Beak
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d10 + 3) piercing damage.'
+        - name: Claws
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage.'
+    traits:
+        - name: Keen Sight
+          desc: The hippogriff has advantage on Wisdom (Perception) checks that rely on sight.
+CREATURE:HYDRA:
+    name: Hydra
+    stats:
+        - 20
+        - 12
+        - 20
+        - 2
+        - 10
+        - 7
+    ac: 15 (Natural Armor)
+    hitDice: 15
+    hitDiceType: 12
+    speed: 30 ft., swim 30 ft.
+    type: monstrosity
+    size: Huge
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 16
+    cr: "8"
+    source: 5e SRD
+    skills:
+        perception: 6
+    actions:
+        - name: Multiattack
+          desc: The hydra makes as many bite attacks as it has heads.
+        - name: Bite
+          desc: 'Melee Weapon Attack: +8 to hit, reach 10 ft., one target. Hit: 10 (1d10 + 5) piercing damage.'
+    traits:
+        - name: Hold Breath
+          desc: The hydra can hold its breath for 1 hour.
+        - name: Multiple Heads
+          desc: |-
+            The hydra has five heads. While it has more than one head, the hydra has advantage on saving throws against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious.
+            Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.
+            At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken fire damage since its last turn. The hydra regains 10 hit points for each head regrown in this way.
+        - name: Reactive Heads
+          desc: For each head the hydra has beyond one, it gets an extra reaction that can be used only for opportunity attacks.
+        - name: Wakeful
+          desc: While the hydra sleeps, at least one of its heads is awake.
+CREATURE:KRAKEN:
+    name: Kraken
+    stats:
+        - 30
+        - 11
+        - 25
+        - 22
+        - 18
+        - 20
+    ac: 18 (Natural Armor)
+    hitDice: 27
+    hitDiceType: 20
+    speed: 20 ft., swim 60 ft.
+    type: monstrosity (titan)
+    size: Gargantuan
+    alignment: chaotic evil
+    senses: truesight 120 ft., passive Perception 14
+    languages: understands Abyssal, Celestial, Infernal, and Primordial but can't speak, telepathy 120 ft.
+    cr: "23"
+    source: 5e SRD
+    saves:
+        constitution: 14
+        dexterity: 7
+        intelligence: 13
+        strength: 17
+        wisdom: 11
+    damageImmunities: lightning; bludgeoning, piercing, and slashing from nonmagical weapons
+    conditionImmunities: frightened, paralyzed
+    actions:
+        - name: Multiattack
+          desc: The kraken makes three tentacle attacks, each of which it can replace with one use of Fling.
+        - name: Bite
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 23 (3d8 + 10) piercing damage. If the target is a Large or smaller creature grappled by the kraken, that creature is swallowed, and the grapple ends. While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside the kraken, and it takes 42 (12d6) acid damage at the start of each of the kraken''s turns. If the kraken takes 50 damage or more on a single turn from a creature inside it, the kraken must succeed on a DC 25 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of the kraken. If the kraken dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 15 feet of movement, exiting prone.'
+        - name: Tentacle
+          desc: 'Melee Weapon Attack: +7 to hit, reach 30 ft., one target. Hit: 20 (3d6 + 10) bludgeoning damage, and the target is grappled (escape DC 18). Until this grapple ends, the target is restrained. The kraken has ten tentacles, each of which can grapple one target.'
+        - name: Fling
+          desc: One Large or smaller object held or creature grappled by the kraken is thrown up to 60 feet in a random direction and knocked prone. If a thrown target strikes a solid surface, the target takes 3 (1d6) bludgeoning damage for every 10 feet it was thrown. If the target is thrown at another creature, that creature must succeed on a DC 18 Dexterity saving throw or take the same damage and be knocked prone.
+        - name: Lightning Storm
+          desc: The kraken magically creates three bolts of lightning, each of which can strike a target the kraken can see within 120 feet of it. A target must make a DC 23 Dexterity saving throw, taking 22 (4d10) lightning damage on a failed save, or half as much damage on a successful one.
+    traits:
+        - name: Amphibious
+          desc: The kraken can breathe air and water.
+        - name: Freedom of Movement
+          desc: The kraken ignores difficult terrain, and magical effects can't reduce its speed or cause it to be restrained. It can spend 5 feet of movement to escape from nonmagical restraints or being grappled.
+        - name: Siege Monster
+          desc: The kraken deals double damage to objects and structures.
+    legendaryActions:
+        - name: Tentacle Attack or Fling
+          desc: The kraken makes one tentacle attack or uses its Fling.
+        - name: Lightning Storm (Costs 2 Actions)
+          desc: The kraken uses Lightning Storm.
+        - name: Ink Cloud (Costs 3 Actions)
+          desc: While underwater, the kraken expels an ink cloud in a 60-foot radius. The cloud spreads around corners, and that area is heavily obscured to creatures other than the kraken. Each creature other than the kraken that ends its turn there must succeed on a DC 23 Constitution saving throw, taking 16 (3d10) poison damage on a failed save, or half as much damage on a successful one. A strong current disperses the cloud, which otherwise disappears at the end of the kraken's next turn.
+CREATURE:LAMIA:
+    name: Lamia
+    stats:
+        - 16
+        - 13
+        - 15
+        - 14
+        - 15
+        - 16
+    ac: 13 (Natural Armor)
+    hitDice: 13
+    hitDiceType: 10
+    speed: 30 ft.
+    type: monstrosity
+    size: Large
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 12
+    languages: Abyssal, Common
+    cr: "4"
+    source: 5e SRD
+    skills:
+        deception: 7
+        insight: 4
+        stealth: 3
+    actions:
+        - name: Multiattack
+          desc: 'The lamia makes two attacks: one with its claws and one with its dagger or Intoxicating Touch.'
+        - name: Claws
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 14 (2d10 + 3) slashing damage.'
+        - name: Dagger
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d4 + 3) piercing damage.'
+        - name: Intoxicating Touch
+          desc: 'Melee Spell Attack: +5 to hit, reach 5 ft., one creature. Hit: The target is magically cursed for 1 hour. Until the curse ends, the target has disadvantage on Wisdom saving throws and all ability checks.'
+    traits:
+        - name: Innate Spellcasting
+          desc: 'The lamia''s innate spellcasting ability is Charisma (spell save DC 13). It can innately cast the following spells, requiring no material components. At will: disguise self (any humanoid form), major image 3/day each: charm person, mirror image, scrying, suggestion 1/day: geas'
+CREATURE:MANTICORE:
+    name: Manticore
+    stats:
+        - 17
+        - 16
+        - 17
+        - 7
+        - 12
+        - 8
+    ac: 14 (Natural Armor)
+    hitDice: 8
+    hitDiceType: 10
+    speed: 30 ft., fly 50 ft.
+    type: monstrosity
+    size: Large
+    alignment: lawful evil
+    senses: darkvision 60 ft., passive Perception 11
+    cr: "3"
+    source: 5e SRD
+    actions:
+        - name: Multiattack
+          desc: 'The manticore makes three attacks: one with its bite and two with its claws or three with its tail spikes.'
+        - name: Bite
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) piercing damage.'
+        - name: Claw
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1d6 + 3) slashing damage.'
+        - name: Tail Spike
+          desc: 'Ranged Weapon Attack: +5 to hit, range 100/200 ft., one target. Hit: 7 (1d8 + 3) piercing damage.'
+    traits:
+        - name: Tail Spike Regrowth
+          desc: The manticore has twenty-four tail spikes. Used spikes regrow when the manticore finishes a long rest.
+CREATURE:MEDUSA:
+    name: Medusa
+    stats:
+        - 10
+        - 15
+        - 16
+        - 12
+        - 13
+        - 15
+    ac: 15 (Natural Armor)
+    hitDice: 17
+    hitDiceType: 8
+    speed: 30 ft.
+    type: monstrosity
+    size: Medium
+    alignment: lawful evil
+    senses: darkvision 60 ft., passive Perception 14
+    languages: Common
+    cr: "6"
+    source: 5e SRD
+    skills:
+        deception: 5
+        insight: 4
+        perception: 4
+        stealth: 5
+    actions:
+        - name: Multiattack
+          desc: The medusa makes either three melee attacks —  one with its snake hair and two with its shortsword — or two ranged attacks with its longbow.
+        - name: Snake Hair
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one creature. Hit: 4 (1d4 + 2) piercing damage plus 14 (4d6) poison damage.'
+        - name: Shortsword
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage.'
+        - name: Longbow
+          desc: 'Ranged Weapon Attack: +5 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage plus 7 (2d6) poison damage.'
+    traits:
+        - name: Petrifying Gaze
+          desc: |-
+            When a creature that can see the medusa's eyes starts its turn within 30 ft. of the medusa, the medusa can force it to make a DC 14 Constitution saving throw if the medusa isn't incapacitated and can see the creature. If the saving throw fails by 5 or more, the creature is instantly petrified. Otherwise, a creature that fails the save begins to turn to stone and is restrained. The restrained creature must repeat the saving throw at the end of its next turn, becoming petrified on a failure or ending the effect on a success. The petrification lasts until the creature is freed by the greater restoration spell or other magic.
+            Unless surprised, a creature can avert its eyes to avoid the saving throw at the start of its turn. If the creature does so, it can't see the medusa until the start of its next turn, when it can avert its eyes again. If the creature looks at the medusa in the meantime, it must immediately make the save.
+            If the medusa sees itself reflected on a polished surface within 30 ft. of it and in an area of bright light, the medusa is, due to its curse, affected by its own gaze.
+CREATURE:MERROW:
+    name: Merrow
+    stats:
+        - 18
+        - 10
+        - 15
+        - 8
+        - 10
+        - 9
+    ac: 13 (Natural Armor)
+    hitDice: 6
+    hitDiceType: 10
+    speed: 10 ft., swim 40 ft.
+    type: monstrosity
+    size: Large
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 10
+    languages: Abyssal, Aquan
+    cr: "2"
+    source: 5e SRD
+    actions:
+        - name: Multiattack
+          desc: 'The merrow makes two attacks: one with its bite and one with its claws or harpoon.'
+        - name: Bite
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) piercing damage.'
+        - name: Claws
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 9 (2d4 + 4) slashing damage.'
+        - name: Harpoon
+          desc: 'Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: 11 (2d6 + 4) piercing damage. If the target is a Huge or smaller creature, it must succeed on a Strength contest against the merrow or be pulled up to 20 feet toward the merrow.'
+    traits:
+        - name: Amphibious
+          desc: The merrow can breathe air and water.
+CREATURE:MIMIC:
+    name: Mimic
+    stats:
+        - 17
+        - 12
+        - 15
+        - 5
+        - 13
+        - 8
+    ac: 12 (Natural Armor)
+    hitDice: 9
+    hitDiceType: 8
+    speed: 15 ft.
+    type: monstrosity (shapechanger)
+    size: Medium
+    alignment: neutral
+    senses: darkvision 60 ft., passive Perception 11
+    cr: "2"
+    source: 5e SRD
+    skills:
+        stealth: 5
+    damageImmunities: acid
+    conditionImmunities: prone
+    actions:
+        - name: Pseudopod
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) bludgeoning damage. If the mimic is in object form, the target is subjected to its Adhesive trait.'
+        - name: Bite
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) piercing damage plus 4 (1d8) acid damage.'
+    traits:
+        - name: Shapechanger
+          desc: The mimic can use its action to polymorph into an object or back into its true, amorphous form. Its statistics are the same in each form. Any equipment it is wearing or carrying isn 't transformed. It reverts to its true form if it dies.
+        - name: Adhesive (Object Form Only)
+          desc: The mimic adheres to anything that touches it. A Huge or smaller creature adhered to the mimic is also grappled by it (escape DC 13). Ability checks made to escape this grapple have disadvantage.
+        - name: False Appearance (Object Form Only)
+          desc: While the mimic remains motionless, it is indistinguishable from an ordinary object.
+        - name: Grappler
+          desc: The mimic has advantage on attack rolls against any creature grappled by it.
+CREATURE:MINOTAUR:
+    name: Minotaur
+    stats:
+        - 18
+        - 11
+        - 16
+        - 6
+        - 16
+        - 9
+    ac: 14 (Natural Armor)
+    hitDice: 9
+    hitDiceType: 10
+    speed: 40 ft.
+    type: monstrosity
+    size: Large
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 17
+    languages: Abyssal
+    cr: "3"
+    source: 5e SRD
+    skills:
+        perception: 7
+    actions:
+        - name: Greataxe
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 17 (2d12 + 4) slashing damage.'
+        - name: Gore
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) piercing damage.'
+    traits:
+        - name: Charge
+          desc: If the minotaur moves at least 10 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra 9 (2d8) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be pushed up to 10 ft. away and knocked prone.
+        - name: Labyrinthine Recall
+          desc: The minotaur can perfectly recall any path it has traveled.
+        - name: Reckless
+          desc: At the start of its turn, the minotaur can gain advantage on all melee weapon attack rolls it makes during that turn, but attack rolls against it have advantage until the start of its next turn.
+CREATURE:OWLBEAR:
+    name: Owlbear
+    stats:
+        - 20
+        - 12
+        - 17
+        - 3
+        - 12
+        - 7
+    ac: 13 (Natural Armor)
+    hitDice: 7
+    hitDiceType: 10
+    speed: 40 ft.
+    type: monstrosity
+    size: Large
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 13
+    cr: "3"
+    source: 5e SRD
+    skills:
+        perception: 3
+    actions:
+        - name: Multiattack
+          desc: 'The owlbear makes two attacks: one with its beak and one with its claws.'
+        - name: Beak
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one creature. Hit: 10 (1d10 + 5) piercing damage.'
+        - name: Claws
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 14 (2d8 + 5) slashing damage.'
+    traits:
+        - name: Keen Sight and Smell
+          desc: The owlbear has advantage on Wisdom (Perception) checks that rely on sight or smell.
+CREATURE:PHASE_SPIDER:
+    name: Phase Spider
+    stats:
+        - 15
+        - 15
+        - 12
+        - 6
+        - 10
+        - 6
+    ac: 13 (Natural Armor)
+    hitDice: 5
+    hitDiceType: 10
+    speed: 30 ft., climb 30 ft.
+    type: monstrosity
+    size: Large
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 10
+    cr: "3"
+    source: 5e SRD
+    skills:
+        stealth: 6
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 7 (1d10 + 2) piercing damage, and the target must make a DC 11 Constitution saving throw, taking 18 (4d8) poison damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.'
+    traits:
+        - name: Ethereal Jaunt
+          desc: As a bonus action, the spider can magically shift from the Material Plane to the Ethereal Plane, or vice versa.
+        - name: Spider Climb
+          desc: The spider can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.
+        - name: Web Walker
+          desc: The spider ignores movement restrictions caused by webbing.
+CREATURE:PURPLE_WORM:
+    name: Purple Worm
+    stats:
+        - 28
+        - 7
+        - 22
+        - 1
+        - 8
+        - 4
+    ac: 18 (Natural Armor)
+    hitDice: 15
+    hitDiceType: 20
+    speed: 50 ft., burrow 30 ft.
+    type: monstrosity
+    size: Gargantuan
+    alignment: unaligned
+    senses: blindsight 30 ft., tremorsense 60 ft., passive Perception 9
+    cr: "15"
+    source: 5e SRD
+    saves:
+        constitution: 11
+        wisdom: 4
+    actions:
+        - name: Multiattack
+          desc: 'The worm makes two attacks: one with its bite and one with its stinger.'
+        - name: Bite
+          desc: |-
+            Melee Weapon Attack: +9 to hit, reach 10 ft., one target. Hit: 22 (3d8 + 9) piercing damage. If the target is a Large or smaller creature, it must succeed on a DC 19 Dexterity saving throw or be swallowed by the worm. A swallowed creature is blinded and restrained, it has total cover against attacks and other effects outside the worm, and it takes 21 (6d6) acid damage at the start of each of the worm's turns.
+            If the worm takes 30 damage or more on a single turn from a creature inside it, the worm must succeed on a DC 21 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of the worm. If the worm dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 20 feet of movement, exiting prone.
+        - name: Tail Stinger
+          desc: 'Melee Weapon Attack: +9 to hit, reach 10 ft., one creature. Hit: 19 (3d6 + 9) piercing damage, and the target must make a DC 19 Constitution saving throw, taking 42 (12d6) poison damage on a failed save, or half as much damage on a successful one.'
+    traits:
+        - name: Tunneler
+          desc: The worm can burrow through solid rock at half its burrow speed and leaves a 10-foot-diameter tunnel in its wake.
+CREATURE:REMORHAZ:
+    name: Remorhaz
+    stats:
+        - 24
+        - 13
+        - 21
+        - 4
+        - 10
+        - 5
+    ac: 17 (Natural Armor)
+    hitDice: 17
+    hitDiceType: 12
+    speed: 30 ft., burrow 20 ft.
+    type: monstrosity
+    size: Huge
+    alignment: unaligned
+    senses: darkvision 60 ft., tremorsense 60 ft., passive Perception 10
+    cr: "11"
+    source: 5e SRD
+    damageImmunities: cold, fire
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +11 to hit, reach 10 ft., one target. Hit: 40 (6d10 + 7) piercing damage plus 10 (3d6) fire damage. If the target is a creature, it is grappled (escape DC 17). Until this grapple ends, the target is restrained, and the remorhaz can''t bite another target.'
+        - name: Swallow
+          desc: |-
+            The remorhaz makes one bite attack against a Medium or smaller creature it is grappling. If the attack hits, that creature takes the bite's damage and is swallowed, and the grapple ends. While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside the remorhaz, and it takes 21 (6d6) acid damage at the start of each of the remorhaz's turns.
+            If the remorhaz takes 30 damage or more on a single turn from a creature inside it, the remorhaz must succeed on a DC 15 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet oft he remorhaz. If the remorhaz dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 15 feet of movement, exiting prone.
+    traits:
+        - name: Heated Body
+          desc: A creature that touches the remorhaz or hits it with a melee attack while within 5 feet of it takes 10 (3d6) fire damage.
+CREATURE:ROC:
+    name: Roc
+    stats:
+        - 28
+        - 10
+        - 20
+        - 3
+        - 10
+        - 9
+    ac: 15 (Natural Armor)
+    hitDice: 16
+    hitDiceType: 20
+    speed: 20 ft., fly 120 ft.
+    type: monstrosity
+    size: Gargantuan
+    alignment: unaligned
+    senses: passive Perception 14
+    cr: "11"
+    source: 5e SRD
+    saves:
+        charisma: 3
+        constitution: 9
+        dexterity: 4
+        wisdom: 4
+    skills:
+        perception: 4
+    actions:
+        - name: Multiattack
+          desc: 'The roc makes two attacks: one with its beak and one with its talons.'
+        - name: Beak
+          desc: 'Melee Weapon Attack: +13 to hit, reach 10 ft., one target. Hit: 27 (4d8 + 9) piercing damage.'
+        - name: Talons
+          desc: 'Melee Weapon Attack: +13 to hit, reach 5 ft., one target. Hit: 23 (4d6 + 9) slashing damage, and the target is grappled (escape DC 19). Until this grapple ends, the target is restrained, and the roc can''t use its talons on another target.'
+    traits:
+        - name: Keen Sight
+          desc: The roc has advantage on Wisdom (Perception) checks that rely on sight.
+CREATURE:ROPER:
+    name: Roper
+    stats:
+        - 18
+        - 8
+        - 17
+        - 7
+        - 16
+        - 6
+    ac: 20 (Natural Armor)
+    hitDice: 11
+    hitDiceType: 10
+    speed: 10 ft., climb 10 ft.
+    type: monstrosity
+    size: Large
+    alignment: neutral evil
+    senses: darkvision 60 ft., passive Perception 16
+    cr: "5"
+    source: 5e SRD
+    skills:
+        perception: 6
+        stealth: 5
+    actions:
+        - name: Multiattack
+          desc: The roper makes four attacks with its tendrils, uses Reel, and makes one attack with its bite.
+        - name: Bite
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 22 (4d8 + 4) piercing damage.'
+        - name: Tendril
+          desc: 'Melee Weapon Attack: +7 to hit, reach 50 ft., one creature. Hit: The target is grappled (escape DC 15). Until the grapple ends, the target is restrained and has disadvantage on Strength checks and Strength saving throws, and the roper can''t use the same tendril on another target.'
+        - name: Reel
+          desc: The roper pulls each creature grappled by it up to 25 ft. straight toward it.
+    traits:
+        - name: False Appearance
+          desc: While the roper remains motionless, it is indistinguishable from a normal cave formation, such as a stalagmite.
+        - name: Grasping Tendrils
+          desc: The roper can have up to six tendrils at a time. Each tendril can be attacked (AC 20; 10 hit points; immunity to poison and psychic damage). Destroying a tendril deals no damage to the roper, which can extrude a replacement tendril on its next turn. A tendril can also be broken if a creature takes an action and succeeds on a DC 15 Strength check against it.
+        - name: Spider Climb
+          desc: The roper can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.
+CREATURE:RUST_MONSTER:
+    name: Rust Monster
+    stats:
+        - 13
+        - 12
+        - 13
+        - 2
+        - 13
+        - 6
+    ac: 14 (Natural Armor)
+    hitDice: 5
+    hitDiceType: 8
+    speed: 40 ft.
+    type: monstrosity
+    size: Medium
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 11
+    cr: 1/2
+    source: 5e SRD
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) piercing damage.'
+        - name: Antennae
+          desc: |-
+            The rust monster corrodes a nonmagical ferrous metal object it can see within 5 feet of it. If the object isn't being worn or carried, the touch destroys a 1-foot cube of it. If the object is being worn or carried by a creature, the creature can make a DC 11 Dexterity saving throw to avoid the rust monster's touch.
+            If the object touched is either metal armor or a metal shield being worn or carried, its takes a permanent and cumulative -1 penalty to the AC it offers. Armor reduced to an AC of 10 or a shield that drops to a +0 bonus is destroyed. If the object touched is a held metal weapon, it rusts as described in the Rust Metal trait.
+    traits:
+        - name: Iron Scent
+          desc: The rust monster can pinpoint, by scent, the location of ferrous metal within 30 feet of it.
+        - name: Rust Metal
+          desc: Any nonmagical weapon made of metal that hits the rust monster corrodes. After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Non magical ammunition made of metal that hits the rust monster is destroyed after dealing damage.
+CREATURE:SPIRIT_NAGA:
+    name: Spirit Naga
+    stats:
+        - 18
+        - 17
+        - 14
+        - 16
+        - 15
+        - 16
+    ac: 15 (Natural Armor)
+    hitDice: 10
+    hitDiceType: 10
+    speed: 40 ft.
+    type: monstrosity
+    size: Large
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 12
+    languages: Abyssal, Common
+    cr: "8"
+    source: 5e SRD
+    saves:
+        charisma: 6
+        constitution: 5
+        dexterity: 6
+        wisdom: 5
+    damageImmunities: poison
+    conditionImmunities: charmed, poisoned
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +7 to hit, reach 10 ft., one creature. Hit: 7 (1d6 + 4) piercing damage, and the target must make a DC 13 Constitution saving throw, taking 31 (7d8) poison damage on a failed save, or half as much damage on a successful one.'
+    traits:
+        - name: Rejuvenation
+          desc: If it dies, the naga returns to life in 1d6 days and regains all its hit points. Only a wish spell can prevent this trait from functioning.
+    spellNotes: 'The naga is a 10th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks), and it needs only verbal components to cast its spells. It has the following wizard spells prepared:'
+    spells:
+        0:
+            spells:
+                - SPELL:MAGE_HAND
+                - SPELL:MINOR_ILLUSION
+                - SPELL:RAY_OF_FROST
+        1:
+            slots: 4
+            spells:
+                - SPELL:CHARM_PERSON
+                - SPELL:DETECT_MAGIC
+                - SPELL:SLEEP
+        2:
+            slots: 3
+            spells:
+                - SPELL:DETECT_THOUGHTS
+                - SPELL:HOLD_PERSON
+        3:
+            slots: 3
+            spells:
+                - SPELL:LIGHTNING_BOLT
+                - SPELL:WATER_BREATHING
+        4:
+            slots: 3
+            spells:
+                - SPELL:BLIGHT
+                - SPELL:DIMENSION_DOOR
+        5:
+            slots: 2
+            spells:
+                - SPELL:DOMINATE_PERSON
+CREATURE:TARRASQUE:
+    name: Tarrasque
+    stats:
+        - 30
+        - 11
+        - 30
+        - 3
+        - 11
+        - 11
+    ac: 25 (Natural Armor)
+    hitDice: 33
+    hitDiceType: 20
+    speed: 40 ft.
+    type: monstrosity (titan)
+    size: Gargantuan
+    alignment: unaligned
+    senses: blindsight 120 ft., passive Perception 10
+    cr: "30"
+    source: 5e SRD
+    saves:
+        charisma: 9
+        intelligence: 5
+        wisdom: 9
+    damageImmunities: fire, poison; bludgeoning, piercing, and slashing from nonmagical weapons
+    conditionImmunities: charmed, frightened, paralyzed, poisoned
+    actions:
+        - name: Multiattack
+          desc: 'The tarrasque can use its Frightful Presence. It then makes five attacks: one with its bite, two with its claws, one with its horns, and one with its tai l. It can use its Swallow instead of its bite.'
+        - name: Bite
+          desc: 'Melee Weapon Attack: +19 to hit, reach 10 ft., one target. Hit: 36 (4d12 + 10) piercing damage. If the target is a creature, it is grappled (escape DC 20). Until this grapple ends, the target is restrained, and the tarrasque can''t bite another target.'
+        - name: Claw
+          desc: 'Melee Weapon Attack: +19 to hit, reach 15 ft., one target. Hit: 28 (4d8 + 10) slashing damage.'
+        - name: Horns
+          desc: 'Melee Weapon Attack: +19 to hit, reach 10 ft., one target. Hit: 32 (4d10 + 10) piercing damage.'
+        - name: Tail
+          desc: 'Melee Weapon Attack: +19 to hit, reach 20 ft., one target. Hit: 24 (4d6 + 10) bludgeoning damage. If the target is a creature, it must succeed on a DC 20 Strength saving throw or be knocked prone.'
+        - name: Frightful Presence
+          desc: Each creature of the tarrasque's choice within 120 feet of it and aware of it must succeed on a DC 17 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, with disadvantage if the tarrasque is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the tarrasque's Frightful Presence for the next 24 hours.
+        - name: Swallow
+          desc: |-
+            The tarrasque makes one bite attack against a Large or smaller creature it is grappling. If the attack hits, the target takes the bite's damage, the target is swallowed, and the grapple ends. While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside the tarrasque, and it takes 56 (16d6) acid damage at the start of each of the tarrasque's turns.
+            If the tarrasque takes 60 damage or more on a single turn from a creature inside it, the tarrasque must succeed on a DC 20 Constitution saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of the tarrasque. If the tarrasque dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 30 feet of movement, exiting prone.
+    traits:
+        - name: Legendary Resistance (3/Day)
+          desc: If the tarrasque fails a saving throw, it can choose to succeed instead.
+        - name: Magic Resistance
+          desc: The tarrasque has advantage on saving throws against spells and other magical effects.
+        - name: Reflective Carapace
+          desc: Any time the tarrasque is targeted by a magic missile spell, a line spell, or a spell that requires a ranged attack roll, roll a d6. On a 1 to 5, the tarrasque is unaffected. On a 6, the tarrasque is unaffected, and the effect is reflected back at the caster as though it originated from the tarrasque, turning the caster into the target.
+        - name: Siege Monster
+          desc: The tarrasque deals double damage to objects and structures.
+    legendaryActions:
+        - name: Attack
+          desc: The tarrasque makes one claw attack or tail attack.
+        - name: Move
+          desc: The tarrasque moves up to half its speed.
+        - name: Chomp (Costs 2 Actions)
+          desc: The tarrasque makes one bite attack or uses its Swallow.
+CREATURE:WINTER_WOLF:
+    name: Winter Wolf
+    stats:
+        - 18
+        - 13
+        - 14
+        - 7
+        - 12
+        - 8
+    ac: 13 (Natural Armor)
+    hitDice: 10
+    hitDiceType: 10
+    speed: 50 ft.
+    type: monstrosity
+    size: Large
+    alignment: neutral evil
+    senses: passive Perception 15
+    languages: Common, Giant, Winter Wolf
+    cr: "3"
+    source: 5e SRD
+    skills:
+        perception: 5
+        stealth: 3
+    damageImmunities: cold
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) piercing damage. If the target is a creature, it must succeed on a DC 14 Strength saving throw or be knocked prone.'
+        - name: Cold Breath (Recharge 5-6)
+          desc: The wolf exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a DC 12 Dexterity saving throw, taking 18 (4d8) cold damage on a failed save, or half as much damage on a successful one.
+    traits:
+        - name: Keen Hearing and Smell
+          desc: The wolf has advantage on Wisdom (Perception) checks that rely on hearing or smell.
+        - name: Pack Tactics
+          desc: The wolf has advantage on an attack roll against a creature if at least one of the wolf's allies is within 5 ft. of the creature and the ally isn't incapacitated.
+        - name: Snow Camouflage
+          desc: The wolf has advantage on Dexterity (Stealth) checks made to hide in snowy terrain.
+CREATURE:WORG:
+    name: Worg
+    stats:
+        - 16
+        - 13
+        - 13
+        - 7
+        - 11
+        - 8
+    ac: 13 (Natural Armor)
+    hitDice: 4
+    hitDiceType: 10
+    speed: 50 ft.
+    type: monstrosity
+    size: Large
+    alignment: neutral evil
+    senses: darkvision 60 ft., passive Perception 14
+    languages: Goblin, Worg
+    cr: 1/2
+    source: 5e SRD
+    skills:
+        perception: 4
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) piercing damage. If the target is a creature, it must succeed on a DC 13 Strength saving throw or be knocked prone.'
+    traits:
+        - name: Keen Hearing and Smell
+          desc: The worg has advantage on Wisdom (Perception) checks that rely on hearing or smell.

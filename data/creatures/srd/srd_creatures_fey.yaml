@@ -1,0 +1,264 @@
+CREATURE:BLINK_DOG:
+    name: Blink Dog
+    stats:
+        - 12
+        - 17
+        - 12
+        - 10
+        - 13
+        - 11
+    ac: "13"
+    hitDice: 4
+    hitDiceType: 8
+    speed: 40 ft.
+    type: fey
+    size: Medium
+    alignment: lawful good
+    senses: passive Perception 10
+    languages: Blink Dog, understands Sylvan but can't speak it
+    cr: 1/4
+    source: 5e SRD
+    skills:
+        perception: 3
+        stealth: 5
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) piercing damage.'
+        - name: Teleport (Recharge 4-6)
+          desc: The dog magically teleports, along with any equipment it is wearing or carrying, up to 40 ft. to an unoccupied space it can see. Before or after teleporting, the dog can make one bite attack.
+    traits:
+        - name: Keen Hearing and Smell
+          desc: The dog has advantage on Wisdom (Perception) checks that rely on hearing or smell.
+CREATURE:DRYAD:
+    name: Dryad
+    stats:
+        - 10
+        - 12
+        - 11
+        - 14
+        - 15
+        - 18
+    ac: 11 (16 With Barkskin)
+    hitDice: 5
+    hitDiceType: 8
+    speed: 30 ft.
+    type: fey
+    size: Medium
+    alignment: neutral
+    senses: darkvision 60 ft., passive Perception 14
+    languages: Elvish, Sylvan
+    cr: "1"
+    source: 5e SRD
+    skills:
+        perception: 4
+        stealth: 5
+    actions:
+        - name: Club
+          desc: 'Melee Weapon Attack: +2 to hit (+6 to hit with shillelagh), reach 5 ft., one target. Hit: 2 (1 d4) bludgeoning damage, or 8 (1d8 + 4) bludgeoning damage with shillelagh.'
+        - name: Fey Charm
+          desc: |-
+            The dryad targets one humanoid or beast that she can see within 30 feet of her. If the target can see the dryad, it must succeed on a DC 14 Wisdom saving throw or be magically charmed. The charmed creature regards the dryad as a trusted friend to be heeded and protected. Although the target isn't under the dryad's control, it takes the dryad's requests or actions in the most favorable way it can.
+            Each time the dryad or its allies do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the dryad dies, is on a different plane of existence from the target, or ends the effect as a bonus action. If a target's saving throw is successful, the target is immune to the dryad's Fey Charm for the next 24 hours.
+            The dryad can have no more than one humanoid and up to three beasts charmed at a time.
+    traits:
+        - name: Innate Spellcasting
+          desc: |-
+            The dryad's innate spellcasting ability is Charisma (spell save DC 14). The dryad can innately cast the following spells, requiring no material components:
+
+            At will: druidcraft
+            3/day each: entangle, goodberry
+            1/day each: barkskin, pass without trace, shillelagh
+        - name: Magic Resistance
+          desc: The dryad has advantage on saving throws against spells and other magical effects.
+        - name: Speak with Beasts and Plants
+          desc: The dryad can communicate with beasts and plants as if they shared a language.
+        - name: Tree Stride
+          desc: Once on her turn, the dryad can use 10 ft. of her movement to step magically into one living tree within her reach and emerge from a second living tree within 60 ft. of the first tree, appearing in an unoccupied space within 5 ft. of the second tree. Both trees must be large or bigger.
+CREATURE:GREEN_HAG:
+    name: Green Hag
+    stats:
+        - 18
+        - 12
+        - 16
+        - 13
+        - 14
+        - 14
+    ac: 17 (Natural Armor)
+    hitDice: 11
+    hitDiceType: 8
+    speed: 30 ft.
+    type: fey
+    size: Medium
+    alignment: neutral evil
+    senses: darkvision 60 ft., passive Perception 14
+    languages: Common, Draconic, Sylvan
+    cr: "3"
+    source: 5e SRD
+    skills:
+        arcana: 3
+        deception: 4
+        perception: 4
+        stealth: 3
+    actions:
+        - name: Claws
+          desc: 'Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) slashing damage.'
+        - name: Illusory Appearance
+          desc: |-
+            The hag covers herself and anything she is wearing or carrying with a magical illusion that makes her look like another creature of her general size and humanoid shape. The illusion ends if the hag takes a bonus action to end it or if she dies.
+            The changes wrought by this effect fail to hold up to physical inspection. For example, the hag could appear to have smooth skin, but someone touching her would feel her rough flesh. Otherwise, a creature must take an action to visually inspect the illusion and succeed on a DC 20 Intelligence (Investigation) check to discern that the hag is disguised.
+        - name: Invisible Passage
+          desc: The hag magically turns invisible until she attacks or casts a spell, or until her concentration ends (as if concentrating on a spell). While invisible, she leaves no physical evidence of her passage, so she can be tracked only by magic. Any equipment she wears or carries is invisible with her.
+    traits:
+        - name: Amphibious
+          desc: The hag can breathe air and water.
+        - name: Innate Spellcasting
+          desc: |-
+            The hag's innate spellcasting ability is Charisma (spell save DC 12). She can innately cast the following spells, requiring no material components:
+
+            At will: dancing lights, minor illusion, vicious mockery
+        - name: Mimicry
+          desc: The hag can mimic animal sounds and humanoid voices. A creature that hears the sounds can tell they are imitations with a successful DC 14 Wisdom (Insight) check.
+        - name: Hag Coven
+          desc: |-
+            When hags must work together, they form covens, in spite of their selfish natures. A coven is made up of hags of any type, all of whom are equals within the group. However, each of the hags continues to desire more personal power.
+            A coven consists of three hags so that any arguments between two hags can be settled by the third. If more than three hags ever come together, as might happen if two covens come into conflict, the result is usually chaos.
+        - name: Shared Spellcasting (Coven Only)
+          desc: |-
+            While all three members of a hag coven are within 30 feet of one another, they can each cast the following spells from the wizard's spell list but must share the spell slots among themselves:
+
+            • 1st level (4 slots): identify, ray of sickness
+            • 2nd level (3 slots): hold person, locate object
+            • 3rd level (3 slots): bestow curse, counterspell, lightning bolt
+            • 4th level (3 slots): phantasmal killer, polymorph
+            • 5th level (2 slots): contact other plane, scrying
+            • 6th level (1 slot): eye bite
+
+            For casting these spells, each hag is a 12th-level spellcaster that uses Intelligence as her spellcasting ability. The spell save DC is 12+the hag's Intelligence modifier, and the spell attack bonus is 4+the hag's Intelligence modifier.
+        - name: Hag Eye (Coven Only)
+          desc: |-
+            A hag coven can craft a magic item called a hag eye, which is made from a real eye coated in varnish and often fitted to a pendant or other wearable item. The hag eye is usually entrusted to a minion for safekeeping and transport. A hag in the coven can take an action to see what the hag eye sees if the hag eye is on the same plane of existence. A hag eye has AC 10, 1 hit point, and darkvision with a radius of 60 feet. If it is destroyed, each coven member takes 3d10 psychic damage and is blinded for 24 hours.
+            A hag coven can have only one hag eye at a time, and creating a new one requires all three members of the coven to perform a ritual. The ritual takes 1 hour, and the hags can't perform it while blinded. During the ritual, if the hags take any action other than performing the ritual, they must start over.
+CREATURE:SATYR:
+    name: Satyr
+    stats:
+        - 12
+        - 16
+        - 11
+        - 12
+        - 10
+        - 14
+    ac: 14 (Leather Armor)
+    hitDice: 7
+    hitDiceType: 8
+    speed: 40 ft.
+    type: fey
+    size: Medium
+    alignment: chaotic neutral
+    senses: passive Perception 12
+    languages: Common, Elvish, Sylvan
+    cr: 1/2
+    source: 5e SRD
+    skills:
+        perception: 2
+        performance: 6
+        stealth: 5
+    actions:
+        - name: Ram
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 6 (2d4 + 1) bludgeoning damage.'
+        - name: Shortsword
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 6 (1 d6 + 3) piercing damage.'
+        - name: Shortbow
+          desc: 'Ranged Weapon Attack: +5 to hit, range 80/320 ft., one target. Hit: 6 (1d6 + 3) piercing damage.'
+        - name: 'Variant: Panpipes'
+          desc: Gentle Lullaby. The creature falls asleep and is unconscious for 1 minute. The effect ends if the creature takes damage or if someone takes an action to shake the creature awake.
+    traits:
+        - name: Magic Resistance
+          desc: The satyr has advantage on saving throws against spells and other magical effects.
+CREATURE:SEA_HAG:
+    name: Sea Hag
+    stats:
+        - 16
+        - 13
+        - 16
+        - 12
+        - 12
+        - 13
+    ac: 14 (Natural Armor)
+    hitDice: 7
+    hitDiceType: 8
+    speed: 30 ft., swim 40 ft.
+    type: fey
+    size: Medium
+    alignment: chaotic evil
+    senses: darkvision 60 ft., passive Perception 11
+    languages: Aquan, Common, Giant
+    cr: "2"
+    source: 5e SRD
+    actions:
+        - name: Claws
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 10 (2d6 + 3) slashing damage.'
+        - name: Death Glare
+          desc: The hag targets one frightened creature she can see within 30 ft. of her. If the target can see the hag, it must succeed on a DC 11 Wisdom saving throw against this magic or drop to 0 hit points.
+        - name: Illusory Appearance
+          desc: |-
+            The hag covers herself and anything she is wearing or carrying with a magical illusion that makes her look like an ugly creature of her general size and humanoid shape. The effect ends if the hag takes a bonus action to end it or if she dies.
+            The changes wrought by this effect fail to hold up to physical inspection. For example, the hag could appear to have no claws, but someone touching her hand might feel the claws. Otherwise, a creature must take an action to visually inspect the illusion and succeed on a DC 16 Intelligence (Investigation) check to discern that the hag is disguised.
+    traits:
+        - name: Amphibious
+          desc: The hag can breathe air and water.
+        - name: Horrific Appearance
+          desc: |-
+            Any humanoid that starts its turn within 30 feet of the hag and can see the hag's true form must make a DC 11 Wisdom saving throw. On a failed save, the creature is frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, with disadvantage if the hag is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the hag's Horrific Appearance for the next 24 hours.
+            Unless the target is surprised or the revelation of the hag's true form is sudden, the target can avert its eyes and avoid making the initial saving throw. Until the start of its next turn, a creature that averts its eyes has disadvantage on attack rolls against the hag.
+        - name: Hag Coven
+          desc: |-
+            When hags must work together, they form covens, in spite of their selfish natures. A coven is made up of hags of any type, all of whom are equals within the group. However, each of the hags continues to desire more personal power.
+            A coven consists of three hags so that any arguments between two hags can be settled by the third. If more than three hags ever come together, as might happen if two covens come into conflict, the result is usually chaos.
+        - name: Shared Spellcasting (Coven Only)
+          desc: |-
+            While all three members of a hag coven are within 30 feet of one another, they can each cast the following spells from the wizard's spell list but must share the spell slots among themselves:
+
+            • 1st level (4 slots): identify, ray of sickness
+            • 2nd level (3 slots): hold person, locate object
+            • 3rd level (3 slots): bestow curse, counterspell, lightning bolt
+            • 4th level (3 slots): phantasmal killer, polymorph
+            • 5th level (2 slots): contact other plane, scrying
+            • 6th level (1 slot): eye bite
+
+            For casting these spells, each hag is a 12th-level spellcaster that uses Intelligence as her spellcasting ability. The spell save DC is 12+the hag's Intelligence modifier, and the spell attack bonus is 4+the hag's Intelligence modifier.
+        - name: Hag Eye (Coven Only)
+          desc: |-
+            A hag coven can craft a magic item called a hag eye, which is made from a real eye coated in varnish and often fitted to a pendant or other wearable item. The hag eye is usually entrusted to a minion for safekeeping and transport. A hag in the coven can take an action to see what the hag eye sees if the hag eye is on the same plane of existence. A hag eye has AC 10, 1 hit point, and darkvision with a radius of 60 feet. If it is destroyed, each coven member takes 3d10 psychic damage and is blinded for 24 hours.
+            A hag coven can have only one hag eye at a time, and creating a new one requires all three members of the coven to perform a ritual. The ritual takes 1 hour, and the hags can't perform it while blinded. During the ritual, if the hags take any action other than performing the ritual, they must start over.
+CREATURE:SPRITE:
+    name: Sprite
+    stats:
+        - 3
+        - 18
+        - 10
+        - 14
+        - 13
+        - 11
+    ac: 15 (Leather Armor)
+    hitDice: 1
+    hitDiceType: 4
+    speed: 10 ft., fly 40 ft.
+    type: fey
+    size: Tiny
+    alignment: neutral good
+    senses: passive Perception 13
+    languages: Common, Elvish, Sylvan
+    cr: 1/4
+    source: 5e SRD
+    skills:
+        perception: 3
+        stealth: 8
+    actions:
+        - name: Longsword
+          desc: 'Melee Weapon Attack: +2 to hit, reach 5 ft., one target. Hit: 1 slashing damage.'
+        - name: Shortbow
+          desc: 'Ranged Weapon Attack: +6 to hit, range 40/160 ft., one target. Hit: 1 piercing damage, and the target must succeed on a DC 10 Constitution saving throw or become poisoned for 1 minute. If its saving throw result is 5 or lower, the poisoned target falls unconscious for the same duration, or until it takes damage or another creature takes an action to shake it awake.'
+        - name: Heart Sight
+          desc: The sprite touches a creature and magically knows the creature's current emotional state. If the target fails a DC 10 Charisma saving throw, the sprite also knows the creature's alignment. Celestials, fiends, and undead automatically fail the saving throw.
+        - name: Invisibility
+          desc: The sprite magically turns invisible until it attacks or casts a spell, or until its concentration ends (as if concentrating on a spell). Any equipment the sprite wears or carries is invisible with it.

@@ -1,0 +1,316 @@
+CREATURE:ANIMATED_ARMOR:
+    name: Animated Armor
+    stats:
+        - 14
+        - 11
+        - 13
+        - 1
+        - 3
+        - 1
+    ac: 18 (Natural Armor)
+    hitDice: 6
+    hitDiceType: 8
+    speed: 25 ft.
+    type: construct
+    size: Medium
+    alignment: unaligned
+    senses: blindsight 60 ft. (blind beyond this radius), passive Perception 6
+    cr: "1"
+    source: 5e SRD
+    damageImmunities: poison, psychic
+    conditionImmunities: blinded, charmed, deafened, exhaustion, frightened, paralyzed, petrified, poisoned
+    actions:
+        - name: Multiattack
+          desc: The armor makes two melee attacks.
+        - name: Slam
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage.'
+    traits:
+        - name: Antimagic Susceptibility
+          desc: The armor is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the armor must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute.
+        - name: False Appearance
+          desc: While the armor remains motionless, it is indistinguishable from a normal suit of armor.
+CREATURE:CLAY_GOLEM:
+    name: Clay Golem
+    stats:
+        - 20
+        - 9
+        - 18
+        - 3
+        - 8
+        - 1
+    ac: 14 (Natural Armor)
+    hitDice: 14
+    hitDiceType: 10
+    speed: 20 ft.
+    type: construct
+    size: Large
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 9
+    languages: understands the languages of its creator but can't speak
+    cr: "9"
+    source: 5e SRD
+    damageImmunities: acid, poison, psychic; bludgeoning, piercing, and slashing from nonmagical weapons that aren't adamantine
+    conditionImmunities: charmed, exhaustion, frightened, paralyzed, petrified, poisoned
+    actions:
+        - name: Multiattack
+          desc: The golem makes two slam attacks.
+        - name: Slam
+          desc: 'Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 16 (2d10 + 5) bludgeoning damage. If the target is a creature, it must succeed on a DC 15 Constitution saving throw or have its hit point maximum reduced by an amount equal to the damage taken. The target dies if this attack reduces its hit point maximum to 0. The reduction lasts until removed by the greater restoration spell or other magic.'
+        - name: Haste (Recharge 5-6)
+          desc: Until the end of its next turn, the golem magically gains a +2 bonus to its AC, has advantage on Dexterity saving throws, and can use its slam attack as a bonus action.
+    traits:
+        - name: Acid Absorption
+          desc: Whenever the golem is subjected to acid damage, it takes no damage and instead regains a number of hit points equal to the acid damage dealt.
+        - name: Berserk
+          desc: Whenever the golem starts its turn with 60 hit points or fewer, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its hit points.
+        - name: Immutable Form
+          desc: The golem is immune to any spell or effect that would alter its form.
+        - name: Magic Resistance
+          desc: The golem has advantage on saving throws against spells and other magical effects.
+        - name: Magic Weapons
+          desc: The golem's weapon attacks are magical.
+CREATURE:FLESH_GOLEM:
+    name: Flesh Golem
+    stats:
+        - 19
+        - 9
+        - 18
+        - 6
+        - 10
+        - 5
+    ac: "9"
+    hitDice: 11
+    hitDiceType: 8
+    speed: 30 ft.
+    type: construct
+    size: Medium
+    alignment: neutral
+    senses: darkvision 60 ft., passive Perception 10
+    languages: understands the languages of its creator but can't speak
+    cr: "5"
+    source: 5e SRD
+    damageImmunities: lightning, poison; bludgeoning, piercing, and slashing from nonmagical weapons that aren't adamantine
+    conditionImmunities: charmed, exhaustion, frightened, paralyzed, petrified, poisoned
+    actions:
+        - name: Multiattack
+          desc: The golem makes two slam attacks.
+        - name: Slam
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 13 (2d8 + 4) bludgeoning damage.'
+    traits:
+        - name: Berserk
+          desc: |-
+            Whenever the golem starts its turn with 40 hit points or fewer, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its hit points.
+            The golem's creator, if within 60 feet of the berserk golem, can try to calm it by speaking firmly and persuasively. The golem must be able to hear its creator, who must take an action to make a DC 15 Charisma (Persuasion) check. If the check succeeds, the golem ceases being berserk. If it takes damage while still at 40 hit points or fewer, the golem might go berserk again.
+        - name: Aversion of Fire
+          desc: If the golem takes fire damage, it has disadvantage on attack rolls and ability checks until the end of its next turn.
+        - name: Immutable Form
+          desc: The golem is immune to any spell or effect that would alter its form.
+        - name: Lightning Absorption
+          desc: Whenever the golem is subjected to lightning damage, it takes no damage and instead regains a number of hit points equal to the lightning damage dealt.
+        - name: Magic Resistance
+          desc: The golem has advantage on saving throws against spells and other magical effects.
+        - name: Magic Weapons
+          desc: The golem's weapon attacks are magical.
+CREATURE:FLYING_SWORD:
+    name: Flying Sword
+    stats:
+        - 12
+        - 15
+        - 11
+        - 1
+        - 5
+        - 1
+    ac: 17 (Natural Armor)
+    hitDice: 5
+    hitDiceType: 6
+    speed: 0 ft., fly 50 ft. It can hover.
+    type: construct
+    size: Small
+    alignment: unaligned
+    senses: blindsight 60 ft. (blind beyond this radius), passive Perception 7
+    cr: 1/4
+    source: 5e SRD
+    saves:
+        dexterity: 4
+    damageImmunities: poison, psychic
+    conditionImmunities: blinded, charmed, deafened, frightened, paralyzed, petrified, poisoned
+    actions:
+        - name: Longsword
+          desc: 'Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d8 + 1) slashing damage.'
+    traits:
+        - name: Antimagic Susceptibility
+          desc: The sword is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the sword must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute.
+        - name: False Appearance
+          desc: While the sword remains motionless and isn't flying, it is indistinguishable from a normal sword.
+CREATURE:HOMUNCULUS:
+    name: Homunculus
+    stats:
+        - 4
+        - 15
+        - 11
+        - 10
+        - 10
+        - 7
+    ac: 13 (Natural Armor)
+    hitDice: 2
+    hitDiceType: 4
+    speed: 20 ft., fly 40 ft.
+    type: construct
+    size: Tiny
+    alignment: neutral
+    senses: darkvision 60 ft., passive Perception 10
+    languages: understands the languages of its creator but can't speak
+    cr: "0"
+    source: 5e SRD
+    damageImmunities: poison
+    conditionImmunities: charmed, poisoned
+    actions:
+        - name: Bite
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one creature. Hit: 1 piercing damage, and the target must succeed on a DC 10 Constitution saving throw or be poisoned for 1 minute. If the saving throw fails by 5 or more, the target is instead poisoned for 5 (1d10) minutes and unconscious while poisoned in this way.'
+    traits:
+        - name: Telepathic Bond
+          desc: While the homunculus is on the same plane of existence as its master, it can magically convey what it senses to its master, and the two can communicate telepathically.
+CREATURE:IRON_GOLEM:
+    name: Iron Golem
+    stats:
+        - 24
+        - 9
+        - 20
+        - 3
+        - 11
+        - 1
+    ac: 20 (Natural Armor)
+    hitDice: 20
+    hitDiceType: 10
+    speed: 30 ft.
+    type: construct
+    size: Large
+    alignment: unaligned
+    senses: darkvision 120 ft., passive Perception 10
+    languages: understands the languages of its creator but can't speak
+    cr: "16"
+    source: 5e SRD
+    damageImmunities: fire, poison, psychic; bludgeoning, piercing, and slashing from nonmagical weapons that aren't adamantine
+    conditionImmunities: charmed, exhaustion, frightened, paralyzed, petrified, poisoned
+    actions:
+        - name: Multiattack
+          desc: The golem makes two melee attacks.
+        - name: Slam
+          desc: 'Melee Weapon Attack: +13 to hit, reach 5 ft., one target. Hit: 20 (3d8 + 7) bludgeoning damage.'
+        - name: Sword
+          desc: 'Melee Weapon Attack: +13 to hit, reach 10 ft., one target. Hit: 23 (3d10 + 7) slashing damage.'
+        - name: Poison Breath (Recharge 5-6)
+          desc: The golem exhales poisonous gas in a 15-foot cone. Each creature in that area must make a DC 19 Constitution saving throw, taking 45 (l0d8) poison damage on a failed save, or half as much damage on a successful one.
+    traits:
+        - name: Fire Absorption
+          desc: Whenever the golem is subjected to fire damage, it takes no damage and instead regains a number of hit points equal to the fire damage dealt.
+        - name: Immutable Form
+          desc: The golem is immune to any spell or effect that would alter its form.
+        - name: Magic Resistance
+          desc: The golem has advantage on saving throws against spells and other magical effects.
+        - name: Magic Weapons
+          desc: The golem's weapon attacks are magical.
+CREATURE:RUG_OF_SMOTHERING:
+    name: Rug of Smothering
+    stats:
+        - 17
+        - 14
+        - 10
+        - 1
+        - 3
+        - 1
+    ac: "12"
+    hitDice: 6
+    hitDiceType: 10
+    speed: 10 ft.
+    type: construct
+    size: Large
+    alignment: unaligned
+    senses: blindsight 60 ft. (blind beyond this radius), passive Perception 6
+    cr: "2"
+    source: 5e SRD
+    damageImmunities: poison, psychic
+    conditionImmunities: blinded, charmed, deafened, frightened, paralyzed, petrified, poisoned
+    actions:
+        - name: Smother
+          desc: 'Melee Weapon Attack: +5 to hit, reach 5 ft., one Medium or smaller creature. Hit: The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the rug can''t smother another target. In addition, at the start of each of the target''s turns, the target takes 10 (2d6 + 3) bludgeoning damage.'
+    traits:
+        - name: Antimagic Susceptibility
+          desc: The rug is incapacitated while in the area of an antimagic field. If targeted by dispel magic, the rug must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for 1 minute.
+        - name: Damage Transfer
+          desc: While it is grappling a creature, the rug takes only half the damage dealt to it, and the creature grappled by the rug takes the other half.
+        - name: False Appearance
+          desc: While the rug remains motionless, it is indistinguishable from a normal rug.
+CREATURE:SHIELD_GUARDIAN:
+    name: Shield Guardian
+    stats:
+        - 18
+        - 8
+        - 18
+        - 7
+        - 10
+        - 3
+    ac: 17 (Natural Armor)
+    hitDice: 15
+    hitDiceType: 10
+    speed: 30 ft.
+    type: construct
+    size: Large
+    alignment: unaligned
+    senses: blindsight 10 ft., darkvision 60 ft., passive Perception 10
+    languages: understands commands given in any language but can't speak
+    cr: "7"
+    source: 5e SRD
+    damageImmunities: poison
+    conditionImmunities: charmed, exhaustion, frightened, paralyzed, poisoned
+    actions:
+        - name: Multiattack
+          desc: The guardian makes two fist attacks.
+        - name: Fist
+          desc: 'Melee Weapon Attack: +7 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) bludgeoning damage.'
+    reactions:
+        - name: Shield
+          desc: When a creature makes an attack against the wearer of the guardian's amulet, the guardian grants a +2 bonus to the wearer's AC if the guardian is within 5 feet of the wearer.
+    traits:
+        - name: Bound
+          desc: The shield guardian is magically bound to an amulet. As long as the guardian and its amulet are on the same plane of existence, the amulet's wearer can telepathically call the guardian to travel to it, and the guardian knows the distance and direction to the amulet. If the guardian is within 60 feet of the amulet's wearer, half of any damage the wearer takes (rounded up) is transferred to the guardian.
+        - name: Regeneration
+          desc: The shield guardian regains 10 hit points at the start of its turn if it has at least 1 hit. point.
+        - name: Spell Storing
+          desc: A spellcaster who wears the shield guardian's amulet can cause the guardian to store one spell of 4th level or lower. To do so, the wearer must cast the spell on the guardian. The spell has no effect but is stored within the guardian. When commanded to do so by the wearer or when a situation arises that was predefined by the spellcaster, the guardian casts the stored spell with any parameters set by the original caster, requiring no components. When the spell is cast or a new spell is stored, any previously stored spell is lost.
+CREATURE:STONE_GOLEM:
+    name: Stone Golem
+    stats:
+        - 22
+        - 9
+        - 20
+        - 3
+        - 11
+        - 1
+    ac: 17 (Natural Armor)
+    hitDice: 17
+    hitDiceType: 10
+    speed: 30 ft.
+    type: construct
+    size: Large
+    alignment: unaligned
+    senses: darkvision 120 ft., passive Perception 10
+    languages: understands the languages of its creator but can't speak
+    cr: "10"
+    source: 5e SRD
+    damageImmunities: poison, psychic; bludgeoning, piercing, and slashing from nonmagical weapons that aren't adamantine
+    conditionImmunities: charmed, exhaustion, frightened, paralyzed, petrified, poisoned
+    actions:
+        - name: Multiattack
+          desc: The golem makes two slam attacks.
+        - name: Slam
+          desc: 'Melee Weapon Attack: +10 to hit, reach 5 ft., one target. Hit: 19 (3d8 + 6) bludgeoning damage.'
+        - name: Slow (Recharge 5-6)
+          desc: The golem targets one or more creatures it can see within 10 ft. of it. Each target must make a DC 17 Wisdom saving throw against this magic. On a failed save, a target can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the target can take either an action or a bonus action on its turn, not both. These effects last for 1 minute. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.
+    traits:
+        - name: Immutable Form
+          desc: The golem is immune to any spell or effect that would alter its form.
+        - name: Magic Resistance
+          desc: The golem has advantage on saving throws against spells and other magical effects.
+        - name: Magic Weapons
+          desc: The golem's weapon attacks are magical.

@@ -1,0 +1,288 @@
+CREATURE:SWARM_OF_BATS:
+    name: Swarm of Bats
+    stats:
+        - 5
+        - 15
+        - 10
+        - 2
+        - 12
+        - 4
+    ac: "12"
+    hitDice: 5
+    hitDiceType: 8
+    speed: 0 ft., fly 30 ft.
+    type: swarm of Tiny beasts
+    size: Medium
+    alignment: unaligned
+    senses: blindsight 60 ft., passive Perception 11
+    cr: 1/4
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, slashing
+    conditionImmunities: charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned
+    actions:
+        - name: Bites
+          desc: 'Melee Weapon Attack: +4 to hit, reach 0 ft., one creature in the swarm''s space. Hit: 5 (2d4) piercing damage, or 2 (1d4) piercing damage if the swarm has half of its hit points or fewer.'
+    traits:
+        - name: Echolocation
+          desc: The swarm can't use its blindsight while deafened.
+        - name: Keen Hearing
+          desc: The swarm has advantage on Wisdom (Perception) checks that rely on hearing.
+        - name: Swarm
+          desc: The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny bat. The swarm can't regain hit points or gain temporary hit points.
+CREATURE:SWARM_OF_BEETLES:
+    name: Swarm of Beetles
+    stats:
+        - 3
+        - 13
+        - 10
+        - 1
+        - 7
+        - 1
+    ac: ""
+    hitDice: 5
+    hitDiceType: 8
+    speed: 20 ft., burrow 5 ft., climb 20 ft.
+    type: swarm of Tiny beasts
+    size: Medium
+    alignment: unaligned
+    senses: blindsight 10 ft., passive Perception 8
+    cr: 1/2
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, slashing
+    conditionImmunities: charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned
+    actions:
+        - name: Bites
+          desc: 'Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm''s space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.'
+    traits:
+        - name: Swarm
+          desc: The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny insect. The swarm can't regain hit points or gain temporary hit points.
+CREATURE:SWARM_OF_CENTIPEDES:
+    name: Swarm of Centipedes
+    stats:
+        - 3
+        - 13
+        - 10
+        - 1
+        - 7
+        - 1
+    ac: ""
+    hitDice: 5
+    hitDiceType: 8
+    speed: 20 ft., climb 20 ft.
+    type: swarm of Tiny beasts
+    size: Medium
+    alignment: unaligned
+    senses: blindsight 10 ft., passive Perception 8
+    cr: 1/2
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, slashing
+    conditionImmunities: charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned
+    actions:
+        - name: Bites
+          desc: |-
+            Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm's space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.
+            A creature reduced to 0 hit points by a swarm of centipedes is stable but poisoned for 1 hour, even after regaining hit points, and paralyzed while poisoned in this way.
+    traits:
+        - name: Swarm
+          desc: The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny insect. The swarm can't regain hit points or gain temporary hit points.
+CREATURE:SWARM_OF_INSECTS:
+    name: Swarm of Insects
+    stats:
+        - 3
+        - 13
+        - 10
+        - 1
+        - 7
+        - 1
+    ac: 12 (Natural Armor)
+    hitDice: 5
+    hitDiceType: 8
+    speed: 20 ft., climb 20 ft.
+    type: swarm of Tiny beasts
+    size: Medium
+    alignment: unaligned
+    senses: blindsight 10 ft., passive Perception 8
+    cr: 1/2
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, slashing
+    conditionImmunities: charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned
+    actions:
+        - name: Bites
+          desc: 'Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm''s space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.'
+    traits:
+        - name: Swarm
+          desc: The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny insect. The swarm can't regain hit points or gain temporary hit points.
+CREATURE:SWARM_OF_POISONOUS_SNAKES:
+    name: Swarm of Poisonous Snakes
+    stats:
+        - 8
+        - 18
+        - 11
+        - 1
+        - 10
+        - 3
+    ac: "14"
+    hitDice: 8
+    hitDiceType: 8
+    speed: 30 ft., swim 30 ft.
+    type: swarm of Tiny beasts
+    size: Medium
+    alignment: unaligned
+    senses: blindsight 10 ft., passive Perception 10
+    cr: "2"
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, slashing
+    conditionImmunities: charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned
+    actions:
+        - name: Bites
+          desc: 'Melee Weapon Attack: +6 to hit, reach 0 ft., one creature in the swarm''s space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer. The target must make a DC 10 Constitution saving throw, taking 14 (4d6) poison damage on a failed save, or half as much damage on a successful one.'
+    traits:
+        - name: Swarm
+          desc: The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny snake. The swarm can't regain hit points or gain temporary hit points.
+CREATURE:SWARM_OF_QUIPPERS:
+    name: Swarm of Quippers
+    stats:
+        - 13
+        - 16
+        - 9
+        - 1
+        - 7
+        - 2
+    ac: "13"
+    hitDice: 8
+    hitDiceType: 8
+    speed: 0 ft., swim 40 ft.
+    type: swarm of Tiny beasts
+    size: Medium
+    alignment: unaligned
+    senses: darkvision 60 ft., passive Perception 8
+    cr: "1"
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, slashing
+    conditionImmunities: charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned
+    actions:
+        - name: Bites
+          desc: 'Melee Weapon Attack: +5 to hit, reach 0 ft., one creature in the swarm''s space. Hit: 14 (4d6) piercing damage, or 7 (2d6) piercing damage if the swarm has half of its hit points or fewer.'
+    traits:
+        - name: Blood Frenzy
+          desc: The swarm has advantage on melee attack rolls against any creature that doesn't have all its hit points.
+        - name: Swarm
+          desc: The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny quipper. The swarm can't regain hit points or gain temporary hit points.
+        - name: Water Breathing
+          desc: The swarm can breathe only underwater.
+CREATURE:SWARM_OF_RATS:
+    name: Swarm of Rats
+    stats:
+        - 9
+        - 11
+        - 9
+        - 2
+        - 10
+        - 3
+    ac: "10"
+    hitDice: 7
+    hitDiceType: 8
+    speed: 30 ft.
+    type: swarm of Tiny beasts
+    size: Medium
+    alignment: unaligned
+    senses: darkvision 30 ft., passive Perception 10
+    cr: 1/4
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, slashing
+    conditionImmunities: charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned
+    actions:
+        - name: Bites
+          desc: 'Melee Weapon Attack: +2 to hit, reach 0 ft., one target in the swarm''s space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer.'
+    traits:
+        - name: Keen Smell
+          desc: The swarm has advantage on Wisdom (Perception) checks that rely on smell.
+        - name: Swarm
+          desc: The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny rat. The swarm can't regain hit points or gain temporary hit points.
+CREATURE:SWARM_OF_RAVENS:
+    name: Swarm of Ravens
+    stats:
+        - 6
+        - 14
+        - 8
+        - 3
+        - 12
+        - 6
+    ac: "12"
+    hitDice: 7
+    hitDiceType: 8
+    speed: 10 ft., fly 50 ft.
+    type: swarm of Tiny beasts
+    size: Medium
+    alignment: unaligned
+    senses: passive Perception 15
+    cr: 1/4
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, slashing
+    conditionImmunities: charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned
+    actions:
+        - name: Beaks
+          desc: 'Melee Weapon Attack: +4 to hit, reach 5 ft., one target in the swarm''s space. Hit: 7 (2d6) piercing damage, or 3 (1d6) piercing damage if the swarm has half of its hit points or fewer.'
+    traits:
+        - name: Swarm
+          desc: The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny raven. The swarm can't regain hit points or gain temporary hit points.
+CREATURE:SWARM_OF_SPIDERS:
+    name: Swarm of Spiders
+    stats:
+        - 3
+        - 13
+        - 10
+        - 1
+        - 7
+        - 1
+    ac: ""
+    hitDice: 5
+    hitDiceType: 8
+    speed: 20 ft., climb 20 ft.
+    type: swarm of Tiny beasts
+    size: Medium
+    alignment: unaligned
+    senses: blindsight 10 ft., passive Perception 8
+    cr: 1/2
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, slashing
+    conditionImmunities: charmed, frightened, paralyzed, petrified, prone, restrained, stunned
+    actions:
+        - name: Bites
+          desc: 'Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm''s space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.'
+    traits:
+        - name: Swarm
+          desc: The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny insect. The swarm can't regain hit points or gain temporary hit points.
+        - name: Spider Climb
+          desc: The swarm can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.
+        - name: Web Sense
+          desc: While in contact with a web, the swarm knows the exact location of any other creature in contact with the same web.
+        - name: Web Walker
+          desc: The swarm ignores movement restrictions caused by webbing.
+CREATURE:SWARM_OF_WASPS:
+    name: Swarm of Wasps
+    stats:
+        - 3
+        - 13
+        - 10
+        - 1
+        - 7
+        - 1
+    ac: ""
+    hitDice: 5
+    hitDiceType: 8
+    speed: 5 ft., fly 30 ft.
+    type: swarm of Tiny beasts
+    size: Medium
+    alignment: unaligned
+    senses: blindsight 10 ft., passive Perception 8
+    cr: 1/2
+    source: 5e SRD
+    damageResistances: bludgeoning, piercing, slashing
+    conditionImmunities: charmed, frightened, grappled, paralyzed, petrified, prone, restrained, stunned
+    actions:
+        - name: Bites
+          desc: 'Melee Weapon Attack: +3 to hit, reach 0 ft., one target in the swarm''s space. Hit: 10 (4d4) piercing damage, or 5 (2d4) piercing damage if the swarm has half of its hit points or fewer.'
+    traits:
+        - name: Swarm
+          desc: The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny insect. The swarm can't regain hit points or gain temporary hit points.

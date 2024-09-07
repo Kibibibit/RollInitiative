@@ -23,15 +23,26 @@ func findYAMLFilesInFolder(path string) ([]string, error) {
 	out := []string{}
 
 	for _, file := range files {
+		fileName := file.Name()
+		if !strings.HasSuffix(path, "/") {
+			fileName = fmt.Sprintf("/%s", fileName)
+		}
 		if !file.IsDir() {
-			fileName := file.Name()
+
 			if strings.HasSuffix(fileName, ".yaml") {
-				if !strings.HasSuffix(path, "/") {
-					fileName = fmt.Sprintf("/%s", fileName)
-				}
+
 				out = append(out, fmt.Sprintf("%s%s", path, fileName))
 			}
 
+		} else {
+			subfile, err := findYAMLFilesInFolder(fmt.Sprintf("%s%s", path, fileName))
+
+			if err != nil {
+				log.Println("Failed to open folder!")
+				log.Fatalln(err)
+				return nil, err
+			}
+			out = append(out, subfile...)
 		}
 	}
 

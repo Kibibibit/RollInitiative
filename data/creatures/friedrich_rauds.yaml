@@ -1,6 +1,6 @@
 CREATURE:NPCS:FRIEDRICH_RAUDS:
     name: (NPC) Friedrich Rauds
-    statBlock:
+    stats:
         - 12
         - 14
         - 14
@@ -51,4 +51,3 @@ CREATURE:NPCS:FRIEDRICH_RAUDS:
                 - SPELL:HEX
                 - SPELL:MISTY_STEP
                 - SPELL:MIRROR_IMAGE
-      

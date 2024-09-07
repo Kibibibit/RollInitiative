@@ -33,8 +33,6 @@ func main() {
 		i++
 	}
 
-	ReadJSON()
-
 	creatureDict, err = ImportCreatures("./data/creatures", creatureDict)
 	if err != nil {
 		log.Fatalln(err)
@@ -51,6 +49,8 @@ func main() {
 
 	slices.Sort(spellIds)
 	slices.Sort(creatureIds)
+
+	// CreateCreatureFiles()
 
 	// g, err := gocui.NewGui(gocui.OutputNormal, true)
 	// if err != nil {
