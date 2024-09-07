@@ -301,7 +301,7 @@ CREATURE:CAVE_BEAR:
         - 2
         - 13
         - 7
-    ac: ""
+    ac: "12 (Natural Armor)"
     hitDice: 5
     hitDiceType: 10
     speed: 40 ft., swim 30 ft.
@@ -1151,7 +1151,7 @@ CREATURE:GIANT_RAT_DISEASED:
         - 2
         - 10
         - 4
-    ac: ""
+    ac: "12"
     hitDice: 2
     hitDiceType: 6
     speed: 30 ft.

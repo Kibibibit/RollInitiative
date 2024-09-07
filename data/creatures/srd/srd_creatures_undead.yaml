@@ -7,7 +7,7 @@ CREATURE:ADULT_BLUE_DRACOLICH:
         - 16
         - 15
         - 19
-    ac: ""
+    ac: "19 (Natural Armor)"
     hitDice: 18
     hitDiceType: 12
     speed: 40 ft., burrow 30 ft., fly 80 ft.

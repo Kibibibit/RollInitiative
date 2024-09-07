@@ -219,7 +219,7 @@ CREATURE:CARRION_CRAWLER:
         - 1
         - 12
         - 5
-    ac: ""
+    ac: "13 (Natural Armor)"
     hitDice: 6
     hitDiceType: 10
     speed: 30 ft., climb 30 ft.
