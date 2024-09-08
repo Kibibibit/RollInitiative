@@ -1,6 +1,8 @@
 package main
 
 import (
+	"windmills/roll_initiative/models"
+
 	"github.com/awesome-gocui/gocui"
 )
 
@@ -9,11 +11,11 @@ const VIEW_CREATURE_NAME = "view_creature"
 type ViewCreatureWidget struct {
 	name       string
 	w, h       int
-	creature   Creature
+	creature   models.Creature
 	lastWindow string
 }
 
-func NewViewCreatureWidget(name string, w, h int, creature Creature, lastWindow string) *ViewCreatureWidget {
+func NewViewCreatureWidget(name string, w, h int, creature models.Creature, lastWindow string) *ViewCreatureWidget {
 
 	return &ViewCreatureWidget{
 		name:       name,

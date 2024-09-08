@@ -1,4 +1,4 @@
-package main
+package models
 
 type Spell struct {
 	Id           string   `yaml:"-"`

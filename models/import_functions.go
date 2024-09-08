@@ -1,4 +1,4 @@
-package main
+package models
 
 import (
 	"fmt"
@@ -13,7 +13,6 @@ import (
 func findYAMLFilesInFolder(path string) ([]string, error) {
 	files, err := os.ReadDir(path)
 
-	log.Printf("Finding all yaml files in %s\n", path)
 	if err != nil {
 		log.Println("Failed to open folder!")
 		log.Fatalln(err)
@@ -52,8 +51,6 @@ func findYAMLFilesInFolder(path string) ([]string, error) {
 func readYAML(path string) ([]byte, error) {
 	yamlFile, err := os.Open(path)
 
-	log.Printf("Trying to open file %s\n", path)
-
 	if err != nil {
 		log.Println("Failed to open file!")
 		log.Fatalln(err)
@@ -61,8 +58,6 @@ func readYAML(path string) ([]byte, error) {
 	}
 
 	defer yamlFile.Close()
-
-	log.Printf("Trying to read data from file %s\n", path)
 
 	data, err := io.ReadAll(yamlFile)
 
@@ -122,7 +117,7 @@ func importGenericData[V any](path string, dict map[string]V) (map[string]V, err
 	return dict, nil
 }
 
-func ImportSpells(path string, dict SpellDict) (SpellDict, error) {
+func ImportSpells(path string, dict map[string]Spell) (map[string]Spell, error) {
 
 	dict, err := importGenericData(path, dict)
 
@@ -135,7 +130,7 @@ func ImportSpells(path string, dict SpellDict) (SpellDict, error) {
 	return dict, nil
 }
 
-func ImportCreatures(path string, dict CreatureDict) (CreatureDict, error) {
+func ImportCreatures(path string, dict map[string]Creature) (map[string]Creature, error) {
 
 	dict, err := importGenericData(path, dict)
 
