@@ -3,14 +3,14 @@ package models
 import (
 	"log"
 	"os"
-	"slices"
 )
 
 type DataStore struct {
-	creatureIds []string
-	creatures   map[string]Creature
-	spellIds    []string
-	spells      map[string]Spell
+	CreatureIds   []string
+	CreatureNames map[string]string
+	creatures     map[string]Creature
+	SpellIds      []string
+	spells        map[string]Spell
 }
 
 func MakeDataStore() *DataStore {
@@ -39,21 +39,35 @@ func MakeDataStore() *DataStore {
 	}
 
 	creatureIds := make([]string, len(creatureDict))
+	creatureNames := make(map[string]string)
 
 	i = 0
 	for k := range creatureDict {
 		creatureIds[i] = k
+		creatureNames[k] = creatureDict[k].Name
 		i++
 	}
 
-	slices.Sort(spellIds)
-	slices.Sort(creatureIds)
-
-	out.spellIds = spellIds
-	out.creatureIds = creatureIds
+	out.SpellIds = spellIds
+	out.CreatureIds = creatureIds
 	out.creatures = creatureDict
 	out.spells = spellDict
+	out.CreatureNames = creatureNames
 
 	return &out
 
+}
+
+func (d *DataStore) GetSpell(id string) *Spell {
+	if spell, ok := d.spells[id]; ok {
+		return &spell
+	}
+	return nil
+}
+
+func (d *DataStore) GetCreature(id string) *Creature {
+	if creature, ok := d.creatures[id]; ok {
+		return &creature
+	}
+	return nil
 }

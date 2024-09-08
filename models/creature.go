@@ -42,3 +42,11 @@ type CreatureSpells struct {
 	Slots  int      `yaml:"slots,omitempty"`
 	Spells []string `yaml:"spells"`
 }
+
+func (c Creature) GetId() string {
+	return c.Id
+}
+
+func (c Creature) GetName() string {
+	return c.Name
+}

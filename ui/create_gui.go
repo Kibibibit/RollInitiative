@@ -15,6 +15,9 @@ func CreateGui(dataStore *models.DataStore, colors *ColorPalette) (*gocui.Gui, e
 		return nil, err
 	}
 
+	g.BgColor = colors.BGColor.GetCUIAttr()
+	g.FgColor = colors.FGColor.GetCUIAttr()
+
 	rootWidget := NewRootWidget(dataStore, colors)
 	shortcutsWidget := NewShortcutsWidget(dataStore, colors)
 

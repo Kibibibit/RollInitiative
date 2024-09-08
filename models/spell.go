@@ -16,3 +16,11 @@ type Spell struct {
 	Classes      []string `yaml:"class,omitempty"`
 	Source       string   `yaml:"source"`
 }
+
+func (s Spell) GetId() string {
+	return s.Id
+}
+
+func (s Spell) GetName() string {
+	return s.Name
+}
