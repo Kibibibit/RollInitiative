@@ -1,5 +1,10 @@
 package models
 
+import (
+	"fmt"
+	"strings"
+)
+
 type Creature struct {
 	Id                    string                 `yaml:"-"`
 	Name                  string                 `yaml:"name"`
@@ -43,10 +48,24 @@ type CreatureSpells struct {
 	Spells []string `yaml:"spells"`
 }
 
-func (c Creature) GetId() string {
-	return c.Id
-}
+func (c *Creature) RenderSearchRow(index int, width int) string {
+	line := fmt.Sprintf(" %2d %s", index, c.Name)
+	cr := c.CR
 
-func (c Creature) GetName() string {
-	return c.Name
+	for len(line) < width/2 {
+		line += " "
+	}
+
+	line += c.Type
+
+	sCount := width - len(line) - 4
+
+	line += strings.Repeat(" ", sCount)
+	line += cr
+
+	for len(line) < width {
+		line += " "
+	}
+
+	return line
 }

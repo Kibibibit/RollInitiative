@@ -10,6 +10,7 @@ type DataStore struct {
 	CreatureNames map[string]string
 	creatures     map[string]Creature
 	SpellIds      []string
+	SpellNames    map[string]string
 	spells        map[string]Spell
 }
 
@@ -26,9 +27,12 @@ func MakeDataStore() *DataStore {
 		os.Exit(1)
 	}
 	spellIds := make([]string, len(spellDict))
+	spellNames := make(map[string]string)
 	var i int = 0
 	for k := range spellDict {
+		s := spellDict[k]
 		spellIds[i] = k
+		spellNames[k] = s.Name
 		i++
 	}
 
@@ -43,8 +47,10 @@ func MakeDataStore() *DataStore {
 
 	i = 0
 	for k := range creatureDict {
+		c := creatureDict[k]
 		creatureIds[i] = k
-		creatureNames[k] = creatureDict[k].Name
+		creatureNames[k] = c.Name
+
 		i++
 	}
 
@@ -53,6 +59,7 @@ func MakeDataStore() *DataStore {
 	out.creatures = creatureDict
 	out.spells = spellDict
 	out.CreatureNames = creatureNames
+	out.SpellNames = spellNames
 
 	return &out
 

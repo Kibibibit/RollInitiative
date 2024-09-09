@@ -164,30 +164,41 @@ func (w *ShortcutsWidget) onKeypress(key rune) func(g *gocui.Gui, v *gocui.View)
 func (w *ShortcutsWidget) openCreatureWiki(g *gocui.Gui, v *gocui.View) error {
 
 	w.hide()
-	//TODO: Put this into a function in search widget
-	var creatureSearch *SearchWidget
 
-	creatureSearch = NewSearchWidget(
-		NameSearchCreaturesWidget,
-		"Find Creature",
-		w.colors,
-		w.dataStore.CreatureNames,
-		func(result string) {
-			creatureSearch.Kill(g, v)
-		},
-	)
+	NewCreatureSearch(g, w.colors, w.dataStore, func(result string) {
 
-	creatureSearch.Layout(g)
+		viewCreature := NewViewCreatureWidget(w.dataStore, NameRootWidget, w.colors, w.dataStore.GetCreature(result))
 
-	g.Update(func(g *gocui.Gui) error {
+		viewCreature.Layout(g)
 
-		_, err := g.SetCurrentView(creatureSearch.name)
-		return err
+		g.Update(func(g *gocui.Gui) error {
+
+			_, err := g.SetCurrentView(viewCreature.name)
+			return err
+		})
+
 	})
 
 	return nil
 }
 
 func (w *ShortcutsWidget) openSpellsWiki(g *gocui.Gui, v *gocui.View) error {
-	return w.onClose(g, v)
+
+	w.hide()
+
+	NewSpellSearch(g, w.colors, w.dataStore, func(result string) {
+
+		// viewCreature := NewViewCreatureWidget(w.dataStore, NameRootWidget, w.colors, w.dataStore.GetCreature(result))
+
+		// viewCreature.Layout(g)
+
+		// g.Update(func(g *gocui.Gui) error {
+
+		// 	_, err := g.SetCurrentView(viewCreature.name)
+		// 	return err
+		// })
+
+	})
+
+	return nil
 }

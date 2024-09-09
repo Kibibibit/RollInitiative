@@ -1,5 +1,10 @@
 package models
 
+import (
+	"fmt"
+	"strings"
+)
+
 type Spell struct {
 	Id           string   `yaml:"-"`
 	Name         string   `yaml:"name"`
@@ -17,10 +22,24 @@ type Spell struct {
 	Source       string   `yaml:"source"`
 }
 
-func (s Spell) GetId() string {
-	return s.Id
-}
+func (c *Spell) RenderSearchRow(index int, width int) string {
+	line := fmt.Sprintf(" %2d %s", index, c.Name)
+	level := fmt.Sprintf("%d", c.Level)
 
-func (s Spell) GetName() string {
-	return s.Name
+	for len(line) < width/2 {
+		line += " "
+	}
+
+	line += c.School
+
+	sCount := width - len(line) - 4
+
+	line += strings.Repeat(" ", sCount)
+	line += level
+
+	for len(line) < width {
+		line += " "
+	}
+
+	return line
 }
