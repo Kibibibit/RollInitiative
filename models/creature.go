@@ -1,9 +1,48 @@
 package models
 
-import (
-	"fmt"
-	"strings"
-)
+var crToXPTable = map[string]int{
+	"0":   10,
+	"1/8": 25,
+	"1/4": 50,
+	"1/2": 100,
+	"1":   200,
+	"2":   450,
+	"3":   700,
+	"4":   1100,
+	"5":   1800,
+	"6":   2300,
+	"7":   2900,
+	"8":   3900,
+	"9":   5000,
+	"10":  5900,
+	"11":  7200,
+	"12":  8400,
+	"13":  10000,
+	"14":  11500,
+	"15":  13000,
+	"16":  15000,
+	"17":  18000,
+	"18":  20000,
+	"19":  22000,
+	"20":  25000,
+	"21":  33000,
+	"22":  41000,
+	"23":  50000,
+	"24":  62000,
+	"25":  75000,
+	"26":  90000,
+	"27":  105000,
+	"28":  120000,
+	"29":  135000,
+	"30":  155000,
+}
+
+func XPFromCR(cr string) (xp int) {
+	if val, ok := crToXPTable[cr]; ok {
+		return val
+	}
+	return 0
+}
 
 type Creature struct {
 	Id                    string                 `yaml:"-"`
@@ -31,8 +70,8 @@ type Creature struct {
 	Reactions             []CreatureTrait        `yaml:"reactions,omitempty"`
 	LairActions           []CreatureTrait        `yaml:"lairActions,omitempty"`
 	Traits                []CreatureTrait        `yaml:"traits,omitempty"`
-	LegendaryDescription  string                 `yaml:"legendaryDescription,omitempty"`
 	LegendaryActions      []CreatureTrait        `yaml:"legendaryActions,omitempty"`
+	LegendaryDescription  string                 `yaml:"legendaryDescription,omitempty"`
 	SpellNotes            string                 `yaml:"spellNotes,omitempty"`
 	Spells                map[int]CreatureSpells `yaml:"spells,omitempty"`
 	PrecombatSpells       []string               `yaml:"precombatSpells,omitempty"`
@@ -46,26 +85,4 @@ type CreatureTrait struct {
 type CreatureSpells struct {
 	Slots  int      `yaml:"slots,omitempty"`
 	Spells []string `yaml:"spells"`
-}
-
-func (c *Creature) RenderSearchRow(index int, width int) string {
-	line := fmt.Sprintf(" %2d %s", index, c.Name)
-	cr := c.CR
-
-	for len(line) < width/2 {
-		line += " "
-	}
-
-	line += c.Type
-
-	sCount := width - len(line) - 4
-
-	line += strings.Repeat(" ", sCount)
-	line += cr
-
-	for len(line) < width {
-		line += " "
-	}
-
-	return line
 }

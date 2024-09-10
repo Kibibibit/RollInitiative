@@ -48,8 +48,8 @@ func (w *RootWidget) Layout(g *gocui.Gui) error {
 	if err == gocui.ErrUnknownView {
 		w.createKeybinds(g)
 		view.Frame = false
-		view.BgColor = w.colors.BGColor.GetCUIAttr()
-		view.FgColor = w.colors.FGColor.GetCUIAttr()
+		view.BgColor = w.colors.BgColor.GetCUIAttr()
+		view.FgColor = w.colors.FgColor.GetCUIAttr()
 		view.SetWritePos(0, w.h)
 
 		fmt.Fprintf(view, "Roll Initiative")

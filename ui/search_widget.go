@@ -62,12 +62,12 @@ func (w *SearchWidget) Layout(g *gocui.Gui) error {
 	w.view = view
 
 	if err == gocui.ErrUnknownView {
-		view.BgColor = w.colors.WindowBGColor.GetCUIAttr()
-		view.FgColor = w.colors.FGColor.GetCUIAttr()
+		view.BgColor = w.colors.BgColorWindow.GetCUIAttr()
+		view.FgColor = w.colors.FgColor.GetCUIAttr()
 		view.Highlight = true
 		view.Title = w.title
-		view.SelBgColor = w.colors.FGColor.GetCUIAttr()
-		view.SelFgColor = w.colors.BGColor.GetCUIAttr()
+		view.SelBgColor = w.colors.FgColor.GetCUIAttr()
+		view.SelFgColor = w.colors.BgColor.GetCUIAttr()
 		w.setKeybinding(g)
 	} else if err != nil {
 		return err
@@ -203,7 +203,7 @@ func NewCreatureSearch(g *gocui.Gui, colors *ColorPalette, dataStore *models.Dat
 		dataStore.CreatureNames,
 		func(index int, width int, id string) string {
 			c := dataStore.GetCreature(id)
-			return c.RenderSearchRow(index, width)
+			return RenderCreatureSearchRow(c, colors, index, width)
 		},
 		func(result string) {
 			creatureSearch.Kill(g, creatureSearch.view)

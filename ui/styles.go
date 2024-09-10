@@ -14,9 +14,10 @@ type Color struct {
 }
 
 type ColorPalette struct {
-	BGColor       *Color
-	FGColor       *Color
-	WindowBGColor *Color
+	BgColor       *Color
+	FgColor       *Color
+	BgColorWindow *Color
+	FgColorDim    *Color
 }
 
 func (c *Color) GetCUIAttr() gocui.Attribute {

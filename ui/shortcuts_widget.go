@@ -72,8 +72,8 @@ func (w *ShortcutsWidget) Layout(g *gocui.Gui) error {
 		view.Visible = false
 		w.createKeybinds(g)
 		view.Frame = false
-		view.BgColor = w.colors.WindowBGColor.GetCUIAttr()
-		view.FgColor = w.colors.FGColor.GetCUIAttr()
+		view.BgColor = w.colors.BgColorWindow.GetCUIAttr()
+		view.FgColor = w.colors.FgColor.GetCUIAttr()
 		view.SetWritePos(0, 0)
 
 	} else if err != nil {
