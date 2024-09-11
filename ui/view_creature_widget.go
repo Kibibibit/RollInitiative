@@ -321,28 +321,11 @@ func (w *ViewCreatureWidget) drawCreatureTraitList(title string, list []models.C
 		}
 
 		for _, trait := range list {
-			drawX, drawY = w.drawCreatureTrait(&trait, drawX, drawY)
+			drawX, drawY = w.drawText(fmt.Sprintf("%s: %s", ApplyBold(trait.Name, w.colors.FgColor), trait.Description), drawX, drawY)
 		}
 	}
 
 	return drawX, drawY
-}
-
-func (w *ViewCreatureWidget) drawCreatureTrait(trait *models.CreatureTrait, drawX int, drawY int) (int, int) {
-	// drawYOut := drawY
-	// drawXOut := drawX
-	// // w.view.SetWritePos(drawX, drawY)
-
-	// // drawLine := trait.Description
-	// // lineLength := len(strings.Split(trait.Description, "\n"))
-	// // if lineLength > 0 {
-	// // 	drawLine = strings.ReplaceAll(drawLine, "\n", "\n\t")
-	// // }
-	// // fmt.Fprintf(w.view, "%s: %s", ApplyBold(trait.Name, w.colors.FgColor), drawLine)
-
-	// // drawYOut += lineLength
-
-	return w.drawText(fmt.Sprintf("%s: %s", ApplyBold(trait.Name, w.colors.FgColor), trait.Description), drawX, drawY)
 }
 
 func (w *ViewCreatureWidget) getSkillSavesString(title string, data map[string]int) (line string, hasSaves bool) {
