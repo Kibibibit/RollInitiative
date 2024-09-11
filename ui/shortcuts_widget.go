@@ -188,15 +188,15 @@ func (w *ShortcutsWidget) openSpellsWiki(g *gocui.Gui, v *gocui.View) error {
 
 	NewSpellSearch(g, w.colors, w.dataStore, func(result string) {
 
-		// viewCreature := NewViewCreatureWidget(w.dataStore, NameRootWidget, w.colors, w.dataStore.GetCreature(result))
+		viewSpell := NewViewSpellWidget(w.dataStore, NameRootWidget, w.colors, w.dataStore.GetSpell(result))
 
-		// viewCreature.Layout(g)
+		viewSpell.Layout(g)
 
-		// g.Update(func(g *gocui.Gui) error {
+		g.Update(func(g *gocui.Gui) error {
 
-		// 	_, err := g.SetCurrentView(viewCreature.name)
-		// 	return err
-		// })
+			_, err := g.SetCurrentView(viewSpell.name)
+			return err
+		})
 
 	})
 
