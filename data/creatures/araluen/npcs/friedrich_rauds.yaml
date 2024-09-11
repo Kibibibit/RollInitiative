@@ -43,7 +43,7 @@ CREATURE:NPCS:FRIEDRICH_RAUDS:
         0:
             spells:
                 - SPELL:SANGUINE_BLAST
-                - SPELL:FIREBOLT
+                - SPELL:FIRE_BOLT
         2:
             slots: 2
             spells:

@@ -28,6 +28,19 @@ var affinityNames = []string{
 	"Languages",
 }
 
+var spellLevelTitles = []string{
+	"Cantrips",
+	"1st level",
+	"2nd level",
+	"3rd level",
+	"4th level",
+	"5th level",
+	"6th level",
+	"7th level",
+	"8th level",
+	"9th level",
+}
+
 const (
 	statStringFirst  string = "┌── %s ──"
 	statStringMiddle string = "┬── %s ──"
@@ -39,6 +52,7 @@ type ViewCreatureWidget struct {
 	name           string
 	x, y           int
 	w, h           int
+	colW           int
 	colors         *ColorPalette
 	dataStore      *models.DataStore
 	previousWidget string
@@ -60,11 +74,13 @@ func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
 
 	width, height := g.Size()
 
-	w.w = utils.Clamp(width-10, height-5, width)
-	w.h = height - 10
+	w.w = utils.Clamp(width-4, 70, width-4)
+	w.h = height - 5
 
 	w.x = width/2 - w.w/2 - 1
 	w.y = height/2 - w.h/2 - 1
+
+	w.colW = w.w / 3
 
 	view, err := g.SetView(w.name, w.x, w.y, w.x+w.w+2, w.y+w.h+2, 0)
 	w.view = view
@@ -175,65 +191,158 @@ func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
 	}
 
 	for index, affinity := range affinities {
-		view.SetWritePos(drawX, drawY)
 
 		if len(affinity) > 0 {
-			fmt.Fprintf(view, "%s: %s", ApplyBold(affinityNames[index], w.colors.FgColor), affinity)
-			drawY += 1
+			drawX, drawY = w.drawText(fmt.Sprintf("%s: %s", ApplyBold(affinityNames[index], w.colors.FgColor), affinity), drawX, drawY)
 		}
 	}
 
-	drawY += 1
+	drawX, drawY = w.drawCreatureTraitList("", w.creature.Traits, drawX, drawY)
 
-	//Draw traits
-
-	for _, trait := range w.creature.Traits {
-		drawX, drawY = w.drawCreatureTrait(&trait, drawX, drawY)
-	}
-
-	drawY += 1
-
-	if len(w.creature.Actions) > 0 {
-		view.SetWritePos(drawX, drawY)
-		fmt.Fprint(view, ApplyBold(ApplyStyles("Actions", gocui.AttrUnderline), w.colors.FgColor))
+	if len(w.creature.Spells) > 0 {
 		drawY += 1
+		drawX, drawY = w.drawText(fmt.Sprintf("%s: %s", ApplyBold("Spellcasting", w.colors.FgColor), w.creature.SpellNotes), drawX, drawY)
+		for level := 0; level <= 9; level++ {
+			if spells, ok := w.creature.Spells[level]; ok {
+				drawLine := spellLevelTitles[level]
+				slotsString := "(at will)"
+				if level > 0 {
+					slotsString = fmt.Sprintf("(%d slots)", spells.Slots)
+				}
 
-		for _, action := range w.creature.Actions {
-			drawX, drawY = w.drawCreatureTrait(&action, drawX, drawY)
+				drawLine = fmt.Sprintf("%s %s:", drawLine, slotsString)
+
+				spellNames := []string{}
+
+				for _, spell := range spells.Spells {
+					s := w.dataStore.GetSpell(spell)
+					if s == nil {
+						spellNames = append(spellNames, spell)
+					} else {
+						spellNames = append(spellNames, s.Name)
+					}
+				}
+
+				drawLine = fmt.Sprintf("%s %s", drawLine, strings.Join(spellNames, ", "))
+
+				drawX, drawY = w.drawText(drawLine, drawX, drawY)
+
+			}
+		}
+		if len(w.creature.PrecombatSpells) > 0 {
+			drawLine := "The creature casts the following spells on itself before combat:"
+			spellNames := []string{}
+			for _, spell := range w.creature.PrecombatSpells {
+				s := w.dataStore.GetSpell(spell)
+				if s == nil {
+					spellNames = append(spellNames, spell)
+				} else {
+					spellNames = append(spellNames, s.Name)
+				}
+			}
+			drawLine = fmt.Sprintf("%s %s", drawLine, strings.Join(spellNames, ", "))
+			drawX, drawY = w.drawText(drawLine, drawX, drawY)
 		}
 	}
-	if len(w.creature.LegendaryActions) > 0 {
 
-		drawY += 1
-
-		view.SetWritePos(drawX, drawY)
-		fmt.Fprint(view, ApplyBold(ApplyStyles("Legendary Actions", gocui.AttrUnderline), w.colors.FgColor))
-		drawY += 1
-
-		for _, action := range w.creature.LegendaryActions {
-			drawX, drawY = w.drawCreatureTrait(&action, drawX, drawY)
-		}
-	}
+	drawX, drawY = w.drawCreatureTraitList("Actions", w.creature.Actions, drawX, drawY)
+	drawX, drawY = w.drawCreatureTraitList("Bonus Actions", w.creature.BonusActions, drawX, drawY)
+	drawX, drawY = w.drawCreatureTraitList("Reactions", w.creature.Reactions, drawX, drawY)
+	drawX, drawY = w.drawCreatureTraitList("Lair Actions", w.creature.LairActions, drawX, drawY)
+	//TODO: Legendary descriptions
+	drawX, drawY = w.drawCreatureTraitList("Legendary Actions", w.creature.LegendaryActions, drawX, drawY)
 
 	return nil
 
 }
 
-func (w *ViewCreatureWidget) drawCreatureTrait(trait *models.CreatureTrait, drawX int, drawY int) (int, int) {
-	drawYOut := drawY
-	drawXOut := drawX
+func (w *ViewCreatureWidget) drawText(text string, drawX, drawY int) (int, int) {
 	w.view.SetWritePos(drawX, drawY)
 
-	drawLine := trait.Description
-	lineLength := len(strings.Split(trait.Description, "\n"))
-	if lineLength > 0 {
-		drawLine = strings.ReplaceAll(drawLine, "\n", "\n\t")
+	lines := []string{}
+
+	baseLines := strings.Split(text, "\n")
+
+	for _, baseLine := range baseLines {
+
+		if utils.StringDrawLength(baseLine) < w.colW-2 {
+			lines = append(lines, baseLine)
+		} else {
+			words := strings.Split(baseLine, " ")
+
+			newLine := ""
+			for len(words) > 0 {
+				nextWord := words[0]
+
+				if utils.StringDrawLength(newLine)+utils.StringDrawLength(nextWord)+1 < w.colW-2 {
+					if len(newLine) == 0 {
+						newLine = nextWord
+					} else {
+						newLine = fmt.Sprintf("%s %s", newLine, nextWord)
+					}
+
+					words = words[1:len(words)]
+				} else {
+					lines = append(lines, newLine)
+					newLine = ""
+				}
+			}
+			if len(newLine) > 0 {
+				lines = append(lines, newLine)
+			}
+
+		}
 	}
-	fmt.Fprintf(w.view, "%s: %s", ApplyBold(trait.Name, w.colors.FgColor), drawLine)
 
-	drawYOut += lineLength
+	for _, line := range lines {
 
-	return drawXOut, drawYOut
+		w.view.SetWritePos(drawX, drawY)
+		fmt.Fprint(w.view, line)
+		drawY += 1
+		if drawY > w.h-1 {
+			drawY = 1
+			drawX += w.colW
+		}
+
+	}
+
+	return drawX, drawY
+}
+
+func (w *ViewCreatureWidget) drawCreatureTraitList(title string, list []models.CreatureTrait, drawX, drawY int) (int, int) {
+	if len(list) > 0 {
+
+		drawY += 1
+
+		w.view.SetWritePos(drawX, drawY)
+		if len(title) > 0 {
+			fmt.Fprint(w.view, ApplyBold(ApplyStyles(title, gocui.AttrUnderline), w.colors.FgColor))
+			drawY += 1
+		}
+
+		for _, trait := range list {
+			drawX, drawY = w.drawCreatureTrait(&trait, drawX, drawY)
+		}
+	}
+
+	return drawX, drawY
+}
+
+func (w *ViewCreatureWidget) drawCreatureTrait(trait *models.CreatureTrait, drawX int, drawY int) (int, int) {
+	// drawYOut := drawY
+	// drawXOut := drawX
+	// // w.view.SetWritePos(drawX, drawY)
+
+	// // drawLine := trait.Description
+	// // lineLength := len(strings.Split(trait.Description, "\n"))
+	// // if lineLength > 0 {
+	// // 	drawLine = strings.ReplaceAll(drawLine, "\n", "\n\t")
+	// // }
+	// // fmt.Fprintf(w.view, "%s: %s", ApplyBold(trait.Name, w.colors.FgColor), drawLine)
+
+	// // drawYOut += lineLength
+
+	return w.drawText(fmt.Sprintf("%s: %s", ApplyBold(trait.Name, w.colors.FgColor), trait.Description), drawX, drawY)
 }
 
 func (w *ViewCreatureWidget) getSkillSavesString(title string, data map[string]int) (line string, hasSaves bool) {
