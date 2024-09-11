@@ -16,13 +16,16 @@ const DRAW_TABLE_START = "&&DRAW_TABLE_START"
 func DrawText(view *gocui.View, colW int, maxH int, colors *ColorPalette, text string, drawX, drawY int) (int, int) {
 	view.SetWritePos(drawX, drawY)
 
+	//Contains every line that will eventually be drawn to the screen
 	lines := []string{}
 
+	// Break up the string on new lines, as we want to preserve paragraph breaks
 	baseLines := strings.Split(text, "\n")
 	var index int = 0
 	for index < len(baseLines) {
 		baseLine := baseLines[index]
 
+		//This means there is a table
 		if strings.Contains(baseLine, "|") {
 			tableLines := []string{}
 			tableLine := baseLines[index]
