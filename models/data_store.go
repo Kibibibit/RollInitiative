@@ -3,6 +3,7 @@ package models
 import (
 	"log"
 	"os"
+	"windmills/roll_initiative/utils"
 )
 
 type DataStore struct {
@@ -12,6 +13,8 @@ type DataStore struct {
 	SpellIds      []string
 	SpellNames    map[string]string
 	spells        map[string]Spell
+
+	IniativeEntries []*IniativeEntry
 }
 
 func MakeDataStore() *DataStore {
@@ -61,6 +64,8 @@ func MakeDataStore() *DataStore {
 	out.CreatureNames = creatureNames
 	out.SpellNames = spellNames
 
+	out.IniativeEntries = []*IniativeEntry{}
+
 	return &out
 
 }
@@ -77,4 +82,38 @@ func (d *DataStore) GetCreature(id string) *Creature {
 		return &creature
 	}
 	return nil
+}
+
+func (d *DataStore) NewCreatureEntry(cId string, tag string, useAvgHp bool) *IniativeEntry {
+
+	creature := d.GetCreature(cId)
+	if creature == nil {
+		log.Fatalln("Failed to find creature!")
+	}
+
+	var hp int
+	conMod := creature.GetConMod()
+	if useAvgHp {
+		hp = utils.AverageDiceRoll(creature.HitDice, creature.HitDiceType)
+	} else {
+		hp = utils.RollDice(creature.HitDice, creature.HitDiceType)
+	}
+	hp += conMod * creature.HitDice
+
+	intRoll := utils.RollDice(1, 20)
+	intRoll += creature.GetDexMod()
+
+	entry := &IniativeEntry{
+		CreatureId:   cId,
+		IsPlayer:     false,
+		Statuses:     "",
+		Hp:           hp,
+		Tag:          tag,
+		IniativeRoll: intRoll,
+	}
+
+	d.IniativeEntries = append(d.IniativeEntries, entry)
+
+	return entry
+
 }

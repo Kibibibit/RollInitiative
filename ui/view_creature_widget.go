@@ -114,7 +114,7 @@ func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
 	view.SetWritePos(1, 4)
 	fmt.Fprintf(view, "%s %s", ApplyBold("Armour Class:", w.colors.FgColor), w.creature.AC)
 
-	conMod := (w.creature.Stats[2] - 10) / 2
+	conMod := w.creature.GetConMod()
 
 	hpBoost := conMod * w.creature.HitDice
 
@@ -145,7 +145,7 @@ func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
 		}
 		topLine += fmt.Sprintf(statString, statName)
 
-		statLine += fmt.Sprintf("│ %2d (%2d) ", value, ((value - 10) / 2))
+		statLine += fmt.Sprintf("│ %2d (%2d) ", value, w.creature.GetMod(value))
 	}
 	statLine += "│"
 

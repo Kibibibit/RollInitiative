@@ -1,5 +1,7 @@
 package models
 
+import "math"
+
 var crToXPTable = map[string]int{
 	"0":   10,
 	"1/8": 25,
@@ -85,4 +87,56 @@ type CreatureTrait struct {
 type CreatureSpells struct {
 	Slots  int      `yaml:"slots,omitempty"`
 	Spells []string `yaml:"spells"`
+}
+
+func (c *Creature) GetMod(x int) int {
+	return int(math.Floor(float64(x-10.0) / 2.0))
+}
+
+func (c *Creature) GetStr() int {
+	return c.Stats[0]
+}
+
+func (c *Creature) GetDex() int {
+	return c.Stats[1]
+}
+
+func (c *Creature) GetCon() int {
+	return c.Stats[2]
+}
+
+func (c *Creature) GetInt() int {
+	return c.Stats[3]
+}
+
+func (c *Creature) GetWis() int {
+	return c.Stats[4]
+}
+
+func (c *Creature) GetCha() int {
+	return c.Stats[5]
+}
+
+func (c *Creature) GetStrMod() int {
+	return c.GetMod(c.Stats[0])
+}
+
+func (c *Creature) GetDexMod() int {
+	return c.GetMod(c.Stats[1])
+}
+
+func (c *Creature) GetConMod() int {
+	return c.GetMod(c.Stats[2])
+}
+
+func (c *Creature) GetIntMod() int {
+	return c.GetMod(c.Stats[3])
+}
+
+func (c *Creature) GetWisMod() int {
+	return c.GetMod(c.Stats[4])
+}
+
+func (c *Creature) GetChaMod() int {
+	return c.GetMod(c.Stats[5])
 }

@@ -20,6 +20,7 @@ type ShortcutsWidget struct {
 	dataStore    *models.DataStore
 	colors       *ColorPalette
 	submenu      rune
+	rootWidget   *RootWidget
 	shortcuts    map[rune]map[rune]*Shortcut
 	submenuNames map[rune]string
 }
@@ -29,18 +30,23 @@ type Shortcut struct {
 	onPress func(g *gocui.Gui, v *gocui.View) error
 }
 
-func NewShortcutsWidget(dataStore *models.DataStore, colors *ColorPalette) *ShortcutsWidget {
+func NewShortcutsWidget(rootWidget *RootWidget, dataStore *models.DataStore, colors *ColorPalette) *ShortcutsWidget {
 	out := ShortcutsWidget{
-		name:      NameShortcutsWidget,
-		dataStore: dataStore,
-		submenu:   shortcutsWidgetNilMenu,
-		colors:    colors,
+		rootWidget: rootWidget,
+		name:       NameShortcutsWidget,
+		dataStore:  dataStore,
+		submenu:    shortcutsWidgetNilMenu,
+		colors:     colors,
 	}
 
 	submenuNamesDict := make(map[rune]string)
+	submenuNamesDict['a'] = "Add"
 	submenuNamesDict['w'] = "Wiki"
 
 	shortcutsDict := make(map[rune]map[rune]*Shortcut)
+
+	shortcutsAddDict := make(map[rune]*Shortcut)
+	shortcutsAddDict['c'] = &Shortcut{"Creature", out.addCreatureEntry}
 
 	shortcutsWikiDict := make(map[rune]*Shortcut)
 
@@ -48,6 +54,7 @@ func NewShortcutsWidget(dataStore *models.DataStore, colors *ColorPalette) *Shor
 	shortcutsWikiDict['s'] = &Shortcut{"Spells", out.openSpellsWiki}
 
 	shortcutsDict['w'] = shortcutsWikiDict
+	shortcutsDict['a'] = shortcutsAddDict
 
 	out.submenuNames = submenuNamesDict
 	out.shortcuts = shortcutsDict
@@ -79,6 +86,7 @@ func (w *ShortcutsWidget) Layout(g *gocui.Gui) error {
 	} else if err != nil {
 		return err
 	}
+	view.Clear()
 
 	view.Rewind()
 
@@ -150,6 +158,7 @@ func (w *ShortcutsWidget) onKeypress(key rune) func(g *gocui.Gui, v *gocui.View)
 		if w.submenu == shortcutsWidgetNilMenu {
 			if _, ok := w.submenuNames[key]; ok {
 				w.submenu = key
+				w.view.Clear()
 			}
 		} else {
 			if shortcut, ok := w.shortcuts[w.submenu][key]; ok {
@@ -200,5 +209,22 @@ func (w *ShortcutsWidget) openSpellsWiki(g *gocui.Gui, v *gocui.View) error {
 
 	})
 
+	return nil
+}
+
+func (w *ShortcutsWidget) addCreatureEntry(g *gocui.Gui, v *gocui.View) error {
+	w.hide()
+
+	NewCreatureSearch(g, w.colors, w.dataStore, func(result string) {
+		w.dataStore.NewCreatureEntry(result, "", false)
+		w.rootWidget.Layout(g)
+
+		g.Update(func(g *gocui.Gui) error {
+
+			_, err := g.SetCurrentView(NameRootWidget)
+			return err
+		})
+
+	})
 	return nil
 }
