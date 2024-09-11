@@ -257,7 +257,7 @@ func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
 }
 
 func (w *ViewCreatureWidget) drawText(text string, drawX, drawY int) (int, int) {
-	return DrawText(w.view, w.colW, w.h, text, drawX, drawY)
+	return DrawText(w.view, w.colW, w.h, w.colors, text, drawX, drawY)
 }
 
 func (w *ViewCreatureWidget) drawCreatureTraitList(title string, list []models.CreatureTrait, drawX, drawY int) (int, int) {

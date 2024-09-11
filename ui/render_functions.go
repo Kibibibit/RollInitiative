@@ -2,6 +2,8 @@ package ui
 
 import (
 	"fmt"
+	"log"
+	"strconv"
 	"strings"
 	"windmills/roll_initiative/models"
 	"windmills/roll_initiative/utils"
@@ -9,18 +11,101 @@ import (
 	"github.com/awesome-gocui/gocui"
 )
 
-func DrawText(view *gocui.View, colW int, maxH int, text string, drawX, drawY int) (int, int) {
+const DRAW_TABLE_START = "&&DRAW_TABLE_START"
+
+func DrawText(view *gocui.View, colW int, maxH int, colors *ColorPalette, text string, drawX, drawY int) (int, int) {
 	view.SetWritePos(drawX, drawY)
 
 	lines := []string{}
 
 	baseLines := strings.Split(text, "\n")
+	var index int = 0
+	for index < len(baseLines) {
+		baseLine := baseLines[index]
 
-	for _, baseLine := range baseLines {
+		if strings.Contains(baseLine, "|") {
+			tableLines := []string{}
+			tableLine := baseLines[index]
+			for strings.Contains(tableLine, "|") {
+				tableLines = append(tableLines, tableLine)
+				index++
+				if index >= len(baseLines) {
+					break
+				} else {
+					tableLine = baseLines[index]
+				}
+			}
 
-		if utils.StringDrawLength(baseLine) < colW-2 {
+			table := [][]string{}
+			longestLines := []int{}
+			for _, line := range tableLines {
+				row := []string{}
+				colNum := 0
+				if strings.Contains(line, "---") {
+					continue
+				}
+				for _, data := range strings.Split(line, "|") {
+
+					cell := strings.TrimSpace(data)
+					if len(cell) == 0 {
+						continue
+					}
+					if len(longestLines)-1 < colNum {
+						longestLines = append(longestLines, 0)
+					}
+					if len(cell) > longestLines[colNum] {
+						longestLines[colNum] = len(cell)
+					}
+					row = append(row, cell)
+					colNum += 1
+
+				}
+				table = append(table, row)
+
+			}
+
+			firstRowChars := []string{}
+
+			for _, l := range longestLines {
+				firstRowChars = append(firstRowChars, strings.Repeat("─", l+2))
+			}
+			drawTableLines := []string{}
+			drawTableLines = append(drawTableLines, fmt.Sprintf("┌%s┐", strings.Join(firstRowChars, "┬")))
+
+			for index, row := range table {
+				drawItems := []string{}
+				for x, cell := range row {
+					for len(cell) < longestLines[x] {
+						cell = fmt.Sprintf("%s ", cell)
+					}
+					if index == 0 {
+						cell = ApplyBold(cell, colors.FgColor)
+					}
+					drawItems = append(drawItems, fmt.Sprintf(" %s ", cell))
+
+				}
+				drawTableLines = append(drawTableLines, fmt.Sprintf("│%s│", strings.Join(drawItems, "│")))
+				if index == 0 {
+					drawTableLines = append(drawTableLines, fmt.Sprintf("├%s┤", strings.Join(firstRowChars, "┼")))
+				}
+			}
+
+			drawTableLines = append(drawTableLines, fmt.Sprintf("└%s┘", strings.Join(firstRowChars, "┴")))
+
+			lines = append(lines, fmt.Sprintf("%s:%d", DRAW_TABLE_START, len(drawTableLines)))
+			lines = append(lines, drawTableLines...)
+
+		} else if utils.StringDrawLength(baseLine) < colW-2 {
+
+			if strings.Contains(baseLine, "#") {
+				baseLine = strings.ReplaceAll(baseLine, "#", "")
+				baseLine = strings.TrimSpace(baseLine)
+				baseLine = ApplyBold(baseLine, colors.FgColor)
+			}
 			lines = append(lines, baseLine)
+			index++
 		} else {
+
 			words := strings.Split(baseLine, " ")
 
 			newLine := ""
@@ -43,18 +128,33 @@ func DrawText(view *gocui.View, colW int, maxH int, text string, drawX, drawY in
 			if len(newLine) > 0 {
 				lines = append(lines, newLine)
 			}
+			index++
 
 		}
+
 	}
 
 	for _, line := range lines {
 
 		view.SetWritePos(drawX, drawY)
-		fmt.Fprint(view, line)
-		drawY += 1
-		if drawY > maxH-1 {
-			drawY = 1
-			drawX += colW
+		if strings.Contains(line, DRAW_TABLE_START) {
+			strAmount := strings.Split(line, ":")[1]
+			int64Amount, err := strconv.ParseInt(strAmount, 10, 64)
+			if err != nil {
+				log.Fatalln(err)
+			}
+			intAmount := int(int64Amount)
+			if drawY+intAmount > maxH-1 {
+				drawY = 1
+				drawX += colW
+			}
+		} else {
+			fmt.Fprint(view, line)
+			drawY += 1
+			if drawY > maxH-1 {
+				drawY = 1
+				drawX += colW
+			}
 		}
 
 	}

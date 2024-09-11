@@ -132,7 +132,7 @@ func (w *ViewSpellWidget) Layout(g *gocui.Gui) error {
 }
 
 func (w *ViewSpellWidget) drawText(text string, drawX, drawY int) (int, int) {
-	return DrawText(w.view, w.w/2-4, w.h, text, drawX, drawY)
+	return DrawText(w.view, w.w/2-4, w.h, w.colors, text, drawX, drawY)
 }
 
 func (w *ViewSpellWidget) createKeybinds(g *gocui.Gui) error {
