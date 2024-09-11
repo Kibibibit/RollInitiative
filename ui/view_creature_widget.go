@@ -19,28 +19,6 @@ var statNames = []string{
 	"CHA",
 }
 
-var affinityNames = []string{
-	"Damage Immunities",
-	"Damage Resistances",
-	"Damage Vulnerabilities",
-	"Condition Immunities",
-	"Senses",
-	"Languages",
-}
-
-var spellLevelTitles = []string{
-	"Cantrips",
-	"1st level",
-	"2nd level",
-	"3rd level",
-	"4th level",
-	"5th level",
-	"6th level",
-	"7th level",
-	"8th level",
-	"9th level",
-}
-
 const (
 	statStringFirst  string = "┌── %s ──"
 	statStringMiddle string = "┬── %s ──"
@@ -71,6 +49,28 @@ func NewViewCreatureWidget(dataStore *models.DataStore, previousWidget string, c
 }
 
 func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
+
+	var spellLevelTitles = []string{
+		"Cantrips",
+		"1st level",
+		"2nd level",
+		"3rd level",
+		"4th level",
+		"5th level",
+		"6th level",
+		"7th level",
+		"8th level",
+		"9th level",
+	}
+
+	var affinityNames = []string{
+		"Damage Immunities",
+		"Damage Resistances",
+		"Damage Vulnerabilities",
+		"Condition Immunities",
+		"Senses",
+		"Languages",
+	}
 
 	width, height := g.Size()
 
