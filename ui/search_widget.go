@@ -230,7 +230,7 @@ func NewSpellSearch(g *gocui.Gui, colors *ColorPalette, dataStore *models.DataSt
 		dataStore.SpellNames,
 		func(index int, width int, id string) string {
 			s := dataStore.GetSpell(id)
-			return s.RenderSearchRow(index, width)
+			return RenderSpellSearchRow(s, colors, index, width)
 		},
 		func(result string) {
 			spellSearch.Kill(g, spellSearch.view)
