@@ -41,3 +41,7 @@ func MainLoop(g *gocui.Gui) {
 		log.Panicln(err)
 	}
 }
+
+func Quit(g *gocui.Gui, v *gocui.View) error {
+	return gocui.ErrQuit
+}

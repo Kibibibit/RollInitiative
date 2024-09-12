@@ -111,14 +111,10 @@ func (w *SearchWidget) setKeybinding(g *gocui.Gui) error {
 		return err
 	}
 
-	for ch := 'A'; ch <= 'z'; ch++ {
+	for _, ch := range utils.ASCII_NON_NUMBERS {
 		if err := g.SetKeybinding(w.name, ch, gocui.ModNone, w.keypress(ch)); err != nil {
 			return err
 		}
-	}
-
-	if err := g.SetKeybinding(w.name, gocui.KeySpace, gocui.ModNone, w.keypress(' ')); err != nil {
-		return err
 	}
 
 	if err := g.SetKeybinding(w.name, gocui.KeyBackspace|gocui.KeyBackspace2, gocui.ModNone, w.backspace); err != nil {
@@ -132,7 +128,7 @@ func (w *SearchWidget) setKeybinding(g *gocui.Gui) error {
 		return err
 	}
 
-	for ch := '0'; ch <= '9'; ch++ {
+	for _, ch := range utils.ASCII_NUMBERS {
 		if err := g.SetKeybinding(w.name, ch, gocui.ModNone, w.onSelect(int(ch)-0x30)); err != nil {
 			return err
 		}

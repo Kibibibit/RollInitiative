@@ -3,6 +3,7 @@ package ui
 import (
 	"fmt"
 	"windmills/roll_initiative/models"
+	"windmills/roll_initiative/utils"
 
 	"github.com/awesome-gocui/gocui"
 )
@@ -41,6 +42,7 @@ func NewShortcutsWidget(rootWidget *RootWidget, dataStore *models.DataStore, col
 
 	submenuNamesDict := make(map[rune]string)
 	submenuNamesDict['a'] = "Add"
+	submenuNamesDict['e'] = "Edit"
 	submenuNamesDict['w'] = "Wiki"
 
 	shortcutsDict := make(map[rune]map[rune]*Shortcut)
@@ -48,12 +50,16 @@ func NewShortcutsWidget(rootWidget *RootWidget, dataStore *models.DataStore, col
 	shortcutsAddDict := make(map[rune]*Shortcut)
 	shortcutsAddDict['c'] = &Shortcut{"Creature", out.addCreatureEntry}
 
+	shortcutsEditDict := make(map[rune]*Shortcut)
+	shortcutsEditDict['d'] = &Shortcut{"Delete", out.deleteCreatureEntry}
+
 	shortcutsWikiDict := make(map[rune]*Shortcut)
 
 	shortcutsWikiDict['c'] = &Shortcut{"Creatures", out.openCreatureWiki}
 	shortcutsWikiDict['s'] = &Shortcut{"Spells", out.openSpellsWiki}
 
 	shortcutsDict['w'] = shortcutsWikiDict
+	shortcutsDict['e'] = shortcutsEditDict
 	shortcutsDict['a'] = shortcutsAddDict
 
 	out.submenuNames = submenuNamesDict
@@ -118,7 +124,7 @@ func (w *ShortcutsWidget) createKeybinds(g *gocui.Gui) error {
 		return err
 	}
 
-	for ch := 'A'; ch <= 'z'; ch++ {
+	for _, ch := range utils.ASCII_LETTERS {
 		if err := g.SetKeybinding(w.name, ch, gocui.ModNone, w.onKeypress(ch)); err != nil {
 			return err
 		}
@@ -216,15 +222,52 @@ func (w *ShortcutsWidget) addCreatureEntry(g *gocui.Gui, v *gocui.View) error {
 	w.hide()
 
 	NewCreatureSearch(g, w.colors, w.dataStore, func(result string) {
-		w.dataStore.NewCreatureEntry(result, "", false)
-		w.rootWidget.Layout(g)
 
+		creature := w.dataStore.GetCreature(result)
+		var addCreatureWidget *AddCreatureWidget
+		addCreatureWidget = NewAddCreatureWidget(
+			w.colors,
+			creature.Name,
+			func(rollHp bool, count int, tags []string) {
+				addCreatureWidget.Kill(g, v)
+
+				for _, tag := range tags {
+					w.dataStore.NewCreatureEntry(result, tag, rollHp)
+				}
+
+				w.rootWidget.Layout(g)
+
+				g.Update(func(g *gocui.Gui) error {
+
+					_, err := g.SetCurrentView(NameRootWidget)
+					return err
+				})
+			},
+		)
+
+		addCreatureWidget.Layout(g)
 		g.Update(func(g *gocui.Gui) error {
 
-			_, err := g.SetCurrentView(NameRootWidget)
+			_, err := g.SetCurrentView(addCreatureWidget.name)
 			return err
 		})
 
 	})
+	return nil
+}
+
+func (w *ShortcutsWidget) deleteCreatureEntry(g *gocui.Gui, v *gocui.View) error {
+	w.hide()
+
+	w.dataStore.DeleteCreatureEntry(w.rootWidget.GetCurrentEntryId())
+
+	w.rootWidget.Layout(g)
+
+	g.Update(func(g *gocui.Gui) error {
+
+		_, err := g.SetCurrentView(NameRootWidget)
+		return err
+	})
+
 	return nil
 }

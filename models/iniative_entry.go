@@ -7,4 +7,5 @@ type IniativeEntry struct {
 	IniativeRoll int
 	Statuses     string
 	Tag          string
+	EntryId      int
 }

@@ -14,7 +14,7 @@ type DataStore struct {
 	SpellNames    map[string]string
 	spells        map[string]Spell
 
-	IniativeEntries []*IniativeEntry
+	IniativeEntries map[int]*IniativeEntry
 }
 
 func MakeDataStore() *DataStore {
@@ -64,7 +64,7 @@ func MakeDataStore() *DataStore {
 	out.CreatureNames = creatureNames
 	out.SpellNames = spellNames
 
-	out.IniativeEntries = []*IniativeEntry{}
+	out.IniativeEntries = make(map[int]*IniativeEntry)
 
 	return &out
 
@@ -84,7 +84,7 @@ func (d *DataStore) GetCreature(id string) *Creature {
 	return nil
 }
 
-func (d *DataStore) NewCreatureEntry(cId string, tag string, useAvgHp bool) *IniativeEntry {
+func (d *DataStore) NewCreatureEntry(cId string, tag string, rollHp bool) *IniativeEntry {
 
 	creature := d.GetCreature(cId)
 	if creature == nil {
@@ -93,10 +93,10 @@ func (d *DataStore) NewCreatureEntry(cId string, tag string, useAvgHp bool) *Ini
 
 	var hp int
 	conMod := creature.GetConMod()
-	if useAvgHp {
-		hp = utils.AverageDiceRoll(creature.HitDice, creature.HitDiceType)
-	} else {
+	if rollHp {
 		hp = utils.RollDice(creature.HitDice, creature.HitDiceType)
+	} else {
+		hp = utils.AverageDiceRoll(creature.HitDice, creature.HitDiceType)
 	}
 	hp += conMod * creature.HitDice
 
@@ -112,8 +112,22 @@ func (d *DataStore) NewCreatureEntry(cId string, tag string, useAvgHp bool) *Ini
 		IniativeRoll: intRoll,
 	}
 
-	d.IniativeEntries = append(d.IniativeEntries, entry)
+	entryId := 0
+
+	for _, entry := range d.IniativeEntries {
+		if entryId <= entry.EntryId {
+			entryId = entry.EntryId + 1
+		}
+	}
+
+	entry.EntryId = entryId
+
+	d.IniativeEntries[entryId] = entry
 
 	return entry
 
+}
+
+func (d *DataStore) DeleteCreatureEntry(entryId int) {
+	delete(d.IniativeEntries, entryId)
 }
