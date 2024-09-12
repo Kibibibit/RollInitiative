@@ -3,6 +3,7 @@ package models
 import (
 	"log"
 	"os"
+	"strings"
 	"windmills/roll_initiative/utils"
 )
 
@@ -108,7 +109,7 @@ func (d *DataStore) NewCreatureEntry(cId string, tag string, rollHp bool) *Iniat
 		IsPlayer:     false,
 		Statuses:     "",
 		Hp:           hp,
-		Tag:          tag,
+		Tag:          strings.TrimSpace(tag),
 		IniativeRoll: intRoll,
 	}
 

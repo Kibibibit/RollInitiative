@@ -7,4 +7,5 @@ const (
 	NameSearchCreaturesWidget = "SEARCH_CREATURES_WIDGET"
 	NameSearchSpellsWidget    = "SEARCH_SPELLS_WIDGET"
 	NameAddCreatureWidget     = "ADD_CREATURE_WIDGET"
+	NameStringWidget          = "STRING_WIDGET"
 )

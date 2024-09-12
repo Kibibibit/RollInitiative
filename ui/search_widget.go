@@ -117,6 +117,10 @@ func (w *SearchWidget) setKeybinding(g *gocui.Gui) error {
 		}
 	}
 
+	if err := g.SetKeybinding(w.name, gocui.KeySpace, gocui.ModNone, w.keypress(' ')); err != nil {
+		return err
+	}
+
 	if err := g.SetKeybinding(w.name, gocui.KeyBackspace|gocui.KeyBackspace2, gocui.ModNone, w.backspace); err != nil {
 		return err
 	}

@@ -3,7 +3,6 @@ package ui
 import (
 	"fmt"
 	"log"
-	"strconv"
 	"strings"
 	"windmills/roll_initiative/utils"
 
@@ -11,38 +10,34 @@ import (
 )
 
 type AddCreatureWidget struct {
-	view           *gocui.View
-	name           string
-	colors         *ColorPalette
-	creatureName   string
-	x, y           int
-	w, h           int
-	onSubmit       func(bool, int, []string)
-	rollHp         bool
-	addCountString string
-	tags           []string
-	killed         bool
-	selectedField  int
-	COUNT_FIELD    int
-	ROLL_HP_FIELD  int
-	TAGS_FIELD     int
-	DONE_FIELD     int
+	view          *gocui.View
+	name          string
+	colors        *ColorPalette
+	creatureName  string
+	x, y          int
+	w, h          int
+	onSubmit      func(bool, int, []string)
+	rollHp        bool
+	tags          []string
+	killed        bool
+	selectedField int
+	ROLL_HP_FIELD int
+	TAGS_FIELD    int
+	DONE_FIELD    int
 }
 
 func NewAddCreatureWidget(colors *ColorPalette, creatureName string, onSubmit func(bool, int, []string)) *AddCreatureWidget {
 	return &AddCreatureWidget{
-		name:           NameAddCreatureWidget,
-		colors:         colors,
-		creatureName:   creatureName,
-		onSubmit:       onSubmit,
-		rollHp:         true,
-		addCountString: "",
-		tags:           []string{},
-		killed:         false,
-		COUNT_FIELD:    0,
-		ROLL_HP_FIELD:  1,
-		TAGS_FIELD:     2,
-		DONE_FIELD:     3,
+		name:          NameAddCreatureWidget,
+		colors:        colors,
+		creatureName:  creatureName,
+		onSubmit:      onSubmit,
+		rollHp:        true,
+		tags:          []string{},
+		killed:        false,
+		ROLL_HP_FIELD: 0,
+		TAGS_FIELD:    1,
+		DONE_FIELD:    2,
 	}
 }
 
@@ -91,19 +86,8 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 
 	fmt.Fprintf(view, "Adding new: %s", w.creatureName)
 
-	//Draw count field
-	w.view.SetWritePos(1, 3)
-
-	creatureCountBoldColor := w.colors.FgColor
-	if w.selectedField == w.COUNT_FIELD {
-		creatureCountBoldColor = w.colors.BgColorWindow
-	}
-	creatureCountString := fmt.Sprintf("%s %s", ApplyBold("Creature Count:", creatureCountBoldColor), w.addCountString)
-
-	fmt.Fprint(view, creatureCountString)
-
 	//Draw roll hp field
-	w.view.SetWritePos(1, 4)
+	w.view.SetWritePos(1, 3)
 
 	rollHpBoldColor := w.colors.FgColor
 	if w.selectedField == w.ROLL_HP_FIELD {
@@ -118,7 +102,7 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 	fmt.Fprint(view, rollHpString)
 
 	//Draw tag field
-	w.view.SetWritePos(1, 5)
+	w.view.SetWritePos(1, 4)
 
 	tagBoldColor := w.colors.FgColor
 	if w.selectedField == w.TAGS_FIELD {
@@ -129,7 +113,7 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 	fmt.Fprint(view, tagString)
 
 	//Draw done button
-	w.view.SetWritePos(1, 7)
+	w.view.SetWritePos(1, 6)
 
 	doneBoldColor := w.colors.FgColor
 	if w.selectedField == w.DONE_FIELD {
@@ -139,14 +123,12 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 
 	fmt.Fprint(view, doneString)
 
-	if w.selectedField == w.COUNT_FIELD {
+	if w.selectedField == w.ROLL_HP_FIELD {
 		view.SetCursor(0, 3)
-	} else if w.selectedField == w.ROLL_HP_FIELD {
-		view.SetCursor(0, 4)
 	} else if w.selectedField == w.TAGS_FIELD {
-		view.SetCursor(0, 5)
+		view.SetCursor(0, 4)
 	} else if w.selectedField == w.DONE_FIELD {
-		view.SetCursor(0, 7)
+		view.SetCursor(0, 6)
 	}
 
 	return nil
@@ -166,28 +148,12 @@ func (w *AddCreatureWidget) setKeybinding(g *gocui.Gui) error {
 		return err
 	}
 
-	for _, ch := range utils.ASCII_NUMBERS {
-		if err := g.SetKeybinding(w.name, ch, gocui.ModNone, w.onNumber(ch)); err != nil {
-			return err
-		}
-	}
-
 	return nil
 }
 
 func (w *AddCreatureWidget) moveField(offset int) func(*gocui.Gui, *gocui.View) error {
 	return func(g *gocui.Gui, v *gocui.View) error {
-		w.selectedField = utils.Clamp(w.selectedField+offset, w.COUNT_FIELD, w.DONE_FIELD)
-		w.Layout(g)
-		return nil
-	}
-}
-
-func (w *AddCreatureWidget) onNumber(ch rune) func(*gocui.Gui, *gocui.View) error {
-	return func(g *gocui.Gui, v *gocui.View) error {
-		if w.selectedField == w.COUNT_FIELD {
-			w.addCountString += string(ch)
-		}
+		w.selectedField = utils.Clamp(w.selectedField+offset, w.ROLL_HP_FIELD, w.DONE_FIELD)
 		w.Layout(g)
 		return nil
 	}
@@ -196,27 +162,60 @@ func (w *AddCreatureWidget) onNumber(ch rune) func(*gocui.Gui, *gocui.View) erro
 func (w *AddCreatureWidget) onEnter(g *gocui.Gui, v *gocui.View) error {
 
 	if w.selectedField == w.DONE_FIELD {
-		creatureCount := 1
-		if len(strings.TrimSpace(w.addCountString)) > 0 {
-			i64, err := strconv.ParseInt(w.addCountString, 10, 64)
-			if err != nil {
-				return err
-			}
-			creatureCount = int(i64)
+
+		if len(w.tags) < 1 {
+			w.tags = []string{""}
 		}
 
-		for len(w.tags) < creatureCount {
-			w.tags = append(w.tags, "")
-		}
-		w.onSubmit(w.rollHp, creatureCount, w.tags)
+		w.onSubmit(w.rollHp, len(w.tags), w.tags)
 	} else if w.selectedField == w.ROLL_HP_FIELD {
 
 		w.rollHp = !w.rollHp
 		w.Layout(g)
 
+	} else if w.selectedField == w.TAGS_FIELD {
+
+		w.tags = []string{}
+
+		w.getStrings(g)
+
 	}
 
 	return nil
+}
+
+func (w *AddCreatureWidget) getStrings(g *gocui.Gui) {
+
+	var inputWidget *StringInputWidget
+
+	inputWidget = NewStringInputWidget(
+		NameStringWidget, "Input Tags", w.colors, w.name, func(result string) {
+
+			w.tags = strings.Split(result, ",")
+
+			inputWidget.killed = true
+
+			inputWidget.Layout(g)
+
+			w.Layout(g)
+			g.Update(
+				func(g *gocui.Gui) error {
+
+					_, err := g.SetCurrentView(w.name)
+					return err
+				})
+
+		})
+
+	inputWidget.Layout(g)
+
+	g.Update(
+		func(g *gocui.Gui) error {
+
+			_, err := g.SetCurrentView(inputWidget.name)
+			return err
+		})
+
 }
 
 func (w *AddCreatureWidget) Kill(g *gocui.Gui, v *gocui.View) error {
