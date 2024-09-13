@@ -29,7 +29,9 @@ CREATURE:WARGAL:
 
           Additionally, if the wargal is possessed, they can be freed from possession by making a contested Wisdom check against the creature possessing the wargal. (Usually, WIS +5)
       - name: Equinophobia
-        desc: Wargals are terrified of horses, and if one comes within 30ft of a wargal, the wargal must succeed on a DC 10 Wisdom saving throw or become frightened.
+        desc: Wargals are terrified of horses, and if one comes within 30ft of a wargal, the wargal must succeed on a DC 10 Wisdom saving throw or become frightened. If posssessed, the possessor must make a DC 10 Wisdom saving throw to keep a hold on the wargal.
+      - name: Reckless Endurance (Only when possessed)
+        desc: While possessed, if the wargal fails a saving throw against a mental condition, the possessor must also make the same saving throw to maintain the possession.
     actions:
       - name: Spear (Only when possessed)
         desc: "Melee Weapon Attack: +4 to hit, reach 5ft., one target. Hit: 5 (1d6 + 2) piercing damage."
