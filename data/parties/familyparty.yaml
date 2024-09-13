@@ -1,0 +1,14 @@
+PARTY:FAMILY:
+  name: "Family Party"
+  players:
+    - id: PLAYER:HEINKEL
+      name: "Heinkel"
+      dex: 13
+    - id: PLAYER:TORITHAR
+      name: "Torithar"
+      dex: 13
+    - id: PLAYER:NOMARI
+      name: "Nomari"
+      dex: 15
+  
+
