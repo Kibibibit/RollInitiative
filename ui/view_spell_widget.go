@@ -126,7 +126,7 @@ func (w *ViewSpellWidget) Layout(g *gocui.Gui) error {
 	drawY += 1
 	classesString := strings.Join(w.spell.Classes, ", ")
 
-	drawX, drawY = w.drawText(fmt.Sprintf("%s: %s", ApplyBold("Spell Lists", w.colors.FgColor), classesString), drawX, drawY)
+	w.drawText(fmt.Sprintf("%s: %s", ApplyBold("Spell Lists", w.colors.FgColor), classesString), drawX, drawY)
 
 	return nil
 }

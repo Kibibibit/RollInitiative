@@ -94,7 +94,7 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 		rollHpBoldColor = w.colors.BgColorWindow
 	}
 	trueFalseString := "Yes"
-	if w.rollHp == false {
+	if !w.rollHp {
 		trueFalseString = "No"
 	}
 	rollHpString := fmt.Sprintf("%s %s", ApplyBold("Roll Creature HP:", rollHpBoldColor), trueFalseString)

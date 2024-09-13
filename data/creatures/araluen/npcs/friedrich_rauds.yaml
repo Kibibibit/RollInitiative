@@ -51,3 +51,6 @@ CREATURE:NPCS:FRIEDRICH_RAUDS:
                 - SPELL:HEX
                 - SPELL:MISTY_STEP
                 - SPELL:MIRROR_IMAGE
+    reactions:
+      - name: Blood Offering
+        desc: "When hit with slashing or piercing damage, the cultist can use their reaction to restore hp equal to double their proficiency bonus (+4)"

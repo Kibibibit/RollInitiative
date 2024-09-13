@@ -2,6 +2,43 @@ package models
 
 import "math"
 
+var crToPBTable = map[string]int{
+	"0":   2,
+	"1/8": 2,
+	"1/4": 2,
+	"1/2": 2,
+	"1":   2,
+	"2":   2,
+	"3":   2,
+	"4":   2,
+	"5":   3,
+	"6":   3,
+	"7":   3,
+	"8":   3,
+	"9":   4,
+	"10":  4,
+	"11":  4,
+	"12":  4,
+	"13":  5,
+	"14":  5,
+	"15":  5,
+	"16":  5,
+	"17":  6,
+	"18":  6,
+	"19":  6,
+	"20":  6,
+	"21":  7,
+	"22":  7,
+	"23":  7,
+	"24":  7,
+	"25":  8,
+	"26":  8,
+	"27":  8,
+	"28":  8,
+	"29":  9,
+	"30":  9,
+}
+
 var crToXPTable = map[string]int{
 	"0":   10,
 	"1/8": 25,
@@ -41,6 +78,13 @@ var crToXPTable = map[string]int{
 
 func XPFromCR(cr string) (xp int) {
 	if val, ok := crToXPTable[cr]; ok {
+		return val
+	}
+	return 0
+}
+
+func PBFromCR(cr string) (pb int) {
+	if val, ok := crToPBTable[cr]; ok {
 		return val
 	}
 	return 0

@@ -104,7 +104,7 @@ func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
 
 	fmt.Fprint(view,
 		ApplyBold(
-			fmt.Sprintf("%s - CR %s (%d XP)", w.creature.Name, w.creature.CR, models.XPFromCR(w.creature.CR)),
+			fmt.Sprintf("%s - CR %s (%d XP, +%d PB)", w.creature.Name, w.creature.CR, models.XPFromCR(w.creature.CR), models.PBFromCR(w.creature.CR)),
 			w.colors.FgColor,
 		),
 	)
@@ -250,7 +250,7 @@ func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
 	drawX, drawY = w.drawCreatureTraitList("Reactions", w.creature.Reactions, drawX, drawY)
 	drawX, drawY = w.drawCreatureTraitList("Lair Actions", w.creature.LairActions, drawX, drawY)
 	//TODO: Legendary descriptions
-	drawX, drawY = w.drawCreatureTraitList("Legendary Actions", w.creature.LegendaryActions, drawX, drawY)
+	w.drawCreatureTraitList("Legendary Actions", w.creature.LegendaryActions, drawX, drawY)
 
 	return nil
 

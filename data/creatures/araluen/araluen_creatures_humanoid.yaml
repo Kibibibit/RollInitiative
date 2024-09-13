@@ -39,3 +39,35 @@ CREATURE:WARGAL:
         desc: "Ranged Weapon Attack: +3 to hit, range 80 ft./320 ft., one target. Hit: 5 (1d8 + 1) piercing damage."
       - name: Claws
         desc: "Melee Weapon Attack: +4 to hit, reach 5ft., one target. Hit: 4 (1d4 + 2) slashing damage."
+CREATURE:AZRAEL_CULTIST:
+  name: "Azrael Cultist"
+  stats: [11, 12, 10, 10, 11, 10]
+  ac: "12 (Leather Armour)"
+  hitDice: 2
+  hitDiceType: 8
+  speed: "30 ft."
+  type: "humanoid (any race)"
+  alignment: "Chaotic Evil"
+  size: "medium"
+  senses: "Passive Perception 10"
+  languages: "Any one language (usually common)"
+  cr: "1/8"
+  source: The Araluen Campaign
+  skills:
+    deception: 2
+    religion: 2
+  traits:
+    - name: Ritual Scarring
+      desc: All cultists of Azrael have undergone extensive and painful rituals to strengthen their fortitude, granting them advantage on all constitution saving throws.
+    - name: Steady Hand
+      desc: If the cultist targets themselves with their dagger, they only do 1 piercing damage.
+    - name: Service in Death
+      desc: When the cultist is rediced to 0 hit points, roll a d6. On a 3-5, they become a Stirge. On a 6, they become a hidden Blood Mephit.
+  actions:
+    - name: Dagger
+      desc: "Melee Weapon Attack: +3 to hit, reach 5ft., one target. Hit: 2 (1d4+2) piercing damage."
+    - name: Dagger (Throw)
+      desc: "Ranged Weapon Attack: +3 to hit, reach 20ft./60ft., one target. Hit: 2 (1d4 +1) piercing damage."
+  reactions:
+    - name: Blood Offering
+      desc: "When hit with slashing or piercing damage, the cultist can use their reaction to restore hp equal to double their proficiency bonus (+4)"

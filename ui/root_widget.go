@@ -72,7 +72,7 @@ func (w *RootWidget) Layout(g *gocui.Gui) error {
 
 	w.entryIds = []int{}
 
-	for entryId, _ := range w.dataStore.IniativeEntries {
+	for entryId := range w.dataStore.IniativeEntries {
 		w.entryIds = append(w.entryIds, entryId)
 	}
 

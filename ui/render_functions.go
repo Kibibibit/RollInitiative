@@ -122,7 +122,7 @@ func DrawText(view *gocui.View, colW int, maxH int, colors *ColorPalette, text s
 						newLine = fmt.Sprintf("%s %s", newLine, nextWord)
 					}
 
-					words = words[1:len(words)]
+					words = words[1:]
 				} else {
 					lines = append(lines, newLine)
 					newLine = ""

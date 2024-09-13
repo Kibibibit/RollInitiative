@@ -47,17 +47,20 @@ CREATURE:HEMOGOBLIN:
     type: elemental
     size: large
     alignment: chaotic evil
-    senses: darkvision 60 ft., passive Perception 8
+    senses: Cannot see, only capable of detecting creatures through sound (Passive Perception 8)
     cr: 1/2
     conditionImmunities: bleeding
     languages: Common, Goblin
     actions:
-        - name: Spin Attack (Recharge 5-6).
-          desc: "THe Hemogoblin can make a claw attack against all creatures within 1.5 metres."
-        - name: Claws.
-          desc: "Melee Weapon Attack: +5 to hit, reach 1.5m, one creature. Hit: (1d8+4) slashing damage."
-        - name: Blood Burst (Recharge 5-6).
-          desc: "The Hemogoblin launches a glob of blood at a point within 6 metres. A burst of blood splatters from the point, and causes a death burst as if a blood mephit was killed there."
+        - name: Spin Attack (Recharge 5-6)
+          desc: "THe Hemogoblin can make a claw attack against all creatures within 5ft. metres."
+        - name: Claws
+          desc: "Melee Weapon Attack: +5 to hit, reach 5ft., one creature. Hit: (1d8+4) slashing damage."
+        - name: Blood Burst
+          desc: "The Hemogoblin launches a glob of blood at a point within 30ft. Each creature within 5 ft. of the point must then succeed on a DC 10 Dexterity saving throw or be restrained for 1 minute. A restrained creature can make a DC 11 strength saving throw at the end of each of its turns to break out. The blood glob has an AC of 5 and 5 hit points and can be destroyed."
     bonus_actions:
-        - name: Consume.
+        - name: Consume
           desc: "The Hemogoblin can absorb a Blood Mephit to restore hitpoints equal to half the hitpoints of the Blood mephit."
+    reactions:
+        - name: Sonic Detection
+          desc: "If a creature moves within 30ft. of a creature, the hemogoblin can use its reaction to launch a blood burst."

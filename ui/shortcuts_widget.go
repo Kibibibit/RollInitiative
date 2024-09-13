@@ -53,16 +53,16 @@ func NewShortcutsWidget(rootWidget *RootWidget, dataStore *models.DataStore, col
 	shortcutsDict := make(map[rune]map[rune]*Shortcut)
 
 	shortcutsAddDict := map[rune]*Shortcut{
-		'c': &Shortcut{"Creature", out.addCreatureEntry, false, false},
-		'p': &Shortcut{"Party", out.addPartyEntries, false, false},
+		'c': {"Creature", out.addCreatureEntry, false, false},
+		'p': {"Party", out.addPartyEntries, false, false},
 	}
 
 	shortcutsEditDict := map[rune]*Shortcut{
-		'r': &Shortcut{"Remove", out.deleteCreatureEntry, true, false},
-		'h': &Shortcut{"Health", out.editCreatureHealth, true, true},
-		'd': &Shortcut{"Damage/Heal", out.damageCreature, true, true},
-		's': &Shortcut{"Status", out.editCreatureStatus, true, false},
-		'i': &Shortcut{"Initiative", out.editCreatureIniative, true, false},
+		'r': {"Remove", out.deleteCreatureEntry, true, false},
+		'h': {"Health", out.editCreatureHealth, true, true},
+		'd': {"Damage/Heal", out.damageCreature, true, true},
+		's': {"Status", out.editCreatureStatus, true, false},
+		'i': {"Initiative", out.editCreatureIniative, true, false},
 	}
 
 	shortcutsWikiDict := make(map[rune]*Shortcut)
@@ -447,7 +447,7 @@ func (w *ShortcutsWidget) addPartyEntries(g *gocui.Gui, v *gocui.View) error {
 	return nil
 }
 
-func (w *ShortcutsWidget) badShortcut(g *gocui.Gui, v *gocui.View) error {
+func (w *ShortcutsWidget) badShortcut(g *gocui.Gui, _ *gocui.View) error {
 	w.hide()
 
 	w.rootWidget.Layout(g)
