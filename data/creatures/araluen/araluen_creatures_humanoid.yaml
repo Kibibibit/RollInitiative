@@ -1,0 +1,39 @@
+CREATURE:WARGAL:
+    name: Wargal
+    stats:
+      - 14
+      - 12
+      - 12
+      - 6
+      - 7
+      - 4
+    ac: "13 (Fur and Leather Armour)"
+    hitDice: 3
+    hitDiceType: 8
+    speed: 40 ft.
+    type: humanoid
+    size: medium
+    alignment: neutral
+    senses: darkvision 60 ft., passive Perception 13
+    cr: 1/2
+    source: The Araluen Campaign
+    damageVulnerabilities: psychic, and slashing, bludgeoning and piercing attacks made with silvered weapons
+    skills:
+        perception: 6
+        stealth: 3
+    languages: Wargal, understands Common and elvish, but can't speak
+    traits:
+      - name: Frail Mind
+        desc: |-
+          Wargal's minds are very easy to manipulate. Wargals have disadvantage on all Wisdom saving throws.
+
+          Additionally, if the wargal is possessed, they can be freed from possession by making a contested Wisdom check against the creature possessing the wargal. (Usually, WIS +5)
+      - name: Equinophobia
+        desc: Wargals are terrified of horses, and if one comes within 30ft of a wargal, the wargal must succeed on a DC 10 Wisdom saving throw or become frightened.
+    actions:
+      - name: Spear (Only when possessed)
+        desc: "Melee Weapon Attack: +4 to hit, reach 5ft., one target. Hit: 5 (1d6 + 2) piercing damage."
+      - name: Light Crossbow (Only when possessed)
+        desc: "Ranged Weapon Attack: +3 to hit, range 80 ft./320 ft., one target. Hit: 5 (1d8 + 1) piercing damage."
+      - name: Claws
+        desc: "Melee Weapon Attack: +4 to hit, reach 5ft., one target. Hit: 4 (1d4 + 2) slashing damage."
