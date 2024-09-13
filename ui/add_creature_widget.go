@@ -119,7 +119,13 @@ func (w *AddCreatureWidget) Layout(g *gocui.Gui) error {
 	if w.selectedField == w.DONE_FIELD {
 		doneBoldColor = w.colors.BgColorWindow
 	}
-	doneString := ApplyBold("DONE", doneBoldColor)
+
+	cCount := 1
+	if len(w.tags) > 1 {
+		cCount = len(w.tags)
+	}
+
+	doneString := ApplyBold(fmt.Sprintf("ADD %d NEW %s", cCount, strings.ToUpper(w.creatureName)), doneBoldColor)
 
 	fmt.Fprint(view, doneString)
 
@@ -174,9 +180,6 @@ func (w *AddCreatureWidget) onEnter(g *gocui.Gui, v *gocui.View) error {
 		w.Layout(g)
 
 	} else if w.selectedField == w.TAGS_FIELD {
-
-		w.tags = []string{}
-
 		w.getStrings(g)
 
 	}
@@ -189,21 +192,14 @@ func (w *AddCreatureWidget) getStrings(g *gocui.Gui) {
 	var inputWidget *StringInputWidget
 
 	inputWidget = NewStringInputWidget(
-		NameStringWidget, "Input Tags", w.colors, w.name, func(result string) {
+		NameStringWidget, "Input Tags", w.colors, w.name, utils.ASCII_ALL, strings.Join(w.tags, ", "), func(result string) {
 
 			w.tags = strings.Split(result, ",")
 
 			inputWidget.killed = true
 
 			inputWidget.Layout(g)
-
 			w.Layout(g)
-			g.Update(
-				func(g *gocui.Gui) error {
-
-					_, err := g.SetCurrentView(w.name)
-					return err
-				})
 
 		})
 

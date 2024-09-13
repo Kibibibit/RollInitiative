@@ -143,6 +143,18 @@ func ImportCreatures(path string, dict map[string]Creature) (map[string]Creature
 	return dict, nil
 }
 
+func ImportParties(path string, dict map[string]Party) (map[string]Party, error) {
+	dict, err := importGenericData(path, dict)
+
+	if err != nil {
+		log.Fatalln("Failed to import parties!")
+		log.Fatalln(err)
+		return nil, err
+	}
+
+	return dict, nil
+}
+
 func MakeId(prefix string, data string) string {
 	out := strings.ToUpper(fmt.Sprintf("%s:%s", prefix, data))
 	out = strings.ReplaceAll(out, " ", "_")

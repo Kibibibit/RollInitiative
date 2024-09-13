@@ -2,6 +2,8 @@ package ui
 
 import (
 	"fmt"
+	"log"
+	"strconv"
 	"windmills/roll_initiative/models"
 	"windmills/roll_initiative/utils"
 
@@ -27,8 +29,10 @@ type ShortcutsWidget struct {
 }
 
 type Shortcut struct {
-	name    string
-	onPress func(g *gocui.Gui, v *gocui.View) error
+	name         string
+	onPress      func(g *gocui.Gui, v *gocui.View) error
+	entryOnly    bool
+	creatureOnly bool
 }
 
 func NewShortcutsWidget(rootWidget *RootWidget, dataStore *models.DataStore, colors *ColorPalette) *ShortcutsWidget {
@@ -40,23 +44,31 @@ func NewShortcutsWidget(rootWidget *RootWidget, dataStore *models.DataStore, col
 		colors:     colors,
 	}
 
-	submenuNamesDict := make(map[rune]string)
-	submenuNamesDict['a'] = "Add"
-	submenuNamesDict['e'] = "Edit"
-	submenuNamesDict['w'] = "Wiki"
+	submenuNamesDict := map[rune]string{
+		'a': "Add",
+		'e': "Edit",
+		'w': "Wiki",
+	}
 
 	shortcutsDict := make(map[rune]map[rune]*Shortcut)
 
-	shortcutsAddDict := make(map[rune]*Shortcut)
-	shortcutsAddDict['c'] = &Shortcut{"Creature", out.addCreatureEntry}
+	shortcutsAddDict := map[rune]*Shortcut{
+		'c': &Shortcut{"Creature", out.addCreatureEntry, false, false},
+		'p': &Shortcut{"Party", out.addPartyEntries, false, false},
+	}
 
-	shortcutsEditDict := make(map[rune]*Shortcut)
-	shortcutsEditDict['d'] = &Shortcut{"Delete", out.deleteCreatureEntry}
+	shortcutsEditDict := map[rune]*Shortcut{
+		'r': &Shortcut{"Remove", out.deleteCreatureEntry, true, false},
+		'h': &Shortcut{"Health", out.editCreatureHealth, true, true},
+		'd': &Shortcut{"Damage/Heal", out.damageCreature, true, true},
+		's': &Shortcut{"Status", out.editCreatureStatus, true, false},
+		'i': &Shortcut{"Initiative", out.editCreatureIniative, true, false},
+	}
 
 	shortcutsWikiDict := make(map[rune]*Shortcut)
 
-	shortcutsWikiDict['c'] = &Shortcut{"Creatures", out.openCreatureWiki}
-	shortcutsWikiDict['s'] = &Shortcut{"Spells", out.openSpellsWiki}
+	shortcutsWikiDict['c'] = &Shortcut{"Creatures", out.openCreatureWiki, false, false}
+	shortcutsWikiDict['s'] = &Shortcut{"Spells", out.openSpellsWiki, false, false}
 
 	shortcutsDict['w'] = shortcutsWikiDict
 	shortcutsDict['e'] = shortcutsEditDict
@@ -78,6 +90,8 @@ func (w *ShortcutsWidget) Layout(g *gocui.Gui) error {
 	w.w = width - 1
 	w.h = shortcutsWidgetHeight - 1
 
+	colW := w.w / 5
+
 	view, err := g.SetView(w.name, w.x, w.y, w.x+w.w+2, w.y+w.h+2, 0)
 	w.view = view
 
@@ -98,6 +112,8 @@ func (w *ShortcutsWidget) Layout(g *gocui.Gui) error {
 
 	items := []string{}
 
+	drawX, drawY := 1, 1
+
 	if w.submenu == '_' {
 
 		for key, name := range w.submenuNames {
@@ -106,12 +122,24 @@ func (w *ShortcutsWidget) Layout(g *gocui.Gui) error {
 
 	} else {
 		for key, shortcut := range w.shortcuts[w.submenu] {
+			if !w.rootWidget.CurrentEntryIsNotPlayer() && shortcut.creatureOnly {
+				continue
+			}
+			if !w.rootWidget.ValidCurrentEntry() && shortcut.entryOnly {
+				continue
+			}
 			items = append(items, fmt.Sprintf("%c %s", key, shortcut.name))
 		}
 	}
 
 	for _, item := range items {
+		view.SetWritePos(drawX, drawY)
 		fmt.Fprintf(view, "%s\n", item)
+		drawY += 2
+		if drawY >= w.h {
+			drawY = 1
+			drawX += colW
+		}
 	}
 
 	return nil
@@ -168,7 +196,15 @@ func (w *ShortcutsWidget) onKeypress(key rune) func(g *gocui.Gui, v *gocui.View)
 			}
 		} else {
 			if shortcut, ok := w.shortcuts[w.submenu][key]; ok {
+				if shortcut.creatureOnly && !w.rootWidget.CurrentEntryIsNotPlayer() {
+					return w.badShortcut(g, v)
+				}
+				if shortcut.entryOnly && !w.rootWidget.ValidCurrentEntry() {
+					return w.badShortcut(g, v)
+				}
+
 				return shortcut.onPress(g, v)
+
 			}
 		}
 
@@ -260,6 +296,159 @@ func (w *ShortcutsWidget) deleteCreatureEntry(g *gocui.Gui, v *gocui.View) error
 	w.hide()
 
 	w.dataStore.DeleteCreatureEntry(w.rootWidget.GetCurrentEntryId())
+
+	w.rootWidget.Layout(g)
+
+	g.Update(func(g *gocui.Gui) error {
+
+		_, err := g.SetCurrentView(NameRootWidget)
+		return err
+	})
+
+	return nil
+}
+
+func (w *ShortcutsWidget) editCreatureHealth(g *gocui.Gui, v *gocui.View) error {
+	w.hide()
+
+	entry := w.dataStore.IniativeEntries[w.rootWidget.GetCurrentEntryId()]
+
+	stringWidget := NewStringInputWidget(
+		NameStringWidget,
+		"Edit creature health",
+		w.colors,
+		NameRootWidget,
+		utils.ASCII_NUMBERS+"-",
+		fmt.Sprintf("%d", entry.Hp),
+		func(result string) {
+			if len(result) > 0 {
+
+				i64, err := strconv.ParseInt(result, 10, 64)
+				if err != nil {
+					log.Panicln(err)
+				}
+				entry.Hp = int(i64)
+
+			}
+		},
+	)
+
+	stringWidget.Layout(g)
+
+	g.Update(func(g *gocui.Gui) error {
+
+		_, err := g.SetCurrentView(stringWidget.name)
+		return err
+	})
+
+	return nil
+}
+
+func (w *ShortcutsWidget) editCreatureIniative(g *gocui.Gui, v *gocui.View) error {
+	w.hide()
+
+	entry := w.dataStore.IniativeEntries[w.rootWidget.GetCurrentEntryId()]
+
+	stringWidget := NewStringInputWidget(
+		NameStringWidget,
+		"Edit creature initiative",
+		w.colors,
+		NameRootWidget,
+		utils.ASCII_NUMBERS+"-",
+		fmt.Sprintf("%d", entry.IniativeRoll),
+		func(result string) {
+			if len(result) > 0 {
+
+				i64, err := strconv.ParseInt(result, 10, 64)
+				if err != nil {
+					log.Panicln(err)
+				}
+				entry.IniativeRoll = int(i64)
+
+			}
+		},
+	)
+
+	stringWidget.Layout(g)
+
+	g.Update(func(g *gocui.Gui) error {
+
+		_, err := g.SetCurrentView(stringWidget.name)
+		return err
+	})
+
+	return nil
+}
+
+func (w *ShortcutsWidget) damageCreature(g *gocui.Gui, v *gocui.View) error {
+	w.hide()
+
+	entry := w.dataStore.IniativeEntries[w.rootWidget.GetCurrentEntryId()]
+
+	stringWidget := NewStringInputWidget(
+		NameStringWidget,
+		"Damage Creature",
+		w.colors,
+		NameRootWidget,
+		utils.ASCII_NUMBERS+"-",
+		"",
+		func(result string) {
+			if len(result) > 0 {
+
+				i64, err := strconv.ParseInt(result, 10, 64)
+				if err != nil {
+					log.Panicln(err)
+				}
+				entry.Hp = utils.Clamp(entry.Hp-int(i64), -entry.MaxHp, entry.MaxHp)
+
+			}
+		},
+	)
+
+	stringWidget.Layout(g)
+
+	g.Update(func(g *gocui.Gui) error {
+
+		_, err := g.SetCurrentView(stringWidget.name)
+		return err
+	})
+
+	return nil
+}
+
+func (w *ShortcutsWidget) editCreatureStatus(g *gocui.Gui, v *gocui.View) error {
+	w.hide()
+
+	entry := w.dataStore.IniativeEntries[w.rootWidget.GetCurrentEntryId()]
+
+	stringWidget := NewStringInputWidget(NameStringWidget, "Edit creature status", w.colors, NameRootWidget, utils.ASCII_ALL, entry.Statuses, func(result string) {
+		entry.Statuses = result
+	})
+
+	stringWidget.Layout(g)
+
+	g.Update(func(g *gocui.Gui) error {
+
+		_, err := g.SetCurrentView(stringWidget.name)
+		return err
+	})
+
+	return nil
+}
+
+func (w *ShortcutsWidget) addPartyEntries(g *gocui.Gui, v *gocui.View) error {
+	w.hide()
+
+	NewPartySearch(g, w.colors, w.dataStore, func(result string) {
+
+		w.dataStore.NewPartyEntries(result)
+
+	})
+	return nil
+}
+
+func (w *ShortcutsWidget) badShortcut(g *gocui.Gui, v *gocui.View) error {
+	w.hide()
 
 	w.rootWidget.Layout(g)
 

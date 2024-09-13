@@ -44,8 +44,6 @@ func NewRootWidget(dataStore *models.DataStore, colors *ColorPalette) *RootWidge
 
 func (w *RootWidget) Layout(g *gocui.Gui) error {
 
-	var columnLengths = []int{50, 15, 5, 20}
-
 	width, height := g.Size()
 
 	w.w = width
@@ -79,7 +77,17 @@ func (w *RootWidget) Layout(g *gocui.Gui) error {
 	}
 
 	slices.SortStableFunc(w.entryIds, func(a int, b int) int {
-		return w.dataStore.IniativeEntries[b].IniativeRoll - w.dataStore.IniativeEntries[a].IniativeRoll
+
+		cA := w.dataStore.IniativeEntries[a]
+		cB := w.dataStore.IniativeEntries[b]
+
+		if cA.IniativeRoll != cB.IniativeRoll {
+			return cB.IniativeRoll - cA.IniativeRoll
+		} else if cB.DexScore != cA.DexScore {
+			return cB.DexScore - cA.DexScore
+		} else {
+			return strings.Compare(fmt.Sprintf("%s %s", cA.CreatureId, cA.Tag), fmt.Sprintf("%s %s", cB.CreatureId, cB.Tag))
+		}
 	})
 
 	for _, entryId := range w.entryIds {
@@ -88,7 +96,8 @@ func (w *RootWidget) Layout(g *gocui.Gui) error {
 		var row []string
 
 		if entry.IsPlayer {
-			row = []string{entry.CreatureId, fmt.Sprintf("%d", entry.IniativeRoll), "", entry.Statuses}
+			player := w.dataStore.GetPlayer(entry.CreatureId)
+			row = []string{player.Name, fmt.Sprintf("%d", entry.IniativeRoll), "", entry.Statuses}
 		} else {
 
 			name := creature.Name
@@ -115,6 +124,19 @@ func (w *RootWidget) Layout(g *gocui.Gui) error {
 	var endLine string
 
 	borderLines := []string{}
+	columnLengths := []int{}
+
+	for _, row := range table {
+		for x, cell := range row {
+			if len(columnLengths)-1 < x {
+				columnLengths = append(columnLengths, 0)
+			}
+
+			if len(cell) > columnLengths[x] {
+				columnLengths[x] = len(cell)
+			}
+		}
+	}
 
 	for _, length := range columnLengths {
 		borderLines = append(borderLines, strings.Repeat("─", length+2))
@@ -202,6 +224,18 @@ func (w *RootWidget) GetCurrentEntryId() int {
 		return w.entryIds[w.currentEntryIndex]
 	}
 	return -1
+}
+
+func (w *RootWidget) CurrentEntryIsNotPlayer() bool {
+	if len(w.entryIds) > 0 {
+		creatureId := w.dataStore.IniativeEntries[w.GetCurrentEntryId()].CreatureId
+		return w.dataStore.GetCreature(creatureId) != nil
+	}
+	return false
+}
+
+func (w *RootWidget) ValidCurrentEntry() bool {
+	return len(w.entryIds) > 0
 }
 
 func (w *RootWidget) moveCursor(offset int) func(*gocui.Gui, *gocui.View) error {

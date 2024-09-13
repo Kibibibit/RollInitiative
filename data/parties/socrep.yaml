@@ -1,0 +1,22 @@
+PARTY:SOCREP:
+  name: "Socrep Party"
+  players:
+    - id: PLAYER:DUMB_BASTARD
+      name: "Dumb Bastard"
+      dex: 12
+    - id: PLAYER:CEDWYNN_HARTFORD
+      name: "Cedwynn Hartford"
+      dex: 15
+    - id: PLAYER:SKAVEN_JOE
+      name: "Skaven Joe"
+      dex: 15
+      familiars:
+        - id: FAMILIAR:SKAVEN_CROW
+          creature_id: CREATURE:RAVEN
+          name: "Skaven Crow"
+    - id: PLAYER:BOB_NEWBIE
+      name: "Bob Newbie"
+      dex: 13
+  
+
+

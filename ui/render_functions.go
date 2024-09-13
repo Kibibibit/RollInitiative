@@ -215,3 +215,19 @@ func RenderSpellSearchRow(s *models.Spell, colors *ColorPalette, index int, widt
 
 	return line
 }
+
+func RenderPartySeachRow(p *models.Party, colors *ColorPalette, index int, width int) string {
+	line := ApplyFgColor(fmt.Sprintf(" %2d ", index), colors.FgColorDim)
+	line = fmt.Sprintf(" %s%s", line, p.Name)
+	sCount := width - utils.StringDrawLength(line) - 4
+
+	line += strings.Repeat(" ", sCount)
+
+	line += string(len(p.Players))
+
+	for utils.StringDrawLength(line) <= width+2 {
+		line += " "
+	}
+
+	return line
+}

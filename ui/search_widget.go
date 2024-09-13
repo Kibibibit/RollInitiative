@@ -246,3 +246,30 @@ func NewSpellSearch(g *gocui.Gui, colors *ColorPalette, dataStore *models.DataSt
 		return err
 	})
 }
+
+func NewPartySearch(g *gocui.Gui, colors *ColorPalette, dataStore *models.DataStore, onSubmit func(string)) {
+	var partySearch *SearchWidget
+
+	partySearch = NewSearchWidget(
+		NameSearchSpellsWidget,
+		"Find Party",
+		colors,
+		dataStore.PartyNames,
+		func(index int, width int, id string) string {
+			p := dataStore.GetParty(id)
+			return RenderPartySeachRow(p, colors, index, width)
+		},
+		func(result string) {
+			partySearch.Kill(g, partySearch.view)
+			onSubmit(result)
+		},
+	)
+
+	partySearch.Layout(g)
+
+	g.Update(func(g *gocui.Gui) error {
+
+		_, err := g.SetCurrentView(partySearch.name)
+		return err
+	})
+}
