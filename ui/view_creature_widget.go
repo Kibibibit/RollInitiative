@@ -273,6 +273,7 @@ func (w *ViewCreatureWidget) drawCreatureTraitList(title string, list []models.C
 
 		for _, trait := range list {
 			drawX, drawY = w.drawText(fmt.Sprintf("%s: %s", ApplyBold(trait.Name, w.colors.FgColor), trait.Description), drawX, drawY)
+			drawY += 1
 		}
 	}
 
