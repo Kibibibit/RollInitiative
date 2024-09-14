@@ -121,14 +121,13 @@ func (w *ShortcutsWidget) Layout(g *gocui.Gui) error {
 	} else {
 		for key, shortcut := range w.shortcuts[w.submenu] {
 
-			dimLine := (!w.rootWidget.CurrentEntryIsNotPlayer() && shortcut.creatureOnly) || (!w.rootWidget.ValidCurrentEntry() && shortcut.entryOnly)
-
+			dimLine := (!w.rootWidget.CurrentEntryIsNotPlayer() && shortcut.creatureOnly) ||
+				(!w.rootWidget.ValidCurrentEntry() && shortcut.entryOnly)
 			drawLine := fmt.Sprintf("%c %s", key, shortcut.name)
 
 			if dimLine {
 				drawLine = ApplyFgColor(drawLine, w.colors.FgColorDim)
 			}
-
 			items = append(items, drawLine)
 		}
 	}
