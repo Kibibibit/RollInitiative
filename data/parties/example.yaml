@@ -1,0 +1,20 @@
+PARTY:EXAMPLE:
+  name: "Example Party"
+  players:
+    - id: PLAYER:BARBARIAN
+      name: "Barbarian"
+      dex: 12
+    - id: PLAYER:FIGHTER
+      name: "Fighter"
+      dex: 13
+    - id: PLAYER:DRUID
+      name: "Druid"
+      dex: 11
+      familiars:
+        - id: FAMILIAR:RAVEN
+          creature_id: CREATURE:RAVEN
+          name: "Raven Familiar"
+    - id: PLAYER:ROGUE
+      name: "Rogue"
+      dex: 15
+  
