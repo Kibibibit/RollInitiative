@@ -1,3 +1,4 @@
 backup_data
 data/parties/*.yaml
 !data/parties/example.yaml
+build
