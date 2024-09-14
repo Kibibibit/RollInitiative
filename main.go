@@ -1,15 +1,32 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"os"
+	"strings"
 	"windmills/roll_initiative/models"
 	"windmills/roll_initiative/ui"
 )
 
 func main() {
 
-	dataStore := models.MakeDataStore()
+	defaultFolderString := os.Getenv("ROLL_DATA_FOLDERS")
+
+	if len(defaultFolderString) == 0 {
+		log.Println("Warning! ROLL_DATA_FOLDER not set, defaulting to ./srd_data for data location!")
+		defaultFolderString = "./srd_data"
+	}
+
+	dataPathPtr := flag.String("data", defaultFolderString, "The location of the data folder")
+
+	flag.Parse()
+
+	dataPathStr := *dataPathPtr
+
+	dataFolders := strings.Split(dataPathStr, ",")
+
+	dataStore := models.MakeDataStore(dataFolders)
 
 	colors := ui.ColorPalette{
 		BgColor:       ui.NewColor(29, 31, 48),
@@ -20,12 +37,12 @@ func main() {
 
 	gui, err := ui.CreateGui(dataStore, &colors)
 
-	defer gui.Close()
-
 	if err != nil {
 		log.Fatalln(err)
 		os.Exit(1)
 	}
+
+	defer gui.Close()
 
 	ui.MainLoop(gui)
 

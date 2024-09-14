@@ -26,7 +26,7 @@ type DataStore struct {
 	IniativeEntries map[int]*IniativeEntry
 }
 
-func MakeDataStore() *DataStore {
+func MakeDataStore(dataFolders []string) *DataStore {
 	out := DataStore{}
 
 	spellDict := make(map[string]Spell)
@@ -34,12 +34,35 @@ func MakeDataStore() *DataStore {
 	partyDict := make(map[string]Party)
 	playerDict := make(map[string]Player)
 
-	spellDict, err := ImportSpells("./data/spells", spellDict)
+	var err error
 
-	if err != nil {
-		log.Fatalln(err)
-		os.Exit(1)
+	for _, folder := range dataFolders {
+		folder = strings.TrimSpace(folder)
+		if !strings.HasSuffix(folder, "/") {
+			folder = folder + "/"
+		}
+
+		spellFolder := folder + "spells"
+		creatureFolder := folder + "creatures"
+		partyFolder := folder + "parties"
+
+		spellDict, err = ImportSpells(spellFolder, spellDict)
+		if err != nil {
+			log.Fatalln(err)
+			os.Exit(1)
+		}
+		partyDict, err = ImportParties(partyFolder, partyDict)
+		if err != nil {
+			log.Fatalln(err)
+			os.Exit(1)
+		}
+		creatureDict, err = ImportCreatures(creatureFolder, creatureDict)
+		if err != nil {
+			log.Fatalln(err)
+			os.Exit(1)
+		}
 	}
+
 	spellIds := make([]string, len(spellDict))
 	spellNames := make(map[string]string)
 	var i int = 0
@@ -50,12 +73,6 @@ func MakeDataStore() *DataStore {
 		spellIds[i] = k
 		spellNames[k] = s.Name
 		i++
-	}
-
-	creatureDict, err = ImportCreatures("./data/creatures", creatureDict)
-	if err != nil {
-		log.Fatalln(err)
-		os.Exit(1)
 	}
 
 	creatureIds := make([]string, len(creatureDict))
@@ -70,12 +87,6 @@ func MakeDataStore() *DataStore {
 		creatureNames[k] = c.Name
 
 		i++
-	}
-
-	partyDict, err = ImportParties("./data/parties", partyDict)
-	if err != nil {
-		log.Fatalln(err)
-		os.Exit(1)
 	}
 
 	partyIds := make([]string, len(partyDict))
