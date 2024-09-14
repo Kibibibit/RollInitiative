@@ -14,7 +14,7 @@ func main() {
 	defaultFolderString := os.Getenv("ROLL_DATA_FOLDERS")
 
 	if len(defaultFolderString) == 0 {
-		log.Println("Warning! ROLL_DATA_FOLDER not set, defaulting to ./srd_data for data location!")
+		log.Println("Warning! ROLL_DATA_FOLDERS not set, defaulting to ./srd_data for data location!")
 		defaultFolderString = "./srd_data"
 	}
 
