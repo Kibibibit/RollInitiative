@@ -239,7 +239,7 @@ func (w *ViewCreatureWidget) drawCreatureSpellList(drawX, drawY int) (int, int) 
 
 				spellNames := []string{}
 
-				for i, spell := range spells.Spells {
+				for x, spell := range spells.Spells {
 					s := w.dataStore.GetSpell(spell)
 
 					spellDrawString := spell
@@ -247,7 +247,7 @@ func (w *ViewCreatureWidget) drawCreatureSpellList(drawX, drawY int) (int, int) 
 						spellDrawString = s.Name
 					}
 
-					if level == w.spellY && i == w.spellX {
+					if level == w.spellY && x == w.spellX {
 						spellDrawString = fmt.Sprintf("\x1b[7m%s\x1b[0m", spellDrawString)
 						w.currentSpell = s.Id
 					}
@@ -258,7 +258,6 @@ func (w *ViewCreatureWidget) drawCreatureSpellList(drawX, drawY int) (int, int) 
 				drawLine = fmt.Sprintf("%s %s", drawLine, strings.Join(spellNames, ", "))
 
 				drawX, drawY = w.drawText(drawLine, drawX, drawY)
-
 			}
 		}
 		if len(w.creature.PrecombatSpells) > 0 {
@@ -363,17 +362,21 @@ func (w *ViewCreatureWidget) onArrow(xOffset, yOffset int) func(*gocui.Gui, *goc
 
 		if w.hasSpells {
 
-			ySize := len(w.creature.Spells)
-
 			w.spellY += yOffset
-			if w.spellY < 0 {
-				w.spellY += ySize
-			}
-			if w.spellY >= ySize {
-				w.spellY -= ySize
+
+			for len(w.creature.Spells[w.spellY].Spells) == 0 {
+				w.spellY += yOffset
+				if w.spellY < 0 {
+					w.spellY = 9
+				}
+				if w.spellY > 9 {
+					w.spellY = 0
+
+				}
 			}
 
 			xSize := len(w.creature.Spells[w.spellY].Spells)
+
 			w.spellX = utils.Clamp(w.spellX, 0, xSize-1)
 			w.spellX += xOffset
 			if w.spellX < 0 {
