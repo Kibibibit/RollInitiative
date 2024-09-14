@@ -23,7 +23,7 @@ type ViewSpellWidget struct {
 
 func NewViewSpellWidget(dataStore *models.DataStore, previousWidget string, colors *ColorPalette, spell *models.Spell) *ViewSpellWidget {
 	return &ViewSpellWidget{
-		name:           NameViewCreatureWidget,
+		name:           NameViewSpellWidget,
 		dataStore:      dataStore,
 		colors:         colors,
 		previousWidget: previousWidget,
@@ -146,7 +146,7 @@ func (w *ViewSpellWidget) createKeybinds(g *gocui.Gui) error {
 
 func (w *ViewSpellWidget) onClose(g *gocui.Gui, v *gocui.View) error {
 
-	nextView, err := g.View(NameRootWidget)
+	nextView, err := g.View(w.previousWidget)
 	if err != nil {
 		log.Println(err)
 		return err

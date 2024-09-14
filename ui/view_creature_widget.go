@@ -35,6 +35,10 @@ type ViewCreatureWidget struct {
 	dataStore      *models.DataStore
 	previousWidget string
 	creature       *models.Creature
+	spellX         int
+	spellY         int
+	hasSpells      bool
+	currentSpell   string
 }
 
 func NewViewCreatureWidget(dataStore *models.DataStore, previousWidget string, colors *ColorPalette, creature *models.Creature) *ViewCreatureWidget {
@@ -44,24 +48,15 @@ func NewViewCreatureWidget(dataStore *models.DataStore, previousWidget string, c
 		colors:         colors,
 		previousWidget: previousWidget,
 		creature:       creature,
+		spellX:         0,
+		spellY:         0,
+		hasSpells:      len(creature.Spells) > 0,
+		currentSpell:   "",
 	}
 
 }
 
 func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
-
-	var spellLevelTitles = []string{
-		"Cantrips",
-		"1st level",
-		"2nd level",
-		"3rd level",
-		"4th level",
-		"5th level",
-		"6th level",
-		"7th level",
-		"8th level",
-		"9th level",
-	}
 
 	var affinityNames = []string{
 		"Damage Immunities",
@@ -199,6 +194,36 @@ func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
 
 	drawX, drawY = w.drawCreatureTraitList("", w.creature.Traits, drawX, drawY)
 
+	drawX, drawY = w.drawCreatureSpellList(drawX, drawY)
+
+	drawX, drawY = w.drawCreatureTraitList("Actions", w.creature.Actions, drawX, drawY)
+	drawX, drawY = w.drawCreatureTraitList("Bonus Actions", w.creature.BonusActions, drawX, drawY)
+	drawX, drawY = w.drawCreatureTraitList("Reactions", w.creature.Reactions, drawX, drawY)
+	drawX, drawY = w.drawCreatureTraitList("Lair Actions", w.creature.LairActions, drawX, drawY)
+	//TODO: Legendary descriptions
+	w.drawCreatureTraitList("Legendary Actions", w.creature.LegendaryActions, drawX, drawY)
+
+	return nil
+
+}
+
+func (w *ViewCreatureWidget) drawText(text string, drawX, drawY int) (int, int) {
+	return DrawText(w.view, w.colW, w.h, w.colors, text, drawX, drawY)
+}
+
+func (w *ViewCreatureWidget) drawCreatureSpellList(drawX, drawY int) (int, int) {
+	var spellLevelTitles = []string{
+		"Cantrips",
+		"1st level",
+		"2nd level",
+		"3rd level",
+		"4th level",
+		"5th level",
+		"6th level",
+		"7th level",
+		"8th level",
+		"9th level",
+	}
 	if len(w.creature.Spells) > 0 {
 		drawY += 1
 		drawX, drawY = w.drawText(fmt.Sprintf("%s: %s", ApplyBold("Spellcasting", w.colors.FgColor), w.creature.SpellNotes), drawX, drawY)
@@ -214,13 +239,20 @@ func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
 
 				spellNames := []string{}
 
-				for _, spell := range spells.Spells {
+				for i, spell := range spells.Spells {
 					s := w.dataStore.GetSpell(spell)
-					if s == nil {
-						spellNames = append(spellNames, spell)
-					} else {
-						spellNames = append(spellNames, s.Name)
+
+					spellDrawString := spell
+					if s != nil {
+						spellDrawString = s.Name
 					}
+
+					if level == w.spellY && i == w.spellX {
+						spellDrawString = fmt.Sprintf("\x1b[7m%s\x1b[0m", spellDrawString)
+						w.currentSpell = s.Id
+					}
+
+					spellNames = append(spellNames, spellDrawString)
 				}
 
 				drawLine = fmt.Sprintf("%s %s", drawLine, strings.Join(spellNames, ", "))
@@ -243,21 +275,9 @@ func (w *ViewCreatureWidget) Layout(g *gocui.Gui) error {
 			drawLine = fmt.Sprintf("%s %s", drawLine, strings.Join(spellNames, ", "))
 			drawX, drawY = w.drawText(drawLine, drawX, drawY)
 		}
+
 	}
-
-	drawX, drawY = w.drawCreatureTraitList("Actions", w.creature.Actions, drawX, drawY)
-	drawX, drawY = w.drawCreatureTraitList("Bonus Actions", w.creature.BonusActions, drawX, drawY)
-	drawX, drawY = w.drawCreatureTraitList("Reactions", w.creature.Reactions, drawX, drawY)
-	drawX, drawY = w.drawCreatureTraitList("Lair Actions", w.creature.LairActions, drawX, drawY)
-	//TODO: Legendary descriptions
-	w.drawCreatureTraitList("Legendary Actions", w.creature.LegendaryActions, drawX, drawY)
-
-	return nil
-
-}
-
-func (w *ViewCreatureWidget) drawText(text string, drawX, drawY int) (int, int) {
-	return DrawText(w.view, w.colW, w.h, w.colors, text, drawX, drawY)
+	return drawX, drawY
 }
 
 func (w *ViewCreatureWidget) drawCreatureTraitList(title string, list []models.CreatureTrait, drawX, drawY int) (int, int) {
@@ -300,8 +320,75 @@ func (w *ViewCreatureWidget) createKeybinds(g *gocui.Gui) error {
 	if err := g.SetKeybinding(w.name, gocui.KeyEsc, gocui.ModNone, w.onClose); err != nil {
 		return err
 	}
+	if err := g.SetKeybinding(w.name, gocui.KeyArrowDown, gocui.ModNone, w.onArrow(0, 1)); err != nil {
+		return err
+	}
+	if err := g.SetKeybinding(w.name, gocui.KeyArrowUp, gocui.ModNone, w.onArrow(0, -1)); err != nil {
+		return err
+	}
+	if err := g.SetKeybinding(w.name, gocui.KeyArrowLeft, gocui.ModNone, w.onArrow(-1, 0)); err != nil {
+		return err
+	}
+	if err := g.SetKeybinding(w.name, gocui.KeyArrowRight, gocui.ModNone, w.onArrow(1, 0)); err != nil {
+		return err
+	}
+	if err := g.SetKeybinding(w.name, gocui.KeyEnter, gocui.ModNone, w.onEnter); err != nil {
+		return err
+	}
+
 	return nil
 
+}
+
+func (w *ViewCreatureWidget) onEnter(g *gocui.Gui, _ *gocui.View) error {
+	if w.hasSpells {
+		if len(w.currentSpell) > 0 {
+			viewSpell := NewViewSpellWidget(w.dataStore, w.name, w.colors, w.dataStore.GetSpell(w.currentSpell))
+
+			viewSpell.Layout(g)
+
+			g.Update(func(g *gocui.Gui) error {
+
+				_, err := g.SetCurrentView(viewSpell.name)
+				return err
+			})
+		}
+	}
+
+	return nil
+}
+
+func (w *ViewCreatureWidget) onArrow(xOffset, yOffset int) func(*gocui.Gui, *gocui.View) error {
+	return func(g *gocui.Gui, v *gocui.View) error {
+
+		if w.hasSpells {
+
+			ySize := len(w.creature.Spells)
+
+			w.spellY += yOffset
+			if w.spellY < 0 {
+				w.spellY += ySize
+			}
+			if w.spellY >= ySize {
+				w.spellY -= ySize
+			}
+
+			xSize := len(w.creature.Spells[w.spellY].Spells)
+			w.spellX = utils.Clamp(w.spellX, 0, xSize-1)
+			w.spellX += xOffset
+			if w.spellX < 0 {
+				w.spellX += xSize
+			}
+			if w.spellX >= xSize {
+				w.spellX -= xSize
+			}
+
+			w.Layout(g)
+
+		}
+
+		return nil
+	}
 }
 
 func (w *ViewCreatureWidget) onClose(g *gocui.Gui, v *gocui.View) error {

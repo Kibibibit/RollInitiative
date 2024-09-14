@@ -13,6 +13,9 @@ import (
 const (
 	shortcutsWidgetHeight  int  = 5
 	shortcutsWidgetNilMenu rune = '_'
+	shortcutWiki           rune = 'w'
+	shortcutEdit           rune = 'e'
+	shortcutAdd            rune = 'a'
 )
 
 type ShortcutsWidget struct {
@@ -45,34 +48,29 @@ func NewShortcutsWidget(rootWidget *RootWidget, dataStore *models.DataStore, col
 	}
 
 	submenuNamesDict := map[rune]string{
-		'a': "Add",
-		'e': "Edit",
-		'w': "Wiki",
+		shortcutAdd:  "Add",
+		shortcutEdit: "Edit",
+		shortcutWiki: "Wiki",
 	}
 
-	shortcutsDict := make(map[rune]map[rune]*Shortcut)
-
-	shortcutsAddDict := map[rune]*Shortcut{
-		'c': {"Creature", out.addCreatureEntry, false, false},
-		'p': {"Party", out.addPartyEntries, false, false},
+	shortcutsDict := map[rune]map[rune]*Shortcut{
+		shortcutAdd: {
+			'c': {"Creature", out.addCreatureEntry, false, false},
+			'p': {"Party", out.addPartyEntries, false, false},
+		},
+		shortcutEdit: {
+			'r': {"Remove", out.deleteCreatureEntry, true, false},
+			'h': {"Health", out.editCreatureHealth, true, true},
+			'd': {"Damage/Heal", out.damageCreature, true, true},
+			's': {"Status", out.editCreatureStatus, true, false},
+			'i': {"Initiative", out.editCreatureIniative, true, false},
+		},
+		shortcutWiki: {
+			'c': {"Creatures", out.openCreatureWiki, false, false},
+			's': {"Spells", out.openSpellsWiki, false, false},
+			'e': {"Current", out.openCurrentWiki, true, true},
+		},
 	}
-
-	shortcutsEditDict := map[rune]*Shortcut{
-		'r': {"Remove", out.deleteCreatureEntry, true, false},
-		'h': {"Health", out.editCreatureHealth, true, true},
-		'd': {"Damage/Heal", out.damageCreature, true, true},
-		's': {"Status", out.editCreatureStatus, true, false},
-		'i': {"Initiative", out.editCreatureIniative, true, false},
-	}
-
-	shortcutsWikiDict := make(map[rune]*Shortcut)
-
-	shortcutsWikiDict['c'] = &Shortcut{"Creatures", out.openCreatureWiki, false, false}
-	shortcutsWikiDict['s'] = &Shortcut{"Spells", out.openSpellsWiki, false, false}
-
-	shortcutsDict['w'] = shortcutsWikiDict
-	shortcutsDict['e'] = shortcutsEditDict
-	shortcutsDict['a'] = shortcutsAddDict
 
 	out.submenuNames = submenuNamesDict
 	out.shortcuts = shortcutsDict
@@ -128,6 +126,7 @@ func (w *ShortcutsWidget) Layout(g *gocui.Gui) error {
 			if !w.rootWidget.ValidCurrentEntry() && shortcut.entryOnly {
 				continue
 			}
+
 			items = append(items, fmt.Sprintf("%c %s", key, shortcut.name))
 		}
 	}
@@ -252,6 +251,28 @@ func (w *ShortcutsWidget) openSpellsWiki(g *gocui.Gui, v *gocui.View) error {
 	})
 
 	return nil
+}
+
+func (w *ShortcutsWidget) openCurrentWiki(g *gocui.Gui, v *gocui.View) error {
+	w.hide()
+
+	initEntry := w.dataStore.IniativeEntries[w.rootWidget.GetCurrentEntryId()]
+	creature := w.dataStore.GetCreature(initEntry.CreatureId)
+	if creature == nil {
+		return nil
+	}
+	viewCreature := NewViewCreatureWidget(w.dataStore, NameRootWidget, w.colors, creature)
+
+	viewCreature.Layout(g)
+
+	g.Update(func(g *gocui.Gui) error {
+
+		_, err := g.SetCurrentView(viewCreature.name)
+		return err
+	})
+
+	return nil
+
 }
 
 func (w *ShortcutsWidget) addCreatureEntry(g *gocui.Gui, v *gocui.View) error {

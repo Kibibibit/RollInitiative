@@ -45,6 +45,8 @@ func MakeDataStore() *DataStore {
 	var i int = 0
 	for k := range spellDict {
 		s := spellDict[k]
+		s.Id = k
+		spellDict[k] = s
 		spellIds[i] = k
 		spellNames[k] = s.Name
 		i++
@@ -62,6 +64,8 @@ func MakeDataStore() *DataStore {
 	i = 0
 	for k := range creatureDict {
 		c := creatureDict[k]
+		c.Id = k
+		creatureDict[k] = c
 		creatureIds[i] = k
 		creatureNames[k] = c.Name
 
