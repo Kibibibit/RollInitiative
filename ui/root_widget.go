@@ -26,6 +26,7 @@ type RootWidget struct {
 	leaderPressed     bool
 	entryIds          []int
 	currentEntryIndex int
+	currentTurnIndex  int
 }
 
 func NewRootWidget(dataStore *models.DataStore, colors *ColorPalette) *RootWidget {
@@ -39,6 +40,7 @@ func NewRootWidget(dataStore *models.DataStore, colors *ColorPalette) *RootWidge
 		colors:            colors,
 		entryIds:          []int{},
 		currentEntryIndex: 0,
+		currentTurnIndex:  0,
 	}
 }
 
@@ -97,18 +99,30 @@ func (w *RootWidget) Layout(g *gocui.Gui) error {
 
 		if entry.IsPlayer {
 			player := w.dataStore.GetPlayer(entry.CreatureId)
-			row = []string{player.Name, fmt.Sprintf("%d", entry.IniativeRoll), "", entry.Statuses}
+			name := player.Name
+			if len(w.entryIds) > 0 {
+				if entryId == w.GetCurrentTurnEntryId() {
+					name = "*" + name
+				}
+			}
+
+			row = []string{player.Name, fmt.Sprintf("%d", entry.IniativeRoll), "---", entry.Statuses}
 		} else {
 
 			name := creature.Name
 			if len(entry.Tag) > 0 {
 				name = fmt.Sprintf("%s (%s)", name, entry.Tag)
 			}
+			if len(w.entryIds) > 0 {
+				if entryId == w.GetCurrentTurnEntryId() {
+					name = "*" + name
+				}
+			}
 
 			row = []string{
 				name,
 				fmt.Sprintf("%d", entry.IniativeRoll),
-				fmt.Sprintf("%d", entry.Hp),
+				fmt.Sprintf("%d HP", entry.Hp),
 				entry.Statuses,
 			}
 		}
@@ -175,6 +189,7 @@ func (w *RootWidget) Layout(g *gocui.Gui) error {
 
 		view.Highlight = true
 		view.SetCursor(0, w.currentEntryIndex+3)
+		view.SetHighlight(w.currentTurnIndex+3, true)
 	} else {
 		view.Highlight = false
 		w.currentEntryIndex = -1
@@ -220,8 +235,15 @@ func (w *RootWidget) onLeader(g *gocui.Gui, v *gocui.View) error {
 }
 
 func (w *RootWidget) GetCurrentEntryId() int {
-	if len(w.entryIds) > 0 {
+	if len(w.entryIds) > 0 && w.currentEntryIndex != -1 {
 		return w.entryIds[w.currentEntryIndex]
+	}
+	return -1
+}
+
+func (w *RootWidget) GetCurrentTurnEntryId() int {
+	if len(w.entryIds) > 0 && w.currentTurnIndex != -1 {
+		return w.entryIds[w.currentTurnIndex]
 	}
 	return -1
 }
