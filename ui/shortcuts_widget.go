@@ -75,7 +75,7 @@ func NewShortcutsWidget(rootWidget *RootWidget, dataStore *models.DataStore, col
 		shortcutTurn: {
 			'n': {"Next", out.moveTurn(1), true, false},
 			'p': {"Previous", out.moveTurn(-1), true, false},
-			's': {"Set", out.setTurn, true, false},
+			'e': {"Set at Entry", out.setTurn, true, false},
 		},
 	}
 
