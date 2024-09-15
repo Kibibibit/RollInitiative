@@ -3,6 +3,7 @@ package ui
 import (
 	"errors"
 	"log"
+	"os"
 	"windmills/roll_initiative/models"
 
 	"github.com/awesome-gocui/gocui"
@@ -28,7 +29,7 @@ func CreateGui(dataStore *models.DataStore, colors *ColorPalette) (*gocui.Gui, e
 		return nil
 	})
 
-	if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone, Quit); err != nil {
+	if err := g.SetKeybinding("", gocui.KeyCtrlC, gocui.ModNone, Quit(colors)); err != nil {
 		log.Panicln("Failed to set ctrlC keybinding!")
 		return nil, err
 	}
@@ -42,6 +43,30 @@ func MainLoop(g *gocui.Gui) {
 	}
 }
 
-func Quit(g *gocui.Gui, v *gocui.View) error {
-	return gocui.ErrQuit
+func Quit(colors *ColorPalette) func(g *gocui.Gui, v *gocui.View) error {
+
+	return func(g *gocui.Gui, v *gocui.View) error {
+
+		currentView := g.CurrentView()
+
+		widget := NewConfirmWidget("Really quit?", colors, currentView.Name(), false, "Are you sure you want to quit?", "Yes", "No",
+
+			func(b bool) {
+				if b {
+					g.Close()
+					os.Exit(0)
+				}
+			},
+		)
+
+		widget.Layout(g)
+
+		g.Update(func(g *gocui.Gui) error {
+			g.SetCurrentView(widget.name)
+			return nil
+		})
+
+		return nil
+	}
+
 }

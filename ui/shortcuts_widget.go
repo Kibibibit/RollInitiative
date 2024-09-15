@@ -16,6 +16,7 @@ const (
 	shortcutWiki           rune = 'w'
 	shortcutEdit           rune = 'e'
 	shortcutAdd            rune = 'a'
+	shortcutTurn           rune = 't'
 )
 
 type ShortcutsWidget struct {
@@ -51,6 +52,7 @@ func NewShortcutsWidget(rootWidget *RootWidget, dataStore *models.DataStore, col
 		shortcutAdd:  "Add",
 		shortcutEdit: "Edit",
 		shortcutWiki: "Wiki",
+		shortcutTurn: "Turn",
 	}
 
 	shortcutsDict := map[rune]map[rune]*Shortcut{
@@ -69,6 +71,11 @@ func NewShortcutsWidget(rootWidget *RootWidget, dataStore *models.DataStore, col
 			'c': {"Creatures", out.openCreatureWiki, false, false},
 			's': {"Spells", out.openSpellsWiki, false, false},
 			'e': {"Current", out.openCurrentWiki, true, true},
+		},
+		shortcutTurn: {
+			'n': {"Next", out.moveTurn(1), true, false},
+			'p': {"Previous", out.moveTurn(-1), true, false},
+			's': {"Set", out.setTurn, true, false},
 		},
 	}
 
@@ -471,6 +478,48 @@ func (w *ShortcutsWidget) addPartyEntries(g *gocui.Gui, v *gocui.View) error {
 
 func (w *ShortcutsWidget) badShortcut(g *gocui.Gui, _ *gocui.View) error {
 	w.hide()
+
+	w.rootWidget.Layout(g)
+
+	g.Update(func(g *gocui.Gui) error {
+
+		_, err := g.SetCurrentView(NameRootWidget)
+		return err
+	})
+
+	return nil
+}
+
+func (w *ShortcutsWidget) moveTurn(offset int) func(g *gocui.Gui, _ *gocui.View) error {
+
+	return func(g *gocui.Gui, _ *gocui.View) error {
+		w.hide()
+		w.rootWidget.currentTurnIndex += offset
+		if w.rootWidget.currentTurnIndex < 0 {
+			w.rootWidget.currentTurnIndex += len(w.rootWidget.entryIds)
+		}
+		if w.rootWidget.currentTurnIndex >= len(w.rootWidget.entryIds) {
+			w.rootWidget.currentTurnIndex -= len(w.rootWidget.entryIds)
+		}
+
+		w.rootWidget.Layout(g)
+
+		g.Update(func(g *gocui.Gui) error {
+
+			_, err := g.SetCurrentView(NameRootWidget)
+			return err
+		})
+
+		return nil
+	}
+
+}
+
+func (w *ShortcutsWidget) setTurn(g *gocui.Gui, _ *gocui.View) error {
+
+	w.hide()
+
+	w.rootWidget.currentTurnIndex = w.rootWidget.currentEntryIndex
 
 	w.rootWidget.Layout(g)
 

@@ -106,7 +106,7 @@ func (w *RootWidget) Layout(g *gocui.Gui) error {
 				}
 			}
 
-			row = []string{player.Name, fmt.Sprintf("%d", entry.IniativeRoll), "---", entry.Statuses}
+			row = []string{name, fmt.Sprintf("%d", entry.IniativeRoll), "---", entry.Statuses}
 		} else {
 
 			name := creature.Name
