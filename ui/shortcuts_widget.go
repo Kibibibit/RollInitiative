@@ -326,6 +326,20 @@ func (w *ShortcutsWidget) deleteCreatureEntry(g *gocui.Gui, v *gocui.View) error
 
 	w.dataStore.DeleteCreatureEntry(w.rootWidget.GetCurrentEntryId())
 
+	for w.rootWidget.currentEntryIndex >= len(w.rootWidget.dataStore.IniativeEntries) {
+		w.rootWidget.currentEntryIndex -= 1
+	}
+	for w.rootWidget.currentTurnIndex >= len(w.rootWidget.dataStore.IniativeEntries) {
+		w.rootWidget.currentTurnIndex -= 1
+	}
+
+	if w.rootWidget.currentEntryIndex < 0 {
+		w.rootWidget.currentEntryIndex = 0
+	}
+	if w.rootWidget.currentTurnIndex < 0 {
+		w.rootWidget.currentTurnIndex = 0
+	}
+
 	w.rootWidget.Layout(g)
 
 	g.Update(func(g *gocui.Gui) error {
